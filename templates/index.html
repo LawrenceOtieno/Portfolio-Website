@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lawrence Otieno   Portfolio Website | StreData</title>
     <!-- Linking CSS File -->
-    <link rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <!-- Fontawesome link -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <!-- Bootstrap link -->
@@ -100,18 +100,21 @@
     <div class="row mt-5 mx-0 justify-content-center align-items-center">
       <div class="col-lg-3 col-md-4 col-12 card-wrapper">
         <div class="card mt-4">
-          <img src="images/churn.png" class="img-fluid" alt="portfolio-img">
+          <img src="{{ url_for('static', filename='images/churn.png') }}" alt="My Image">
           <div class="card-body text-center">
-            <h6 class="card-title">HRM- Churn rate prediction using machine learning</h6>
+            <h6 class="card-title">Optical character Recognitio</h6>
+            <p class="card-text text-secondary">Python/Decision Tree/xgboost</p>
             <p class="card-text text-secondary">Python/Decision Tree/xgboost</p>
           </div>
         </div>
       </div>
       <div class="col-lg-3 col-md-4 col-12 card-wrapper">
         <div class="card mt-4">
-          <img src="images/twitter.png" class="img-fluid" alt="portfolio-img">
+          <img src="{{ url_for('static', filename='images/twitter.png') }}" alt="My Image">
+        
           <div class="card-body text-center">
             <h6 class="card-title">Twitter Bot for Product Monitoring</h6>
+            <p class="card-text text-secondary">Python/Keras/Tweepy</p>
             <p class="card-text text-secondary">Python/Keras/Tweepy</p>
           </div>
         </div>
@@ -119,7 +122,8 @@
 
       <div class="col-lg-3 col-md-4 col-12 card-wrapper">
         <div class="card mt-4">
-          <img src="images/tiktok2.PNG" class="img-fluid" alt="portfolio-img">
+          <img src="{{ url_for('static', filename='images/tiktok2.PNG') }}" alt="My Image">
+      
           <div class="card-body text-center">
             <h6 class="card-title">Opinion vs. Claim Classifier: Enhancing Content Moderation at TikTok</h6>
             <p class="card-text text-secondary">Python/sklearn/RandomForestClassifier</p>
@@ -128,7 +132,7 @@
       </div>
       <div class="col-lg-3 col-md-4 card-wrapper">
         <div class="card mt-4">
-          <img src="images/plant.PNG" class="img-fluid" alt="portfolio-img">
+          <img src="{{ url_for('static', filename='images/plant.PNG') }}" alt="My Image">
           <div class="card-body text-center">
             <h6 class="card-title">Plant Disease Detection- Mahindy Project</h6>
             <p class="card-text text-secondary">Python/Keras/CNN/RCNN</p>
@@ -138,7 +142,7 @@
 
       <div class="col-lg-3 col-md-4 col-12 card-wrapper">
         <div class="card mt-4">
-          <img src="images/AB_Test.png" class="img-fluid" alt="portfolio-img">
+          <img src="{{ url_for('static', filename='images/AB_Test.png') }}" alt="My Image">
           <div class="card-body text-center">
             <h6 class="card-title">Statistical Review and A/B Testing for New York City TLC Project</h6>
             <p class="card-text text-secondary">Python/SKLearn/BigQuery</p>
@@ -147,7 +151,8 @@
       </div>
       <div class="col-lg-3 col-md-4 card-wrapper">
         <div class="card mt-4">
-          <img src="images/churn_rate.png" class="img-fluid" alt="portfolio-img">
+          <img src="{{ url_for('static', filename='images/churn_rate.png') }}" alt="My Image">
+
           <div class="card-body text-center">
             <h6 class="card-title">Customer Churn Turnover- ML</h6>
             <p class="card-text text-secondary">Python/Keras</p>
@@ -156,7 +161,7 @@
       </div>
       <div class="col-lg-3 col-md-4 card-wrapper">
         <div class="card mt-4">
-          <img src="images/pace.PNG" class="img-fluid" alt="portfolio-img">
+          <img src="{{ url_for('static', filename='images/pace.png') }}" alt="My Image">
           <div class="card-body text-center">
             <h6 class="card-title">Blog on using PACE as an analytical framework</h6>
             <p class="card-text text-secondary">Word/WordPress</p>
@@ -166,7 +171,7 @@
       
       <div class="col-lg-3 col-md-4 col-12 card-wrapper">
         <div class="card mt-4">
-          <img src="images/COVID-19_youth.jpg" class="img-fluid" alt="portfolio-img">
+          <img src="{{ url_for('static', filename='images/COVID-19_youth.jpg') }}" alt="My Image">
           <div class="card-body text-center">
             <h6 class="card-title">COVID-19 fatalities and risk of conflicts - Youth Bulge</h6>
             <p class="card-text text-secondary">Excel/r/research</p>
@@ -175,7 +180,7 @@
       </div>
       <div class="col-lg-3 col-md-4 card-wrapper">
         <div class="card mt-4">
-          <img src="images/HRM.PNG" class="img-fluid" alt="portfolio-img">
+          <img src="{{ url_for('static', filename='images/HRM.png') }}" alt="My Image">
           <div class="card-body text-center">
             <h6 class="card-title">Human Resource Management (HRM)- Executive Dashboard</h6>
             <p class="card-text text-secondary">Tableau</p>
@@ -202,12 +207,12 @@
           <p>From an early age, I was fascinated with computer systems and their impact on daily activities and procedures. Starting with Computer Packages,I gradually expanded my skills to include Operating Systems, Microsoft365, Security Systems, and Python.</p>
         </div>
         <div class="col-3 col-md-2 img text-center">
-          <img class="rounded-circle border border-5 border-dark-subtle img-fluid" src="images/about-img-1.jpg" alt="img">
+          <img class="rounded-circle border border-5 border-dark-subtle img-fluid" src="{{ url_for('static', filename='images/about-img-1.jpg') }}" alt="My Image">
         </div>
       </div>
       <div class="row justify-content-md-end mt-5 pt-5">
         <div class="col-3 col-md-2 img text-center">
-          <img class="rounded-circle border border-5 border-dark-subtle img-fluid" src="images/about-img-2.jpg" alt="img">
+          <img class="rounded-circle border border-5 border-dark-subtle img-fluid" src="{{ url_for('static', filename='images/about-img-2.jpg') }}" alt="img">
         </div>
         <div class="col-9 col-md-5">
           <h5>2015-2019</h5>
@@ -222,12 +227,12 @@
           <p>Throughout my career, I have consistently sought opportunities to refine my skills and stay updated with the latest technologies. I strive for excellence in every project I undertake and aim to deliver valuable and impactful results.</p>
         </div>
         <div class="col-3 col-md-2 img text-center">
-          <img class="rounded-circle border border-5 border-dark-subtle img-fluid" src="images/about-img-3.jpg" alt="img">
+          <img class="rounded-circle border border-5 border-dark-subtle img-fluid" src="{{ url_for('static', filename='images/about-img-3.jpg') }}" alt="img">
         </div>
       </div>
       <div class="row justify-content-md-end mt-5 pt-5">
         <div class="col-3 col-md-2 img text-center">
-          <img class="rounded-circle border border-5 border-dark-subtle img-fluid" src="images/about-img-4.jpg" alt="img">
+          <img class="rounded-circle border border-5 border-dark-subtle img-fluid" src="{{ url_for('static', filename='images/about-img-4.jpg') }}" alt="img">
         </div>
         <div class="col-9 col-md-5">
           <h5>Future</h5>
@@ -252,7 +257,7 @@
       </div>
       <div class="row">
         <div class="col-lg-4 mt-5 order-lg-0 order-1 text-center">
-          <img class="img-fluid rounded-circle border border-5 border-dark-subtle" src="images/profile-img.jpg" alt="profile-img">
+          <img class="img-fluid rounded-circle border border-5 border-dark-subtle" src="{{ url_for('static', filename='images/Lawrence - img.jpeg') }}"alt="profile-img">
           <h2 class="mt-3">Lawrence Otieno</h2>
           <ul class="list-unstyled contact-info">
             <li><i class="fas fa-envelope me-2"></i> lawrenceit38@gmail.com</li>
