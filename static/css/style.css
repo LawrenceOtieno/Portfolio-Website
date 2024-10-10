@@ -1,9 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+
 /* Color variables */
 :root {
   --white-color: #fff;
   --bg-color-light: #fff;
   --bg-color-dark: #333;
   --gray-color: #ccc;
+}
+
+.montserrat-400 {
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+.dark-mode {
+  --card-bg: #333;
+  --card-text: #fff;
+}
+
+.light-mode {
+  --card-bg: #fff;
+  --card-text: #333;
 }
 
 /* Light mode styles */
@@ -21,6 +40,7 @@ body.dark-mode {
 /* Changing background color */
 body {
   background: var(--bg-color) !important;
+  font-family: "Montserrat", sans-serif;
 }
 
 /* Changing link color */
@@ -37,6 +57,12 @@ body {
   background-attachment: fixed;
 }
 
+.card-image {
+  max-height: 300px;
+  height: 100%;
+  object-fit: cover;
+}
+
 #skills i {
   height: 100px;
   width: 100px;
@@ -51,6 +77,11 @@ body {
 #about img,
 .hire-text h2 {
   position: relative;
+}
+
+.card {
+  background: var(--card-bg) !important;
+  color: var(--card-text) !important;
 }
 
 /* Timeline background line */
