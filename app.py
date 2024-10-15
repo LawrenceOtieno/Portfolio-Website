@@ -81,7 +81,7 @@ def homepage():
         msg = Message(
             subject="New Contact Form Submission",
             sender=app.config['MAIL_DEFAULT_SENDER'],
-            recipients=['recipient_email@gmail.com'],  # Replace with your recipient email
+            recipients=['lawrenceit38@gmail.com'],  # Replace with your recipient email
             body=f"Name: {name}\nEmail: {email}\nPhone: {phone}\nMessage: {message}"
         )
 
