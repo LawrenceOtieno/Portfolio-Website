@@ -63,7 +63,7 @@ projects = [
         ],
     },
 ]
-
+# the
 @app.route("/", methods=["GET", "POST"])
 def homepage():
     if request.method == "POST":
