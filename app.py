@@ -16,54 +16,61 @@ mail = Mail(app)
 
 projects = [
     {
-        "name": "Optical character Recognitio",
+        "name": "Optical Character Recognition",
         "image": "images/churn.png",
         "tags": ["Python", "Decision Tree", "xgboost"],
+        "link": "https://github.com/yourusername/ocr-project",  # <-- Add actual GitHub link here
     },
     {
         "name": "Twitter Bot for Product Monitoring",
         "image": "images/twitter.png",
         "tags": ["Python", "Keras", "Tweepy"],
+        "link": "https://github.com/yourusername/twitter-bot",  # <-- Add actual GitHub link here
     },
     {
         "name": "Opinion vs. Claim Classifier: Enhancing Content Moderation at TikTok",
         "image": "images/tiktok2.PNG",
         "tags": ["Python", "sklearn", "RandomForestClassifier"],
+        "link": "https://github.com/yourusername/tiktok-classifier",  # <-- Add actual GitHub link here
     },
     {
         "name": "Plant Disease Detection- Mahindy Project",
         "image": "images/plant.PNG",
         "tags": ["Python", "Keras", "CNN", "RCNN"],
+        "link": "#",  # Placeholder link until you add it
     },
     {
         "name": "Statistical Review and A/B Testing for New York City TLC Project",
         "image": "images/AB_Test.png",
         "tags": ["Python", "SKLearn", "BigQuery"],
+        "link": "#",
     },
     {
         "name": "Customer Churn Turnover- ML",
         "image": "images/churn_rate.png",
         "tags": ["Python", "Keras"],
+        "link": "#",
     },
     {
         "name": "Blog on using PACE as an analytical framework",
         "image": "images/pace.png",
         "tags": ["WordPress"],
+        "link": "#",
     },
     {
         "name": "COVID-19 fatalities and risk of conflicts - Youth Bulge",
         "image": "images/COVID-19_youth.jpg",
         "tags": ["Excel", "R", "Research"],
+        "link": "#",
     },
     {
         "name": "Human Resource Management (HRM)- Executive Dashboard",
         "image": "images/HRM.png",
-        "tags": [
-            "Tableau",
-        ],
+        "tags": ["Tableau"],
+        "link": "#",
     },
 ]
-# the
+
 @app.route("/", methods=["GET", "POST"])
 def homepage():
     if request.method == "POST":
@@ -73,7 +80,7 @@ def homepage():
         phone = request.form["phone"]
         message = request.form["message"]
 
-        # Validate form data (you can add more validation as needed)
+        # Validate form data
         if not name or not email or not phone or not message:
             return "Please fill all fields", 400
 
@@ -81,14 +88,12 @@ def homepage():
         msg = Message(
             subject="New Contact Form Submission",
             sender=app.config['MAIL_DEFAULT_SENDER'],
-            recipients=['lawrenceit38@gmail.com'],  # Replace with your recipient email
+            recipients=['lawrenceit38@gmail.com'],
             body=f"Name: {name}\nEmail: {email}\nPhone: {phone}\nMessage: {message}"
         )
 
         # Send the email
         mail.send(msg)
-
-        # You can add additional logic here, such as saving to a database or sending a success response
 
     return render_template("index.html", projects=projects)
 
