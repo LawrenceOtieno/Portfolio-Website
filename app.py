@@ -17,7 +17,7 @@ mail = Mail(app)
 projects = [
     {
         "name": "Movies Rating Dashboard",
-        "image": "images/moviesr.PNG",
+        "image": "images/moviesr.png",
         "tags": ["Python", "HTML", "Streamlit"],
         "link": "https://github.com/LawrenceOtieno/MovieRatingsDashboard",  # <-- Add actual GitHub link here
     },
