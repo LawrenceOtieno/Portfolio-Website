@@ -22,10 +22,10 @@ projects = [
         "link": "https://github.com/LawrenceOtieno/MovieRatingsDashboard",  # <-- Add actual GitHub link here
     },
     {
-        "name": "Twitter Bot for Product Monitoring",
-        "image": "images/twitter.png",
-        "tags": ["Python", "Keras", "Tweepy"],
-        "link": "https://github.com/yourusername/twitter-bot",  # <-- Add actual GitHub link here
+        "name": "Gazebo Indoor Environment Generator for PX4 Autopilot",
+        "image": "images/gazebo.png",
+        "tags": ["Python", "Shell", "PX4 Autopilot","Gazebo Simulator"],
+        "link": "https://github.com/LawrenceOtieno/gazebo-indoor-gen",  # <-- Add actual GitHub link here
     },
     {
         "name": "Opinion vs. Claim Classifier: Enhancing Content Moderation at TikTok",
