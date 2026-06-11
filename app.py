@@ -28,10 +28,10 @@ projects = [
         "link": "https://github.com/LawrenceOtieno/gazebo-indoor-gen",  # <-- Add actual GitHub link here
     },
     {
-        "name": "Opinion vs. Claim Classifier: Enhancing Content Moderation at TikTok",
-        "image": "images/tiktok2.PNG",
-        "tags": ["Python", "sklearn", "RandomForestClassifier"],
-        "link": "https://github.com/yourusername/tiktok-classifier",  # <-- Add actual GitHub link here
+        "name": "KRA Nil Automator",
+        "image": "images/automator.png",
+        "tags": ["Python", "HTML", "Playwright", "Waitress"],
+        "link": "https://github.com/LawrenceOtieno/kra-nil-automator",  # <-- Add actual GitHub link here
     },
     {
         "name": "Plant Disease Detection- Mahindy Project",
