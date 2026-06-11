@@ -16,10 +16,10 @@ mail = Mail(app)
 
 projects = [
     {
-        "name": "Optical Character Recognition",
-        "image": "images/churn.png",
-        "tags": ["Python", "Decision Tree", "xgboost"],
-        "link": "https://github.com/yourusername/ocr-project",  # <-- Add actual GitHub link here
+        "name": "Movies Rating Dashboard",
+        "image": "images/movies_rating_dashboard.png",
+        "tags": ["Python", "HTML", "Streamlit"],
+        "link": "https://github.com/LawrenceOtieno/MovieRatingsDashboard",  # <-- Add actual GitHub link here
     },
     {
         "name": "Twitter Bot for Product Monitoring",
