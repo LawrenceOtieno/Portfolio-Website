@@ -34,10 +34,10 @@ projects = [
         "link": "https://github.com/LawrenceOtieno/kra-nil-automator",  # <-- Add actual GitHub link here
     },
     {
-        "name": "Plant Disease Detection- Mahindy Project",
-        "image": "images/plant.PNG",
-        "tags": ["Python", "Keras", "CNN", "RCNN"],
-        "link": "#",  # Placeholder link until you add it
+        "name": "HRM Executive Dashboard",
+        "image": "images/dashboard.PNG",
+        "tags": ["Python", "Pandas", "Numpy", "Plotly", "Streamlit"],
+        "link": "https://github.com/LawrenceOtieno/hrm-executive-dashboard",
     },
     {
         "name": "Statistical Review and A/B Testing for New York City TLC Project",
