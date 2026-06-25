@@ -4,7 +4,7 @@
 :root {
   --white-color: #fff;
   --bg-color-light: #fff;
-  --bg-color-dark: #333;
+  --bg-color-dark: #121212; /* Refined for a cleaner modern dark theme */
   --gray-color: #ccc;
 }
 
@@ -16,7 +16,7 @@
 }
 
 .dark-mode {
-  --card-bg: #333;
+  --card-bg: #1e1e1e;
   --card-text: #fff;
 }
 
@@ -28,7 +28,7 @@
 /* Light mode styles */
 body.light-mode {
   --bg-color: var(--bg-color-light);
-  color: var(--white-color);
+  color: #333 !important; /* Fixed: dark text for readability in light mode */
 }
 
 /* Dark mode styles */
@@ -48,15 +48,39 @@ body {
   color: var(--white-color);
 }
 
-/* Hero section background image */
+/* Upgraded Hero section fallback structural rules */
 .hero {
-  height: 100vh;
-  background-image: url("../images/home-bg.jpg");
+  min-height: 85vh;
   background-repeat: no-repeat;
   background-size: cover;
+  background-position: center center;
   background-attachment: fixed;
 }
 
+/* Premium CTA Button Enhancements */
+.custom-hero-btn {
+  border: 2px solid transparent !important;
+}
+
+.custom-hero-btn:hover {
+  transform: translateY(-4px);
+  background-color: #0d6efd !important;
+  border-color: #0d6efd !important;
+  box-shadow: 0 1rem 3rem rgba(13, 110, 253, 0.4) !important;
+}
+
+/* Smooth bouncing arrow indicator */
+@keyframes custom-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(5px); }
+}
+
+.custom-bounce {
+  display: inline-block;
+  animation: custom-bounce 2s infinite ease-in-out;
+}
+
+/* General Layout Elements */
 .card-image {
   max-height: 300px;
   height: 100%;
@@ -82,6 +106,13 @@ body {
 .card {
   background: var(--card-bg) !important;
   color: var(--card-text) !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Subtle Card Lift on Hover for Project section polish */
+#portfolio .card:hover, #skills .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15) !important;
 }
 
 /* Timeline background line */
@@ -106,6 +137,11 @@ body {
 .social-icons a {
   width: 40px;
   height: 40px;
+  transition: transform 0.2s ease;
+}
+
+.social-icons a:hover {
+  transform: scale(1.1);
 }
 
 footer .social-icons a {
@@ -125,6 +161,7 @@ footer .social-icons a {
   background-image: url("../images/contact-bg.jpeg");
 }
 
+/* Media Queries for responsive viewports */
 @media screen and (max-width: 990px) {
   #skills .card {
     width: calc(100% / 2 - 10px) !important;
@@ -135,5 +172,9 @@ footer .social-icons a {
   #skills .card,
   #portfolio .card-wrapper {
     width: 100% !important;
+  }
+  
+  #about .img::before {
+    display: none; /* Hides vertical timeline bar on mobile layout clutter */
   }
 }
