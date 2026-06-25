@@ -28,7 +28,7 @@
 /* Light mode styles */
 body.light-mode {
   --bg-color: var(--bg-color-light);
-  color: #333 !important; /* Fixed: dark text for readability in light mode */
+  color: #333 !important; /* Dark text for readability in light mode */
 }
 
 /* Dark mode styles */
@@ -48,7 +48,7 @@ body {
   color: var(--white-color);
 }
 
-/* Upgraded Hero section fallback structural rules */
+/* Hero section fallback structural rules */
 .hero {
   min-height: 85vh;
   background-repeat: no-repeat;
@@ -177,4 +177,16 @@ footer .social-icons a {
   #about .img::before {
     display: none; /* Hides vertical timeline bar on mobile layout clutter */
   }
+}
+
+/* Typewriter Cursor Animation Engine */
+.cursor {
+  font-weight: 300;
+  color: #ffc107; /* Matches Bootstrap's warning gold */
+  animation: blink 0.7s infinite;
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
