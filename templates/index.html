@@ -73,27 +73,22 @@
       </nav>
     </header>
 
-    <!-- Upgraded Modern Hero Section -->
     <section class="hero d-flex flex-column align-items-center justify-content-center position-relative" 
              style="background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.85)), url('/static/images/hero-bg.jpg') no-repeat center center/cover; min-height: 85vh;">
       
-      <div class="text-center px-4 animate-fade-in">
-        <!-- Subheading / Greeting -->
-        <p class="text-uppercase text-warning fw-bold mb-2 fs-5 text-warning" style="letter-spacing: 3px;">
+      <div class="text-center px-4">
+        <p class="text-uppercase text-warning fw-bold mb-2 fs-5" style="letter-spacing: 3px;">
           Welcome to my Portfolio
         </p>
         
-        <!-- Main Premium Title -->
         <h1 class="display-2 text-white fw-extrabold mb-3 tracking-tight" style="font-weight: 800;">
           Lawrence Otieno
         </h1>
         
-        <!-- Refined Descriptive Subtitle Breakdown -->
-        <h3 class="h2 text-light fw-normal mb-5 opacity-90 mx-auto" style="max-width: 850px; line-height: 1.5; color: #f1f5f9;">
-          Business Analyst <span class="text-warning mx-2">|</span> Data Engineer <span class="text-warning mx-2">|</span> Automation & Integration
+        <h3 class="h2 text-light fw-normal mb-5 mx-auto" style="max-width: 850px; min-height: 48px; line-height: 1.5; color: #f1f5f9;">
+          <span id="typewriter-text" class="fw-bold text-warning"></span><span class="cursor">|</span>
         </h3>
         
-        <!-- Interactive CTA Button with Arrow Animation -->
         <div class="mt-4">
           <a href="#skills" class="btn btn-lg btn-primary px-5 py-3 fw-medium rounded-pill shadow-lg text-decoration-none custom-hero-btn" style="transition: all 0.3s ease-in-out;">
             EXPLORE MY WORK <i class="fas fa-arrow-down ms-2 custom-bounce"></i>
@@ -460,5 +455,49 @@
     </script>
     
     <script src="{{ url_for('static', filename='javascript/darkmode.js') }}"></script>
+
+    <script>
+      const words = ["Business Analyst", "Data Engineer", "Automation & Integration"];
+      let i = 0;
+      let timer;
+
+      function typingEffect() {
+        let word = words[i].split("");
+        var loopTyping = function() {
+          if (word.length > 0) {
+            document.getElementById('typewriter-text').innerHTML += word.shift();
+          } else {
+            setTimeout(deletingEffect, 2000);
+            return false;
+          }
+          timer = setTimeout(loopTyping, 100);
+        };
+        loopTyping();
+      }
+
+      function deletingEffect() {
+        let word = words[i].split("");
+        var loopDeleting = function() {
+          if (word.length > 0) {
+            word.pop();
+            document.getElementById('typewriter-text').innerHTML = word.join("");
+          } else {
+            if (words.length > (i + 1)) {
+              i++;
+            } else {
+              i = 0;
+            }
+            setTimeout(typingEffect, 500);
+            return false;
+          }
+          timer = setTimeout(loopDeleting, 50);
+        };
+        loopDeleting();
+      }
+
+      document.addEventListener("DOMContentLoaded", function() {
+        typingEffect();
+      });
+    </script>
   </body>
 </html>
