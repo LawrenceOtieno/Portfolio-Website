@@ -35,7 +35,7 @@ projects = [
     },
     {
         "name": "HRM Executive Dashboard",
-        "image": "images/dashboard.PNG",
+        "image": "images/dashboard.Png",
         "tags": ["Python", "Pandas", "Numpy", "Plotly", "Streamlit"],
         "link": "https://github.com/LawrenceOtieno/hrm-executive-dashboard",
     },
