@@ -4,7 +4,7 @@
 :root {
   --white-color: #fff;
   --bg-color-light: #fff;
-  --bg-color-dark: #121212; /* Refined for a cleaner modern dark theme */
+  --bg-color-dark: #333;
   --gray-color: #ccc;
 }
 
@@ -16,7 +16,7 @@
 }
 
 .dark-mode {
-  --card-bg: #1e1e1e;
+  --card-bg: #333;
   --card-text: #fff;
 }
 
@@ -28,7 +28,7 @@
 /* Light mode styles */
 body.light-mode {
   --bg-color: var(--bg-color-light);
-  color: #333 !important; /* Dark text for readability in light mode */
+  color: var(--white-color);
 }
 
 /* Dark mode styles */
@@ -43,44 +43,30 @@ body {
   font-family: "Montserrat", sans-serif;
 }
 
-/* Changing link color */
+/* Changing link color & adding interactive hover button activities */
 .nav-item .nav-link {
   color: var(--white-color);
+  padding: 0.5rem 1rem !important;
+  border-radius: 6px;
+  transition: all 0.3s ease-in-out;
 }
 
-/* Hero section fallback structural rules */
+.nav-item .nav-link:hover {
+  color: #ffc107 !important; /* Changes text color to theme gold on hover */
+  background-color: rgba(255, 255, 255, 0.08); /* Soft glass-like background highlight */
+  text-shadow: 0 2px 10px rgba(255, 193, 7, 0.4); /* Subtle glowing text shadow */
+  transform: translateY(-1px); /* Slight interactive upward lift */
+}
+
+/* Hero section background image */
 .hero {
-  min-height: 85vh;
+  height: 100vh;
+  background-image: url("../images/home-bg.jpg");
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center center;
   background-attachment: fixed;
 }
 
-/* Premium CTA Button Enhancements */
-.custom-hero-btn {
-  border: 2px solid transparent !important;
-}
-
-.custom-hero-btn:hover {
-  transform: translateY(-4px);
-  background-color: #0d6efd !important;
-  border-color: #0d6efd !important;
-  box-shadow: 0 1rem 3rem rgba(13, 110, 253, 0.4) !important;
-}
-
-/* Smooth bouncing arrow indicator */
-@keyframes custom-bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(5px); }
-}
-
-.custom-bounce {
-  display: inline-block;
-  animation: custom-bounce 2s infinite ease-in-out;
-}
-
-/* General Layout Elements */
 .card-image {
   max-height: 300px;
   height: 100%;
@@ -106,13 +92,6 @@ body {
 .card {
   background: var(--card-bg) !important;
   color: var(--card-text) !important;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-/* Subtle Card Lift on Hover for Project section polish */
-#portfolio .card:hover, #skills .card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0.5rem 1.5rem rgba(0, 0, 0, 0.15) !important;
 }
 
 /* Timeline background line */
@@ -137,11 +116,6 @@ body {
 .social-icons a {
   width: 40px;
   height: 40px;
-  transition: transform 0.2s ease;
-}
-
-.social-icons a:hover {
-  transform: scale(1.1);
 }
 
 footer .social-icons a {
@@ -161,7 +135,6 @@ footer .social-icons a {
   background-image: url("../images/contact-bg.jpeg");
 }
 
-/* Media Queries for responsive viewports */
 @media screen and (max-width: 990px) {
   #skills .card {
     width: calc(100% / 2 - 10px) !important;
@@ -173,20 +146,4 @@ footer .social-icons a {
   #portfolio .card-wrapper {
     width: 100% !important;
   }
-  
-  #about .img::before {
-    display: none; /* Hides vertical timeline bar on mobile layout clutter */
-  }
-}
-
-/* Typewriter Cursor Animation Engine */
-.cursor {
-  font-weight: 300;
-  color: #ffc107; /* Matches Bootstrap's warning gold */
-  animation: blink 0.7s infinite;
-}
-
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
 }
