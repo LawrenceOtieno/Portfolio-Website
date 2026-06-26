@@ -67,6 +67,17 @@ body {
   background-attachment: fixed;
 }
 
+/* Smooth bouncing arrow indicator keyframes and behavior */
+@keyframes custom-bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(6px); }
+}
+
+.custom-bounce {
+  display: inline-block;
+  animation: custom-bounce 1.6s infinite ease-in-out;
+}
+
 .card-image {
   max-height: 300px;
   height: 100%;
