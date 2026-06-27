@@ -178,10 +178,103 @@ footer .social-icons a {
   box-shadow: 0 10px 25px rgba(13, 110, 253, 0.15);
 }
 
-/* Media Queries */
+/* ==========================================
+   DYNAMIC SCROLLABLE PORTFOLIO RUNWAY STYLES 
+   ========================================== */
+
+/* Outer slider safety container boundaries */
+.portfolio-slider-outer {
+  position: relative;
+  width: 100%;
+  padding: 0 5px;
+}
+
+/* The horizontal infinite rolling card track */
+.portfolio-slider-track {
+  display: flex;
+  flex-wrap: nowrap; /* CRITICAL: Locks cards in an un-broken single lane line */
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: 1.5rem 0;
+  width: 100%;
+  
+  /* Enables native high-performance flick touch gestures on mobile devices */
+  -webkit-overflow-scrolling: touch; 
+  scrollbar-width: none; /* Hides scrollbar for Firefox */
+}
+
+.portfolio-slider-track::-webkit-scrollbar {
+  display: none; /* Hides scrollbar for Chrome, Safari, Blink layouts */
+}
+
+/* Individual Portfolio Slides - Shows 3 cleanly + peeks at the 4th on desktop layouts */
+.portfolio-slide-card {
+  flex: 0 0 calc(33.333% - 1rem); /* Force precise scaling sizing without structural shrinkage */
+  min-width: 310px; /* Safeguards aspect ratio across standard layouts */
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+}
+
+.portfolio-slide-card:hover {
+  transform: translateY(-5px);
+}
+
+/* Floating Navigation Control Arrows overlay */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: rgba(33, 37, 41, 0.85);
+  color: var(--white-color);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  transition: all 0.25s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.slider-arrow:hover {
+  background-color: #ffc107;
+  color: #222;
+  border-color: #ffc107;
+  box-shadow: 0 0 15px rgba(255, 193, 7, 0.5);
+}
+
+/* Positioning Offsets over container frames */
+.left-arrow { left: -22px; }
+.right-arrow { right: -22px; }
+
+/* Responsive Media Queries Adjustments */
+@media screen and (max-width: 1100px) {
+  .portfolio-slide-card {
+    flex: 0 0 calc(50% - 0.75rem); /* Flips cleanly to 2 cards visible on medium viewports */
+  }
+}
+
 @media screen and (max-width: 990px) {
   #skills .card {
     width: calc(100% / 2 - 10px) !important;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .portfolio-slide-card {
+    flex: 0 0 85%; /* Focuses into 1 clear centered card while bleeding into next card edges */
+    min-width: 270px;
+  }
+  .left-arrow { left: -8px; }
+  .right-arrow { right: -8px; }
+  .slider-arrow {
+    width: 42px;
+    height: 42px;
+    font-size: 1.1rem;
   }
 }
 
