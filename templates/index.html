@@ -160,7 +160,6 @@
       </div>
     </section>
 
-    <!-- Updated Portfolio Section Container -->
     <section class="container py-5" id="portfolio">
       <div class="row mt-4 py-3">
         <div class="col-12 d-flex flex-column text-center justify-content-center">
@@ -171,42 +170,67 @@
         </div>
       </div>
       
-      <!-- Horizontal Slider Structural Wrappers -->
-      <div class="portfolio-slider-outer position-relative mt-5">
+      <div id="portfolioCarousel" class="carousel slide mt-5" data-bs-ride="false">
         
-        <!-- Slider Arrow Navigation Controls -->
-        <button class="slider-arrow left-arrow" aria-label="Slide Left">&#10094;</button>
-        <button class="slider-arrow right-arrow" aria-label="Slide Right">&#10095;</button>
-
-        <!-- Infinite Running Runway Track -->
-        <div class="portfolio-slider-track">
+        <div class="carousel-indicators custom-indicators">
           {% for project in projects %}
-          <div class="portfolio-slide-card">
-            <div class="card h-100 d-flex flex-column">
-              <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
-                <img
-                  src="{{ url_for('static', filename=project.image) }}"
-                  alt="{{ project.name }}"
-                  class="card-img-top"
-                  style="max-height: 300px; min-height: 300px; object-fit: cover"
-                />
-              </a>
-              <div class="card-body flex-grow-1">
-                <h4 class="card-title text-start h4">
-                  <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer" class="text-dark text-decoration-none project-title-link">
-                    {{project.name}} <small class="text-muted fs-6 ms-1"><i class="fas fa-external-link-alt"></i></small>
-                  </a>
-                </h4>
+            <button 
+              type="button" 
+              data-bs-target="#portfolioCarousel" 
+              data-bs-slide-to="{{ loop.index0 }}" 
+              class="{% if loop.first %}active{% endif %}" 
+              aria-current="{% if loop.first %}true{% endif %}" 
+              aria-label="Slide {{ loop.index }}">
+            </button>
+          {% endfor %}
+        </div>
+
+        <div class="carousel-inner px-md-5">
+          {% for project in projects %}
+          <div class="carousel-item {% if loop.first %}active{% endif %}">
+            <div class="d-flex justify-content-center px-2">
+              
+              <div class="card portfolio-carousel-card border-0 shadow-sm">
+                <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none project-card-anchor">
+                  <div class="position-relative overflow-hidden card-img-wrapper">
+                    <img
+                      src="{{ url_for('static', filename=project.image) }}"
+                      alt="{{ project.name }}"
+                      class="card-img-top"
+                    />
+                    <div class="card-hover-overlay d-flex align-items-center justify-content-center">
+                      <span class="btn btn-light rounded-pill px-4 fw-medium shadow">
+                        View Project <i class="fas fa-external-link-alt ms-1 fs-7"></i>
+                      </span>
+                    </div>
+                  </div>
+                  
+                  <div class="card-body text-center d-flex flex-column justify-content-between">
+                    <h4 class="card-title text-dark h4 mb-3">
+                      {{ project.name }}
+                    </h4>
+                    <div class="card-tags-wrapper d-flex flex-wrap justify-content-center gap-2">
+                      {% for tag in project.tags %}
+                      <span class="badge text-bg-dark px-2 py-1.5"> {{ tag }} </span>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </a>
               </div>
-              <div class="card-footer">
-                {% for tag in project.tags %}
-                <span class="badge text-bg-dark p-2"> {{tag}} </span>
-                {% endfor %}
-              </div>
+
             </div>
           </div>
           {% endfor %}
         </div>
+
+        <button class="carousel-control-prev custom-carousel-arrow" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next custom-carousel-arrow" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
         
       </div>
     </section>
@@ -529,30 +553,6 @@
             this.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
           }
         });
-      });
-    </script>
-
-    <!-- Portfolio Slider Interaction Controller Logic -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function() {
-        const track = document.querySelector('.portfolio-slider-track');
-        const leftArrow = document.querySelector('.left-arrow');
-        const rightArrow = document.querySelector('.right-arrow');
-
-        if (track && leftArrow && rightArrow) {
-          const getStepDistance = () => {
-            const firstCard = track.querySelector('.portfolio-slide-card');
-            return firstCard ? firstCard.clientWidth + 24 : 360;
-          };
-
-          leftArrow.addEventListener('click', () => {
-            track.scrollBy({ left: -getStepDistance(), behavior: 'smooth' });
-          });
-
-          rightArrow.addEventListener('click', () => {
-            track.scrollBy({ left: getStepDistance(), behavior: 'smooth' });
-          });
-        }
       });
     </script>
   </body>
