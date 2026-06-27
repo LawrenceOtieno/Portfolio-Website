@@ -1,289 +1,206 @@
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
-
-/* Color variables */
-:root {
-  --white-color: #fff;
-  --bg-color-light: #fff;
-  --bg-color-dark: #333;
-  --gray-color: #ccc;
+/* ==========================================================================
+   1. Global Typography & Core Overrides
+   ========================================================================== */
+body {
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
+  background-color: #ffffff;
+  color: #212529;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .montserrat-400 {
-  font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
 }
 
-.dark-mode {
-  --card-bg: #333;
-  --card-text: #fff;
+/* Base Utility Triggers */
+.tracking-tight { letter-spacing: -0.05em; }
+.tracking-wider { letter-spacing: 0.05em; }
+.tracking-widest { letter-spacing: 0.15em; }
+.cursor { animation: blink 1s infinite; color: #ffc107; }
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
 }
 
-.light-mode {
-  --card-bg: #fff;
-  --card-text: #333;
-}
-
-/* Light mode styles */
-body.light-mode {
-  --bg-color: var(--bg-color-light);
-  color: var(--white-color);
-}
-
-/* Dark mode styles */
-body.dark-mode {
-  --bg-color: var(--bg-color-dark);
-  color: var(--white-color);
-}
-
-/* Changing background color */
-body {
-  background: var(--bg-color) !important;
-  font-family: "Montserrat", sans-serif;
-}
-
-/* Changing link color & adding interactive hover button activities */
-.nav-item .nav-link {
-  color: var(--white-color);
-  padding: 0.5rem 1rem !important;
-  border-radius: 6px;
-  transition: all 0.3s ease-in-out;
-}
-
-.nav-item .nav-link:hover {
-  color: #ffc107 !important; /* Changes text color to theme gold on hover */
-  background-color: rgba(255, 255, 255, 0.08); /* Soft glass-like background highlight */
-  text-shadow: 0 2px 10px rgba(255, 193, 7, 0.4); /* Subtle glowing text shadow */
-  transform: translateY(-1px); /* Slight interactive upward lift */
-}
-
-/* Hero section background image */
+/* ==========================================================================
+   2. Hero Landing Layout Engine
+   ========================================================================== */
 .hero {
-  height: 100vh;
-  background-image: url("../images/home-bg.jpg");
-  background-repeat: no-repeat;
   background-size: cover;
-  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-/* Smooth bouncing arrow indicator keyframes and behavior */
-@keyframes custom-bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(6px); }
+.custom-hero-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
 }
 
 .custom-bounce {
-  display: inline-block;
-  animation: custom-bounce 1.6s infinite ease-in-out;
+  animation: bounce 2s infinite;
 }
 
-.card-image {
-  max-height: 300px;
-  height: 100%;
-  object-fit: cover;
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+  40% { transform: translateY(-8px); }
+  60% { transform: translateY(-4px); }
 }
 
-#skills i {
-  height: 100px;
-  width: 100px;
-}
-
-#portfolio img {
-  height: 300px;
-  object-fit: cover;
-}
-
-#about .img,
-#about img,
-.hire-text h2 {
-  position: relative;
-}
-
-.card {
-  background: var(--card-bg) !important;
-  color: var(--card-text) !important;
-}
-
-/* Timeline background line */
-#about .img::before {
-  content: "";
-  left: 50%;
-  width: 4px;
-  position: absolute;
-  height: calc(100% + 140px);
-  background: var(--gray-color);
-}
-
-#about img,
-#about .hire-text h2 {
-  width: 140px;
-}
-
-#about .hire-text h2 {
-  height: 140px;
-}
-
-.social-icons a {
-  width: 40px;
-  height: 40px;
-}
-
-footer .social-icons a {
-  width: 30px;
-  height: 30px;
-}
-
-#cv img {
-  width: 230px;
-}
-
-/* Contact section background image */
-#contact {
-  background-size: cover;
-  background-attachment: fixed;
-  background-position: center;
-  background-image: url("../images/contact-bg.jpeg");
-}
-
-/* Dynamic Active Card Slider Grid Rules */
+/* ==========================================================================
+   3. Skills Horizontal Slider (Native Swipe / Focus Driven)
+   ========================================================================== */
 .skills-slider-container {
-  display: flex;
-  gap: 1.5rem;
-  transition: all 0.5s ease;
   overflow-x: auto;
-  padding: 1rem 0;
-  scrollbar-width: none; /* Hides horizontal track for clean view on modern viewports */
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 15px;
 }
 
 .skills-slider-container::-webkit-scrollbar {
-  display: none; /* Hides scrollbar on Chrome/Safari engines */
+  height: 6px;
 }
 
-.skills-slider-container .skill-slide-card {
-  flex: 1;
-  min-width: 250px;
-  transition: all 0.5s ease-in-out;
+.skills-slider-container::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+
+.skill-slide-card {
+  flex: 0 0 280px;
+  max-width: 280px;
   cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Hover/Focus expansion for the dynamic active panel experience */
-.skills-slider-container .skill-slide-card.active-focus {
-  flex: 2.5;
-  min-width: 320px;
+.skill-slide-card.active-focus {
+  transform: scale(1.03);
 }
 
-.skills-slider-container .skill-slide-card.active-focus .card {
-  border: 2px solid #0d6efd !important;
-  box-shadow: 0 10px 25px rgba(13, 110, 253, 0.15);
-}
-
-/* ==========================================
-   DYNAMIC SCROLLABLE PORTFOLIO RUNWAY STYLES 
-   ========================================== */
-
-/* Outer slider safety container boundaries */
+/* ==========================================================================
+   4. Portfolio Carousel Track (Arrow Button Nav Driven)
+   ========================================================================== */
 .portfolio-slider-outer {
   position: relative;
   width: 100%;
-  padding: 0 5px;
+  padding: 0 10px;
 }
 
-/* The horizontal infinite rolling card track */
+/* Horizontal Runner Runway Track */
 .portfolio-slider-track {
   display: flex;
-  flex-wrap: nowrap; /* CRITICAL: Locks cards in an un-broken single lane line */
-  gap: 1.5rem;
+  gap: 24px;
   overflow-x: auto;
   scroll-behavior: smooth;
-  padding: 1.5rem 0;
-  width: 100%;
-  
-  /* Enables native high-performance flick touch gestures on mobile devices */
-  -webkit-overflow-scrolling: touch; 
-  scrollbar-width: none; /* Hides scrollbar for Firefox */
+  scrollbar-width: none; /* Firefox layout fallback override */
+  padding: 15px 5px;
 }
 
 .portfolio-slider-track::-webkit-scrollbar {
-  display: none; /* Hides scrollbar for Chrome, Safari, Blink layouts */
+  display: none; /* Chrome/Safari/Edge scrollbar removal to maintain track clean look */
 }
 
-/* Individual Portfolio Slides - Shows 3 cleanly + peeks at the 4th on desktop layouts */
+/* Single Portfolio Card Container Dimension Boundary */
 .portfolio-slide-card {
-  flex: 0 0 calc(33.333% - 1rem); /* Force precise scaling sizing without structural shrinkage */
-  min-width: 310px; /* Safeguards aspect ratio across standard layouts */
-  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.3s ease;
+  flex: 0 0 350px;
+  width: 350px;
+  transition: transform 0.3s ease;
 }
 
 .portfolio-slide-card:hover {
   transform: translateY(-5px);
 }
 
-/* Floating Navigation Control Arrows overlay */
+/* Slider Arrow Navigation Controls Styling */
 .slider-arrow {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(33, 37, 41, 0.85);
-  color: var(--white-color);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
+  background-color: #212529;
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 50%;
-  cursor: pointer;
-  z-index: 10;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4rem;
-  transition: all 0.25s ease-in-out;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.2s ease, transform 0.2s ease, opacity 0.2s ease;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .slider-arrow:hover {
   background-color: #ffc107;
-  color: #222;
+  color: #212529;
   border-color: #ffc107;
-  box-shadow: 0 0 15px rgba(255, 193, 7, 0.5);
 }
 
-/* Positioning Offsets over container frames */
-.left-arrow { left: -22px; }
-.right-arrow { right: -22px; }
-
-/* Responsive Media Queries Adjustments */
-@media screen and (max-width: 1100px) {
-  .portfolio-slide-card {
-    flex: 0 0 calc(50% - 0.75rem); /* Flips cleanly to 2 cards visible on medium viewports */
-  }
+.slider-arrow:active {
+  transform: translateY(-50%) scale(0.95);
 }
 
-@media screen and (max-width: 990px) {
-  #skills .card {
-    width: calc(100% / 2 - 10px) !important;
-  }
-}
+.left-arrow { left: -20px; }
+.right-arrow { right: -20px; }
 
-@media screen and (max-width: 768px) {
-  .portfolio-slide-card {
-    flex: 0 0 85%; /* Focuses into 1 clear centered card while bleeding into next card edges */
-    min-width: 270px;
-  }
-  .left-arrow { left: -8px; }
-  .right-arrow { right: -8px; }
+/* Handle arrows visibility adjustments on small device break viewing ports */
+@media (max-width: 768px) {
   .slider-arrow {
-    width: 42px;
-    height: 42px;
-    font-size: 1.1rem;
+    display: none; /* Fallback cleanly to native finger drag swipe gestures on mobile viewports */
+  }
+  .portfolio-slider-track {
+    scrollbar-width: auto;
+    overflow-x: scroll;
+  }
+  .portfolio-slide-card {
+    flex: 0 0 290px;
+    width: 290px;
   }
 }
 
-@media screen and (max-width: 668px) {
-  #skills .card,
-  #portfolio .card-wrapper {
-    width: 100% !important;
-  }
-  .skills-slider-container {
-    flex-wrap: wrap; /* Fallback to clean standard layout for extra tight screens */
-  }
+/* ==========================================================================
+   5. About & Timeline Visual Styling Wrap
+   ========================================================================== */
+.img img {
+  transition: transform 0.3s ease;
+}
+
+.img img:hover {
+  transform: scale(1.05);
+}
+
+.hire-text h2 {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hire-text h2:hover {
+  transform: rotate(-5deg) scale(1.1);
+}
+
+/* ==========================================================================
+   6. Global Elements & Structural Adjustments
+   ========================================================================== */
+.project-title-link {
+  transition: color 0.2s ease;
+}
+
+.project-title-link:hover {
+  color: #0d6efd !important;
+}
+
+.contact-info li i {
+  width: 20px;
+  color: #0d6efd;
+}
+
+footer .social-icons a {
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+footer .social-icons a:hover {
+  transform: translateY(-2px);
+  background-color: #0a58ca !important;
 }
