@@ -160,6 +160,7 @@
       </div>
     </section>
 
+    <!-- Smooth Carousel Portfolio Section -->
     <section class="container py-5" id="portfolio">
       <div class="row mt-4 py-3">
         <div class="col-12 d-flex flex-column text-center justify-content-center">
@@ -172,6 +173,7 @@
       
       <div id="portfolioCarousel" class="carousel slide mt-5" data-bs-ride="false">
         
+        <!-- Bottom Progress Dots Navigation Indicators -->
         <div class="carousel-indicators custom-indicators">
           {% for project in projects %}
             <button 
@@ -185,11 +187,13 @@
           {% endfor %}
         </div>
 
+        <!-- Carousel Runway Inner Layer -->
         <div class="carousel-inner px-md-5">
           {% for project in projects %}
           <div class="carousel-item {% if loop.first %}active{% endif %}">
             <div class="d-flex justify-content-center px-2">
               
+              <!-- Smooth Clickable Grid Card Asset -->
               <div class="card portfolio-carousel-card border-0 shadow-sm">
                 <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none project-card-anchor">
                   <div class="position-relative overflow-hidden card-img-wrapper">
@@ -223,6 +227,7 @@
           {% endfor %}
         </div>
 
+        <!-- Carousel Navigation Side Control Paddles -->
         <button class="carousel-control-prev custom-carousel-arrow" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="prev">
           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
           <span class="visually-hidden">Previous</span>
@@ -434,7 +439,8 @@
       </div>
     </section>
 
-    <section class="py-5 bg-dark" id="contact">
+    <!-- Fixed Contact Me Section with Background Class Styling Hook -->
+    <section class="py-5 contact-section-bg" id="contact">
       <div class="container-xxl py-5">
         <div class="col-12 d-flex flex-column text-center justify-content-center">
           <h2 class="text-white display-2">CONTACT ME</h2>
