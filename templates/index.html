@@ -3,166 +3,218 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio</title>
+  <title>Lawrence Omondi | Portfolio</title>
+  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
   <link rel="stylesheet" href="style.css">
 </head>
-<body class="dark-mode"> <nav class="navbar navbar-expand-lg fixed-top bg-dark">
+<body class="dark-mode">
+
+  <nav class="navbar navbar-expand-lg fixed-top bg-dark navbar-dark border-b border-secondary">
     <div class="container">
-      <div class="navbar-nav ms-auto d-flex flex-row gap-2">
-        <a class="nav-item nav-link" href="#skills">Skills</a>
-        <a class="nav-item nav-link" href="#portfolio">Portfolio</a>
-        <a class="nav-item nav-link" href="#about">About</a>
-        <a class="nav-item nav-link" href="#cv">CV</a>
-        <a class="nav-item nav-link" href="#contact">Contact</a>
+      <a class="navbar-brand fw-bold text-uppercase tracking-wider" href="#">LO<span class="text-warning">.</span></a>
+      <button class="navbar-toggler" type="var" data-bs-toggle="collapse" data-bs-target="#portfolioNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="portfolioNav">
+        <div class="navbar-nav ms-auto gap-2">
+          <a class="nav-item nav-link" href="#skills">Skills</a>
+          <a class="nav-item nav-link" href="#portfolio">Portfolio</a>
+          <a class="nav-item nav-link" href="#about">About</a>
+          <a class="nav-item nav-link" href="#cv">CV</a>
+          <a class="nav-item nav-link" href="#contact">Contact</a>
+        </div>
       </div>
     </div>
   </nav>
 
-  <section class="hero d-flex align-items-center justify-content-center text-center">
-    <div>
-      <a href="#portfolio" class="btn btn-primary rounded-pill px-4 py-2 custom-bounce text-uppercase fw-bold">
-        Explore My Work &darr;
-      </a>
+  <section class="hero d-flex align-items-center justify-content-center text-center text-white position-relative">
+    <div class="container z-index-2">
+      <h1 class="display-2 fw-bold text-uppercase tracking-tight mb-3">Lawrence Omondi</h1>
+      <p class="lead text-warning text-uppercase tracking-widest fs-4 mb-5">Data Engineer &amp; Robotics Research Specialist</p>
+      <div class="mt-4">
+        <a href="#portfolio" class="btn btn-outline-warning rounded-pill px-4 py-2 custom-bounce text-uppercase fw-bold transition-all">
+          Explore My Work &nbsp;<i class="bi bi-chevron-down"></i>
+        </a>
+      </div>
     </div>
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-dark opacity-50 z-index-1"></div>
   </section>
 
   <section id="skills" class="py-5 bg-transparent">
     <div class="container text-center">
-      <h2 class="display-4 fw-normal text-uppercase">Skills</h2>
+      <h2 class="display-4 fw-normal text-uppercase text-white">Skills</h2>
+      <div class="w-25 mx-auto border-bottom border-warning border-2 mb-4"></div>
       <p class="text-muted mb-5">Continuously improving my skills and knowledge in the field.</p>
       
-      <div class="skills-slider-container">
+      <div class="skills-slider-container px-2">
         <div class="skill-slide-card active-focus">
-          <div class="card p-4 text-center h-100">
+          <div class="card p-4 text-center h-100 border-secondary">
             <div class="d-flex justify-content-center mb-3">
-              <i class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white fs-2">📊</i>
+              <i class="bg-warning rounded-circle d-flex align-items-center justify-content-center text-dark fs-2 bi bi-graph-up-arrow"></i>
             </div>
-            <h4 class="fw-bold">Business Analyst</h4>
-            <p class="small text-muted">Proficient in Requirements gathering, mapping, and translating data into insights using tools such as Python, R, Excel, and SQL.</p>
+            <h4 class="fw-bold text-white">Business Analyst</h4>
+            <p class="small text-muted mb-0">Proficient in Requirements gathering, mapping, and translating data into insights using tools such as Python, R, Excel, and SQL.</p>
           </div>
         </div>
         <div class="skill-slide-card">
-          <div class="card p-4 text-center h-100">
+          <div class="card p-4 text-center h-100 border-secondary">
             <div class="d-flex justify-content-center mb-3">
-              <i class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white fs-2">📈</i>
+              <i class="bg-warning rounded-circle d-flex align-items-center justify-content-center text-dark fs-2 bi bi-database-fill-gear"></i>
             </div>
-            <h4 class="fw-bold">Data Engineer</h4>
-            <p class="small text-muted">I have experience in building data pipelines, modeling, and moving data using tools such as Python, SQL, Cloud, and Spark.</p>
+            <h4 class="fw-bold text-white">Data Engineer</h4>
+            <p class="small text-muted mb-0">I have experience in building data pipelines, modeling, and moving data using tools such as Python, SQL, Cloud infrastructure, and Apache Spark.</p>
           </div>
         </div>
         <div class="skill-slide-card">
-          <div class="card p-4 text-center h-100">
+          <div class="card p-4 text-center h-100 border-secondary">
             <div class="d-flex justify-content-center mb-3">
-              <i class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white fs-2">⚙️</i>
+              <i class="bg-warning rounded-circle d-flex align-items-center justify-content-center text-dark fs-2 bi bi-cpu-fill"></i>
             </div>
-            <h4 class="fw-bold">Automation & Integration</h4>
-            <p class="small text-muted">Skilled in building workflows, connecting systems, and automating tasks using tools such as Python, Bash, Airflow, and APIs.</p>
+            <h4 class="fw-bold text-white">Automation &amp; Integration</h4>
+            <p class="small text-muted mb-0">Skilled in building workflows, connecting cross-platform systems, and automating tasks using tools such as Python, Bash scripting, Airflow, and APIs.</p>
           </div>
         </div>
         <div class="skill-slide-card">
-          <div class="card p-4 text-center h-100">
+          <div class="card p-4 text-center h-100 border-secondary">
             <div class="d-flex justify-content-center mb-3">
-              <i class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white fs-2">🔍</i>
+              <i class="bg-warning rounded-circle d-flex align-items-center justify-content-center text-dark fs-2 bi bi-file-earmark-text-fill"></i>
             </div>
-            <h4 class="fw-bold">Documentation</h4>
-            <p class="small text-muted">I create both simple and technical documentation, map business processes, and write user guides using Confluence, Markdown, and Jira to ensure technical and business alignment.</p>
+            <h4 class="fw-bold text-white">Documentation</h4>
+            <p class="small text-muted mb-0">I create simple and technical documentation, map business processes, and write user guides using Confluence, Markdown, and Jira to ensure clear alignment.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section id="portfolio" class="py-5">
+  <section id="portfolio" class="py-5 bg-dark">
     <div class="container position-relative">
       <div class="text-center mb-5">
-        <h2 class="display-4 fw-normal text-uppercase">Portfolio</h2>
+        <h2 class="display-4 fw-normal text-uppercase text-white">Portfolio</h2>
+        <div class="w-25 mx-auto border-bottom border-warning border-2 mb-4"></div>
         <p class="text-muted">A collection of projects I've worked on.</p>
       </div>
 
       <div class="portfolio-slider-outer">
-        
-        <button class="slider-arrow left-arrow" aria-label="Slide Left">&#10094;</button>
-        <button class="slider-arrow right-arrow" aria-label="Slide Right">&#10095;</button>
+        <button class="slider-arrow left-arrow" aria-label="Slide Left"><i class="bi bi-chevron-left"></i></button>
+        <button class="slider-arrow right-arrow" aria-label="Slide Right"><i class="bi bi-chevron-right"></i></button>
 
         <div class="portfolio-slider-track">
           
           <div class="portfolio-slide-card">
-            <div class="card h-100 shadow-sm">
-              <img src="images/moviesr.png" class="card-img-top card-image" alt="Data Analytics Project">
-              <div class="card-body">
-                <h5 class="card-title fw-bold">Data Analytics Dashboard</h5>
-                <p class="card-text small text-muted">Interactive analytical metrics displaying complex user-generated rating trends mapped across linear timescales cleanly.</p>
+            <div class="card h-100 shadow border-secondary overflow-hidden">
+              <img src="images/moviesr.PNG" class="card-img-top card-image" alt="Data Analytics Interface">
+              <div class="card-body d-flex flex-column justify-content-between">
+                <div>
+                  <h5 class="card-title fw-bold text-white mb-2">Data Analytics Dashboard</h5>
+                  <p class="card-text small text-muted">Interactive analytical metrics displaying user-generated rating trends mapped across linear timescales cleanly via automated visualization panels.</p>
+                </div>
+                <div class="mt-3"><span class="badge bg-secondary">Python</span> <span class="badge bg-secondary">SQL</span></div>
               </div>
             </div>
           </div>
 
           <div class="portfolio-slide-card">
-            <div class="card h-100 shadow-sm">
-              <img src="images/uav-navigation.png" class="card-img-top card-image" alt="Robotics System Pipeline">
-              <div class="card-body">
-                <h5 class="card-title fw-bold">Autonomous UAV Navigation</h5>
-                <p class="card-text small text-muted">Advanced robotic flight simulation workflows incorporating imitation learning routines and high-frequency collision logs.</p>
+            <div class="card h-100 shadow border-secondary overflow-hidden">
+              <img src="images/uav-navigation.png" class="card-img-top card-image" alt="Autonomous Robotics Environment Simulation">
+              <div class="card-body d-flex flex-column justify-content-between">
+                <div>
+                  <h5 class="card-title fw-bold text-white mb-2">Autonomous UAV Navigation</h5>
+                  <p class="card-text small text-muted">Advanced robotic flight simulation workflows incorporating imitation learning routines, Artificial Potential Field algorithms, and high-frequency collision logs.</p>
+                </div>
+                <div class="mt-3"><span class="badge bg-secondary">ROS</span> <span class="badge bg-secondary">Gazebo</span> <span class="badge bg-secondary">PX4</span></div>
               </div>
             </div>
           </div>
 
           <div class="portfolio-slide-card">
-            <div class="card h-100 shadow-sm">
-              <img src="images/pace.png" class="card-img-top card-image" alt="KRA Nil Automator Pro Application">
-              <div class="card-body">
-                <h5 class="card-title fw-bold">KRA Nil Automator Pro</h5>
-                <p class="card-text small text-muted">Isolated browser sequencing framework optimized to safely handle automated tasks via local debugging ports seamlessly.</p>
+            <div class="card h-100 shadow border-secondary overflow-hidden">
+              <img src="images/PACE.png" class="card-img-top card-image" alt="KRA Nil Automator Pro System Engine">
+              <div class="card-body d-flex flex-column justify-content-between">
+                <div>
+                  <h5 class="card-title fw-bold text-white mb-2">KRA Nil Automator Pro</h5>
+                  <p class="card-text small text-muted">Isolated browser sequencing framework optimized to safely handle automated tax compliance execution tasks via local debugging ports seamlessly.</p>
+                </div>
+                <div class="mt-3"><span class="badge bg-secondary">Automation</span> <span class="badge bg-secondary">Python Engine</span></div>
               </div>
             </div>
           </div>
 
           <div class="portfolio-slide-card">
-            <div class="card h-100 shadow-sm">
-              <img src="images/workflow-automation.png" class="card-img-top card-image" alt="Data Pipeline Framework">
-              <div class="card-body">
-                <h5 class="card-title fw-bold">Data Pipeline & API Integration</h5>
-                <p class="card-text small text-muted">High-frequency background cron jobs, programmatic file cleanups, and synchronization engines built via custom scripting.</p>
+            <div class="card h-100 shadow border-secondary overflow-hidden">
+              <img src="images/workflow-automation.png" class="card-img-top card-image" alt="API Execution Framework Architecture">
+              <div class="card-body d-flex flex-column justify-content-between">
+                <div>
+                  <h5 class="card-title fw-bold text-white mb-2">Data Pipeline &amp; API Integration</h5>
+                  <p class="card-text small text-muted">High-frequency background cron jobs, programmatic file cleanups, and secure authorization synchronization engines built via specialized background script assets.</p>
+                </div>
+                <div class="mt-3"><span class="badge bg-secondary">Bash</span> <span class="badge bg-secondary">APIs</span> <span class="badge bg-secondary">Data Pipelines</span></div>
               </div>
             </div>
           </div>
 
-          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="about" class="py-5">
-    <div class="container text-center position-relative">
-      <div class="img mx-auto mb-4">
-        <img src="images/profile.jpg" class="rounded-circle border img-fluid" alt="Profile Layout">
-      </div>
-      <div class="hire-text">
-        <h2 class="mx-auto d-flex align-items-center justify-content-center bg-secondary rounded-circle text-white">HIRE</h2>
+  <section id="about" class="py-5 text-white">
+    <div class="container py-4">
+      <div class="row align-items-center justify-content-center">
+        <div class="col-md-4 text-center position-relative mb-4 mb-md-0">
+          <div class="img mx-auto mb-4 border border-secondary p-2 rounded-circle style-profile-wrapper">
+            <img src="images/profile.jpg" class="rounded-circle img-fluid" alt="Lawrence Omondi Otieno">
+          </div>
+          <div class="hire-text">
+            <h2 class="mx-auto d-flex align-items-center justify-content-center bg-warning text-dark rounded-circle fw-bold shadow-lg">HIRE</h2>
+          </div>
+        </div>
+        <div class="col-md-8 text-start ps-md-5">
+          <h2 class="h1 text-uppercase mb-3">About Me</h2>
+          <p class="lead text-muted">Bridging engineering documentation, process automation, and enterprise data analytics environments with precision.</p>
+          <p class="small text-secondary">Specializing in setting up robust technical pipelines, I research autonomous navigation models, design automated execution architectures, and craft clean, interactive data analytics environments intended to convert chaotic tracking workflows into predictable enterprise tools.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <section id="cv" class="py-5 text-center bg-light text-dark">
+  <section id="cv" class="py-5 text-center bg-light text-dark shadow-inner">
     <div class="container">
-      <img src="images/cv-preview.png" class="img-thumbnail mb-3" alt="Curriculum Vitae Graphic">
+      <h2 class="text-uppercase fw-bold mb-4">Curriculum Vitae</h2>
+      <p class="text-muted w-50 mx-auto mb-4">Review my comprehensive professional roadmap, core tool mastery tracking details, and technical academic history vectors.</p>
+      <div class="position-relative d-inline-block shadow-lg rounded overflow-hidden mb-4">
+        <img src="images/cv-preview.png" class="img-fluid style-cv-display" alt="Curriculum Vitae Documentation Graphic">
+      </div>
+      <div>
+        <a href="assets/lawrence-omondi-cv.pdf" download class="btn btn-dark rounded-pill px-4 py-2 text-uppercase font-monospace fw-bold btn-sm tracking-wider">
+          <i class="bi bi-file-earmark-arrow-down-fill"></i> Download Complete PDF
+        </a>
+      </div>
     </div>
   </section>
 
-  <section id="contact" class="py-5 text-white text-center">
-    <div class="container py-5">
-      <h3>Get In Touch</h3>
-      <div class="social-icons d-flex justify-content-center gap-2 mt-3">
-        <a href="#" class="btn btn-outline-light rounded-circle p-2 d-flex align-items-center justify-content-center">🔗</a>
+  <section id="contact" class="py-5 text-white text-center position-relative">
+    <div class="container py-5 position-relative z-index-2">
+      <h2 class="display-5 text-uppercase mb-3">Get In Touch</h2>
+      <p class="text-warning font-monospace small mb-4">Let's solve operational complexities together</p>
+      <div class="social-icons d-flex justify-content-center gap-3 mt-3">
+        <a href="https://github.com" target="_blank" class="btn btn-outline-warning rounded-circle d-flex align-items-center justify-content-center p-0" title="GitHub Profile"><i class="bi bi-github fs-5"></i></a>
+        <a href="https://linkedin.com" target="_blank" class="btn btn-outline-warning rounded-circle d-flex align-items-center justify-content-center p-0" title="LinkedIn Connection"><i class="bi bi-linkedin fs-5"></i></a>
+        <a href="mailto:contact@example.com" class="btn btn-outline-warning rounded-circle d-flex align-items-center justify-content-center p-0" title="Direct Email"><i class="bi bi-envelope-at-fill fs-5"></i></a>
       </div>
     </div>
+    <div class="position-absolute top-0 start-0 w-100 h-100 bg-black opacity-75 z-index-1"></div>
   </section>
 
   <footer class="bg-dark py-4 text-center text-white border-top border-secondary">
-    <div class="social-icons d-flex justify-content-center gap-2 mb-2">
-      <a href="#" class="btn btn-outline-light btn-sm rounded-circle"></a>
+    <div class="container">
+      <p class="small text-secondary mb-0">&copy; 2026 Lawrence Omondi Otieno. All Rights Reserved.</p>
     </div>
   </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -171,10 +223,9 @@
       const rightArrow = document.querySelector('.right-arrow');
 
       if (track && leftArrow && rightArrow) {
-        // Calculates structural spacing properties on demand dynamically
         const getStepDistance = () => {
           const firstCard = track.querySelector('.portfolio-slide-card');
-          // Width of card element + structural layout margin gap (1.5rem = 24px)
+          // Standard structural fallback calculation: block width boundary + layout row margin gap
           return firstCard ? firstCard.clientWidth + 24 : 340;
         };
 
