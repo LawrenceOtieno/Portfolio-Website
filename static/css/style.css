@@ -80,7 +80,7 @@ body {
 }
 
 /* ==========================================================================
-   4. Portfolio Carousel Track (Bootstrap 5 Override)
+   4. Portfolio Carousel Track (Bootstrap 5 Override Layout)
    ========================================================================== */
 #portfolioCarousel {
   max-width: 900px;
@@ -238,4 +238,13 @@ footer .social-icons a {
 footer .social-icons a:hover {
   transform: translateY(-2px);
   background-color: #0a58ca !important;
+}
+
+/* ==========================================================================
+   7. Contact Section Background Image Overlay Engine
+   ========================================================================== */
+.contact-section-bg {
+  background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.9)), 
+              url('/static/images/contact-bg.jpg') no-repeat center center/cover;
+  background-attachment: scroll;
 }
