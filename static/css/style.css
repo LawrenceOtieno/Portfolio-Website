@@ -146,6 +146,39 @@ footer .social-icons a {
   background-image: url("../images/contact-bg.jpeg");
 }
 
+/* Dynamic Active Card Slider Grid Rules */
+.skills-slider-container {
+  display: flex;
+  gap: 1.5rem;
+  transition: all 0.5s ease;
+  overflow-x: auto;
+  padding: 1rem 0;
+  scrollbar-width: none; /* Hides horizontal track for clean view on modern viewports */
+}
+
+.skills-slider-container::-webkit-scrollbar {
+  display: none; /* Hides scrollbar on Chrome/Safari engines */
+}
+
+.skills-slider-container .skill-slide-card {
+  flex: 1;
+  min-width: 250px;
+  transition: all 0.5s ease-in-out;
+  cursor: pointer;
+}
+
+/* Hover/Focus expansion for the dynamic active panel experience */
+.skills-slider-container .skill-slide-card.active-focus {
+  flex: 2.5;
+  min-width: 320px;
+}
+
+.skills-slider-container .skill-slide-card.active-focus .card {
+  border: 2px solid #0d6efd !important;
+  box-shadow: 0 10px 25px rgba(13, 110, 253, 0.15);
+}
+
+/* Media Queries */
 @media screen and (max-width: 990px) {
   #skills .card {
     width: calc(100% / 2 - 10px) !important;
@@ -156,5 +189,8 @@ footer .social-icons a {
   #skills .card,
   #portfolio .card-wrapper {
     width: 100% !important;
+  }
+  .skills-slider-container {
+    flex-wrap: wrap; /* Fallback to clean standard layout for extra tight screens */
   }
 }
