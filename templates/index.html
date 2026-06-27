@@ -1,523 +1,192 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lawrence Otieno Portfolio Website | StreData</title>
-    
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-    />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}"
-    />
-  </head>
-  <body class="montserrat-400">
-    <header class="bg-light sticky-top">
-      <nav class="navbar navbar-expand-lg py-3 bg-dark navbar-dark">
-        <div class="container-xl container-fluid">
-          <a class="navbar-brand fw-bold fs-3" href="/">Myspace</a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item mx-2">
-                <a class="nav-link" href="#skills">Skills</a>
-              </li>
-              <li class="nav-item mx-2">
-                <a class="nav-link" href="#portfolio">Portfolio</a>
-              </li>
-              <li class="nav-item mx-2">
-                <a class="nav-link" href="#about">About</a>
-              </li>
-              <li class="nav-item mx-2">
-                <a class="nav-link" href="#cv">CV</a>
-              </li>
-              <li class="nav-item mx-2">
-                <a class="nav-link" href="#contact">Contact</a>
-              </li>
-            </ul>
-          </div>
-          <button
-            onclick="toggleDarkMode()"
-            class="btn btn-md btn-light rounded-circle d-flex align-items-center justify-content-center"
-            style="width: 50px; height: 50px"
-            aria-label="Toggle Dark Mode"
-          >
-            <i data-lucide="sun"></i>
-          </button>
-        </div>
-      </nav>
-    </header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-mode"> <nav class="navbar navbar-expand-lg fixed-top bg-dark">
+    <div class="container">
+      <div class="navbar-nav ms-auto d-flex flex-row gap-2">
+        <a class="nav-item nav-link" href="#skills">Skills</a>
+        <a class="nav-item nav-link" href="#portfolio">Portfolio</a>
+        <a class="nav-item nav-link" href="#about">About</a>
+        <a class="nav-item nav-link" href="#cv">CV</a>
+        <a class="nav-item nav-link" href="#contact">Contact</a>
+      </div>
+    </div>
+  </nav>
 
-    <section class="hero d-flex flex-column align-items-center justify-content-center position-relative" 
-             style="background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.85)), url('/static/images/hero-bg.jpg') no-repeat center center/cover; min-height: 85vh;">
+  <section class="hero d-flex align-items-center justify-content-center text-center">
+    <div>
+      <a href="#portfolio" class="btn btn-primary rounded-pill px-4 py-2 custom-bounce text-uppercase fw-bold">
+        Explore My Work &darr;
+      </a>
+    </div>
+  </section>
+
+  <section id="skills" class="py-5 bg-transparent">
+    <div class="container text-center">
+      <h2 class="display-4 fw-normal text-uppercase">Skills</h2>
+      <p class="text-muted mb-5">Continuously improving my skills and knowledge in the field.</p>
       
-      <div class="text-center px-4">
-        <p class="text-uppercase text-warning fw-bold mb-2 fs-5" style="letter-spacing: 3px;">
-          Welcome to my Portfolio
-        </p>
-        
-        <h1 class="display-2 text-white fw-extrabold mb-3 tracking-tight" style="font-weight: 800;">
-          Lawrence Otieno
-        </h1>
-        
-        <h3 class="h2 text-light fw-normal mb-5 mx-auto" style="max-width: 850px; min-height: 48px; line-height: 1.5; color: #f1f5f9;">
-          <span id="typewriter-text" class="fw-bold text-warning"></span><span class="cursor">|</span>
-        </h3>
-        
-        <div class="mt-4">
-          <a href="#skills" class="btn btn-lg btn-primary px-5 py-3 fw-medium rounded-pill shadow-lg text-decoration-none custom-hero-btn" style="transition: all 0.3s ease-in-out;">
-            Explore My Expertise <i class="fas fa-arrow-down ms-2 custom-bounce"></i>
-          </a>
+      <div class="skills-slider-container">
+        <div class="skill-slide-card active-focus">
+          <div class="card p-4 text-center h-100">
+            <div class="d-flex justify-content-center mb-3">
+              <i class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white fs-2">📊</i>
+            </div>
+            <h4 class="fw-bold">Business Analyst</h4>
+            <p class="small text-muted">Proficient in Requirements gathering, mapping, and translating data into insights using tools such as Python, R, Excel, and SQL.</p>
+          </div>
+        </div>
+        <div class="skill-slide-card">
+          <div class="card p-4 text-center h-100">
+            <div class="d-flex justify-content-center mb-3">
+              <i class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white fs-2">📈</i>
+            </div>
+            <h4 class="fw-bold">Data Engineer</h4>
+            <p class="small text-muted">I have experience in building data pipelines, modeling, and moving data using tools such as Python, SQL, Cloud, and Spark.</p>
+          </div>
+        </div>
+        <div class="skill-slide-card">
+          <div class="card p-4 text-center h-100">
+            <div class="d-flex justify-content-center mb-3">
+              <i class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white fs-2">⚙️</i>
+            </div>
+            <h4 class="fw-bold">Automation & Integration</h4>
+            <p class="small text-muted">Skilled in building workflows, connecting systems, and automating tasks using tools such as Python, Bash, Airflow, and APIs.</p>
+          </div>
+        </div>
+        <div class="skill-slide-card">
+          <div class="card p-4 text-center h-100">
+            <div class="d-flex justify-content-center mb-3">
+              <i class="bg-primary rounded-circle d-flex align-items-center justify-content-center text-white fs-2">🔍</i>
+            </div>
+            <h4 class="fw-bold">Documentation</h4>
+            <p class="small text-muted">I create both simple and technical documentation, map business processes, and write user guides using Confluence, Markdown, and Jira to ensure technical and business alignment.</p>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="container py-5" id="skills">
-      <div class="row mt-4 py-3">
-        <div class="col-12 d-flex flex-column text-center justify-content-center">
-          <h2 class="display-2">SKILLS</h2>
-          <h5 class="text-secondary fw-normal py-2">
-            Continuously improving my skills and knowledge in the field.
-          </h5>
-        </div>
+  <section id="portfolio" class="py-5">
+    <div class="container position-relative">
+      <div class="text-center mb-5">
+        <h2 class="display-4 fw-normal text-uppercase">Portfolio</h2>
+        <p class="text-muted">A collection of projects I've worked on.</p>
       </div>
-      
-      <div class="row g-4 justify-content-start flex-nowrap skills-slider-container">
-        
-        <div class="col-lg-3 col-md-6 d-flex justify-content-center skill-slide-card">
-          <div class="card card-wrapper d-flex flex-column align-items-center text-center p-4 w-100">
-            <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-chart-bar" style="width: 60px; height: 60px;"></i>
-            <div class="card-body">
-              <h3 class="card-title mt-4 h4">Business Analyst</h3>
-              <p class="card-description text-center card-text">
-                Proficient in Requirements gathering, mapping, and translating data into insights using tools such as Python, R, Excel, and SQL. Skilled in data visualization and reporting, with experience in creating dashboards and reports using tools like Tableau and Power BI.
-              </p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-6 d-flex justify-content-center skill-slide-card">
-          <div class="card d-flex flex-column align-items-center text-center p-4 w-100">
-            <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-chart-line" style="width: 60px; height: 60px;"></i>
-            <div class="card-body">
-              <h3 class="card-title mt-4 h4">Data Engineer</h3>
-              <p class="card-description text-center card-text">
-                I have experience in building data pipelines, modeling, and moving data using tools such as Python, SQL, Cloud, and Spark.
-              </p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-6 d-flex justify-content-center skill-slide-card">
-          <div class="card d-flex flex-column align-items-center text-center p-4 w-100">
-            <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-chart-pie" style="width: 60px; height: 60px;"></i>
-            <div class="card-body">
-              <h3 class="card-title mt-4 h4">Automation & Integration</h3>
-              <p class="card-description text-center card-text">
-                Skilled in building workflows, connecting systems, and automating tasks using tools such as Python, Bash, Airflow, and APIs.
-              </p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-3 col-md-6 d-flex justify-content-center skill-slide-card">
-          <div class="card d-flex flex-column align-items-center text-center p-4 w-100">
-            <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-search" style="width: 60px; height: 60px;"></i>
-            <div class="card-body">
-              <h3 class="card-title mt-4 h4">Documentation</h3>
-              <p class="card-description text-center card-text">
-                I create both simple and technical documentation, map business processes, and write user guides using Confluence, Markdown, and Jira to ensure technical and business procedures are reproducible.
-              </p>
-            </div>
-          </div>
-        </div>
 
-      </div>
-    </section>
+      <div class="portfolio-slider-outer">
+        
+        <button class="slider-arrow left-arrow" aria-label="Slide Left">&#10094;</button>
+        <button class="slider-arrow right-arrow" aria-label="Slide Right">&#10095;</button>
 
-    <section class="container py-5" id="portfolio">
-      <div class="row mt-4 py-3">
-        <div class="col-12 d-flex flex-column text-center justify-content-center">
-          <h2 class="display-2">PORTFOLIO</h2>
-          <h5 class="text-secondary fw-normal py-2">
-            A collection of projects I've worked on.
-          </h5>
-        </div>
-        <div class="row mt-5 mx-0 row-gap-4">
-          {% for project in projects %}
-          <div class="col-lg-4 col-md-6 col-12 card-wrapper">
-            <div class="card h-100 d-flex flex-column">
-              <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
-                <img
-                  src="{{ url_for('static', filename=project.image) }}"
-                  alt="{{ project.name }}"
-                  class="card-img-top"
-                  style="max-height: 300px; min-height: 300px; object-fit: cover"
-                />
-              </a>
-              <div class="card-body flex-grow-1">
-                <h4 class="card-title text-start h4">
-                  <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer" class="text-dark text-decoration-none project-title-link">
-                    {{project.name}} <small class="text-muted fs-6 ms-1"><i class="fas fa-external-link-alt"></i></small>
-                  </a>
-                </h4>
-              </div>
-              <div class="card-footer">
-                {% for tag in project.tags %}
-                <span class="badge text-bg-dark p-2"> {{tag}} </span>
-                {% endfor %}
+        <div class="portfolio-slider-track">
+          
+          <div class="portfolio-slide-card">
+            <div class="card h-100 shadow-sm">
+              <img src="images/moviesr.png" class="card-img-top card-image" alt="Data Analytics Project">
+              <div class="card-body">
+                <h5 class="card-title fw-bold">Data Analytics Dashboard</h5>
+                <p class="card-text small text-muted">Interactive analytical metrics displaying complex user-generated rating trends mapped across linear timescales cleanly.</p>
               </div>
             </div>
           </div>
-          {% endfor %}
-        </div>
-      </div>
-    </section>
 
-    <section class="container py-5" id="about">
-      <div class="row mt-4 py-3">
-        <div class="col-12 d-flex flex-column text-center">
-          <h2 class="display-2">ABOUT</h2>
-          <h5 class="text-secondary fw-normal py-2">
-            Learn more about me, my background, and what motivates me.
-          </h5>
-        </div>
-      </div>
-      
-      <div class="row flex-row-reverse flex-md-row mt-5 pt-5 align-items-center">
-        <div class="col-9 col-md-5 text-md-end">
-          <p class="text-body-secondary mb-1">2004-2014</p>
-          <h4 class="h3">Early Passion for Tech</h4>
-          <p>
-            From an early age, I was fascinated with computer systems and their impact on daily activities and procedures. Starting with Computer Packages, I gradually expanded my skills to include Operating Systems, Microsoft365, Security Systems, and Python.
-          </p>
-        </div>
-        <div class="col-3 col-md-2 img text-center">
-          <img
-            class="rounded-circle border border-5 border-dark-subtle img-fluid"
-            src="{{ url_for('static', filename='images/about-img-1.jpg') }}"
-            alt="Early passion timeline graphic"
-          />
-        </div>
-      </div>
-      
-      <div class="row justify-content-md-end mt-5 pt-5 align-items-center">
-        <div class="col-3 col-md-2 img text-center">
-          <img
-            class="rounded-circle border border-5 border-dark-subtle img-fluid"
-            src="{{ url_for('static', filename='images/about-img-2.jpg') }}"
-            alt="Higher education timeline graphic"
-          />
-        </div>
-        <div class="col-9 col-md-5">
-          <p class="text-body-secondary mb-1">2015-2019</p>
-          <h4 class="h3">Higher Education and Career Growth</h4>
-          <p>
-            Studied Business and Information Technology, complementing my academic foundation in IT Operations applied to Business Environments, and enhancing my proficiency with ICT Support, and data analytical tools such as Excel, and Python. Gained hands-on experience through internships and freelance projects.
-          </p>
-        </div>
-      </div>
-      
-      <div class="row flex-row-reverse flex-md-row mt-5 pt-5 align-items-center">
-        <div class="col-9 col-md-5 text-md-end">
-          <p class="text-body-secondary mb-1">2019-Present</p>
-          <h4 class="h3">Professional Excellence and Continuous Learning</h4>
-          <p>
-            Throughout my career, I have consistently sought opportunities to refine my skills and stay updated with the latest technologies. I strive for excellence in every project I undertake and aim to deliver valuable and impactful results.
-          </p>
-        </div>
-        <div class="col-3 col-md-2 img text-center">
-          <img
-            class="rounded-circle border border-5 border-dark-subtle img-fluid"
-            src="{{ url_for('static', filename='images/about-img-3.jpg') }}"
-            alt="Professional experience timeline graphic"
-          />
-        </div>
-      </div>
-      
-      <div class="row justify-content-md-end mt-5 pt-5 align-items-center">
-        <div class="col-3 col-md-2 img text-center">
-          <img
-            class="rounded-circle border border-5 border-dark-subtle img-fluid"
-            src="{{ url_for('static', filename='images/about-img-4.jpg') }}"
-            alt="Future timeline graphic"
-          />
-        </div>
-        <div class="col-9 col-md-5">
-          <p class="text-body-secondary mb-1">Future</p>
-          <h4 class="h3">Progressively Making a Difference</h4>
-          <p>
-            I am committed to leveraging my skills and expertise to contribute to meaningful projects that have a positive impact on society. I am eager to take on new challenges and collaborate with talented individuals to create innovative solutions.
-          </p>
-        </div>
-      </div>
-
-      <div class="row justify-content-md-center mt-5 pt-5">
-        <div class="col-3 col-md-2 d-flex justify-content-center hire-text">
-          <h2 class="h4 text-center d-flex justify-content-center align-items-center bg-primary text-white rounded-circle border border-5 border-dark-subtle" style="width: 120px; height: 120px;">
-            Your<br />Next<br />Hire
-          </h2>
-        </div>
-      </div>
-    </section>
-
-    <section class="container py-5" id="cv">
-      <div class="row mt-4 py-3">
-        <div class="col-12 d-flex flex-column text-center">
-          <h2 class="display-2">CURRICULUM VITAE</h2>
-          <h5 class="text-secondary fw-normal py-2 container-lg">
-            A resume showing my growth and career progress as an IT Operations Specialist, ICT Support Officer, and a Data Analyst.
-          </h5>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 mt-5 order-lg-0 order-1 text-center d-flex flex-column align-items-start row-gap-4">
-          <img
-            class="img-fluid rounded-circle border border-5 border-dark-subtle"
-            src="{{ url_for('static', filename='images/Lawrence - img.jpeg') }}"
-            alt="profile-img"
-          />
-          <div class="d-flex flex-column align-items-start row-gap-2">
-            <h2 class="mt-3 display-6 text-start">Lawrence Otieno</h2>
-            <ul class="list-unstyled contact-info d-flex flex-column align-items-start row-gap-2">
-              <li><i class="fas fa-envelope me-2"></i> lawrenceit38@gmail.com</li>
-              <li><i class="fas fa-phone me-2"></i> (254) 711720717</li>
-              <li><i class="fas fa-map-marker-alt me-2"></i> Nairobi, Kenya</li>
-            </ul>
-            <div class="social-icons d-flex flex-row gap-2 align-items-center justify-content-start">
-              <a href="https://x.com/Otieno360" class="bg-primary text-white d-flex align-items-center justify-content-center text-decoration-none rounded-circle" style="width:35px; height:35px;"><i class="fa-brands fa-twitter"></i></a>
-              <a href="https://www.facebook.com/lawrence.otieno.5458/" class="bg-primary text-white d-flex align-items-center justify-content-center text-decoration-none rounded-circle" style="width:35px; height:35px;"><i class="fa-brands fa-facebook-f"></i></a>
-              <a href="https://www.linkedin.com/in/lawrence-otieno-5b6b6212a" class="bg-primary text-white d-flex align-items-center justify-content-center text-decoration-none rounded-circle" style="width:35px; height:35px;"><i class="fa-brands fa-linkedin-in"></i></a>
-            </div>
-          </div>
-          <div class="d-flex flex-column align-items-start">
-            <h5>Technical Skills</h5>
-            <ul class="list-unstyled d-flex flex-column align-items-start">
-              <li>Python</li>
-              <li>Excel</li>
-              <li>GitHub</li>
-              <li>ServiceNow</li>
-              <li>Ansible</li>
-              <li>Dashboard</li>
-            </ul>
-          </div>
-          <div class="d-flex flex-column align-items-start">
-            <h5>Personal Interests</h5>
-            <div class="d-flex flex-column align-items-start text-start">
-              <p>Reading Science Fiction Books, Interesting Journals, and AI related contents are a great insight.</p>
-              <p>Travelling and adventure.</p>
-              <p>Open Source Contribution.</p>
-              <p>Social Impact Researcher</p>
-              <p>Tech Blogging - Writing about latest trends in technology, and sharing tutorials.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-lg-7 offset-lg-1 order-lg-1 order-0 mt-5 text-start">
-          <h3 class="h2 fw-normal">Profile</h3>
-          <hr />
-          <p>
-            I am an IT Operations Specialist with 3 years of experience in ICT support, and 1 year of experience in data analysis, proficient in managing and supporting IT infrastructure. In my operations, I have experience utilizing monitoring and virtualization tools such as Nagios, Ansible, and VMware. I am Experienced in IT infrastructure and service management with a strong command of ServiceNow, as a tool. I am committed to ensuring seamless IT operations through effective system integration, requirements analysis, process optimization, user training, and data reporting.
-          </p>
-          
-          <h3 class="h2 fw-normal">Highlights of Qualifications</h3>
-          <hr />
-          <ul>
-            <li>IT Operations</li>
-            <li>ICT Support</li>
-            <li>Data Analysis</li>
-          </ul>
-          
-          <h3 class="h2 fw-normal">Education</h3>
-          <hr />
-          <dl>
-            <dt>2015 - 2019</dt>
-            <dd>Taita Taveta University</dd>
-            <dd>Bachelor of Business Information Technology</dd>
-            <dt>Certifications</dt>
-            <dd>Certification in CCNA</dd>
-          </dl>
-          <hr />
-          <dl>
-            <dt>2017</dt>
-            <dd>Information Systems Management</dd>
-            <dd>Taita Taveta University</dd>
-          </dl>
-          
-          <h3 class="h2 fw-normal">Work Experience</h3>
-          <hr />
-          <dl>
-            <dt>February, 2024 - Present</dt>
-            <dd>Business Analyst</dd>
-            <dd>AESOPS KENYA</dd>
-            
-            <dt>December, 2021 - February 2024</dt>
-            <dd>Tech Support (ICT Officer)</dd>
-            <dd>AESOPS KENYA</dd>
-            
-            <dt>May, 2020 - August, 2021</dt>
-            <dd>ICT Officer – ServiceNow, Jira</dd>
-            <dd>Kwick Credit Limited</dd>
-            
-            <dt>April, 2019 - June, 2019</dt>
-            <dd>ICT Help Desk Support – Internship</dd>
-            <dd>Kenya Power and Lighting Company (KPLC)</dd>
-          </dl>
-          
-          <h3 class="h2 fw-normal">Skills & Competencies</h3>
-          <hr />
-          <p class="lh-lg">
-            • Process Optimization • Technical Support • Data Reporting • System Administration • Excel • Python • Data Collection • Reporting & Documentation • Troubleshooting (Wireshark) • Office Peripherals Support • Network & Security Management
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <section class="py-5 bg-dark" id="contact">
-      <div class="container-xxl py-5">
-        <div class="col-12 d-flex flex-column text-center justify-content-center">
-          <h2 class="text-white display-2">CONTACT ME</h2>
-          <p class="text-white fw-normal py-2">
-            Interested if I'd be the right fit for your team? Fill in this form and I will respond within 24-48 hours.
-          </p>
-        </div>
-        <div class="row pt-4 mt-5">
-          <div class="col-12">
-            <form action="/" method="POST">
-              <div class="row d-flex justify-content-center">
-                <div class="col-lg-6">
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="name" id="floatingInput" placeholder="Enter Name*" required />
-                    <label for="floatingInput"> Enter Name*</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="email" class="form-control" name="email" id="floatingEmail" placeholder="Enter Email*" required />
-                    <label for="floatingEmail"> Enter Email*</label>
-                  </div>
-                  <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="phone" id="floatingPhone" placeholder="Enter Phone*" required />
-                    <label for="floatingPhone"> Enter Phone*</label>
-                  </div>
-                </div>
-                <div class="form-floating col-lg-6">
-                  <textarea class="form-control" name="message" placeholder="Leave a comment here" id="floatingMessage" style="height: 205px" required></textarea>
-                  <label for="floatingMessage" class="px-4"> Enter Message*</label>
-                </div>
-                <div class="col-12 mt-5 d-flex justify-content-center">
-                  <button class="btn btn-lg btn-outline-light"> SEND MESSAGE</button>
-                </div>
+          <div class="portfolio-slide-card">
+            <div class="card h-100 shadow-sm">
+              <img src="images/uav-navigation.png" class="card-img-top card-image" alt="Robotics System Pipeline">
+              <div class="card-body">
+                <h5 class="card-title fw-bold">Autonomous UAV Navigation</h5>
+                <p class="card-text small text-muted">Advanced robotic flight simulation workflows incorporating imitation learning routines and high-frequency collision logs.</p>
               </div>
-            </form>
+            </div>
           </div>
-        </div>
+
+          <div class="portfolio-slide-card">
+            <div class="card h-100 shadow-sm">
+              <img src="images/pace.png" class="card-img-top card-image" alt="KRA Nil Automator Pro Application">
+              <div class="card-body">
+                <h5 class="card-title fw-bold">KRA Nil Automator Pro</h5>
+                <p class="card-text small text-muted">Isolated browser sequencing framework optimized to safely handle automated tasks via local debugging ports seamlessly.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="portfolio-slide-card">
+            <div class="card h-100 shadow-sm">
+              <img src="images/workflow-automation.png" class="card-img-top card-image" alt="Data Pipeline Framework">
+              <div class="card-body">
+                <h5 class="card-title fw-bold">Data Pipeline & API Integration</h5>
+                <p class="card-text small text-muted">High-frequency background cron jobs, programmatic file cleanups, and synchronization engines built via custom scripting.</p>
+              </div>
+            </div>
+          </div>
+
+          </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <footer class="bg-light py-4">
-      <div class="container-xxl flex-wrap d-flex align-items-center justify-content-between">
-        <p class="mb-0">Copyright © 2026 Lawrence Otieno</p>
-        <ul class="social-icons d-flex list-unstyled mb-0">
-          <li><a href="https://x.com/Otieno360" class="bg-primary mx-2 text-white d-flex align-items-center justify-content-center text-decoration-none rounded-circle" style="width:30px; height:30px;"><small><i class="fa-brands fa-twitter"></i></small></a></li>
-          <li><a href="https://www.facebook.com/lawrence.otieno.5458/" class="bg-primary mx-2 text-white d-flex align-items-center justify-content-center text-decoration-none rounded-circle" style="width:30px; height:30px;"><small><i class="fa-brands fa-facebook-f"></i></small></a></li>
-          <li><a href="https://www.linkedin.com/in/lawrence-otieno-5b6b6212a" class="bg-primary mx-2 text-white d-flex align-items-center justify-content-center text-decoration-none rounded-circle" style="width:30px; height:30px;"><small><i class="fa-brands fa-linkedin-in"></i></small></a></li>
-        </ul>
+  <section id="about" class="py-5">
+    <div class="container text-center position-relative">
+      <div class="img mx-auto mb-4">
+        <img src="images/profile.jpg" class="rounded-circle border img-fluid" alt="Profile Layout">
       </div>
-    </footer>
+      <div class="hire-text">
+        <h2 class="mx-auto d-flex align-items-center justify-content-center bg-secondary rounded-circle text-white">HIRE</h2>
+      </div>
+    </div>
+  </section>
 
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-      crossorigin="anonymous"
-    ></script>
+  <section id="cv" class="py-5 text-center bg-light text-dark">
+    <div class="container">
+      <img src="images/cv-preview.png" class="img-thumbnail mb-3" alt="Curriculum Vitae Graphic">
+    </div>
+  </section>
 
-    <script src="https://unpkg.com/lucide@0.294.0/dist/umd/lucide.js"></script>
-    <script>
-      lucide.createIcons();
-    </script>
-    
-    <script src="{{ url_for('static', filename='javascript/darkmode.js') }}"></script>
+  <section id="contact" class="py-5 text-white text-center">
+    <div class="container py-5">
+      <h3>Get In Touch</h3>
+      <div class="social-icons d-flex justify-content-center gap-2 mt-3">
+        <a href="#" class="btn btn-outline-light rounded-circle p-2 d-flex align-items-center justify-content-center">🔗</a>
+      </div>
+    </div>
+  </section>
 
-    <script>
-      const words = ["Business Analyst", "Data Engineer", "Automation & Integration"];
-      let i = 0;
-      let timer;
+  <footer class="bg-dark py-4 text-center text-white border-top border-secondary">
+    <div class="social-icons d-flex justify-content-center gap-2 mb-2">
+      <a href="#" class="btn btn-outline-light btn-sm rounded-circle"></a>
+    </div>
+  </footer>
 
-      function typingEffect() {
-        let word = words[i].split("");
-        var loopTyping = function() {
-          if (word.length > 0) {
-            document.getElementById('typewriter-text').innerHTML += word.shift();
-          } else {
-            setTimeout(deletingEffect, 2000);
-            return false;
-          }
-          timer = setTimeout(loopTyping, 100);
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const track = document.querySelector('.portfolio-slider-track');
+      const leftArrow = document.querySelector('.left-arrow');
+      const rightArrow = document.querySelector('.right-arrow');
+
+      if (track && leftArrow && rightArrow) {
+        // Calculates structural spacing properties on demand dynamically
+        const getStepDistance = () => {
+          const firstCard = track.querySelector('.portfolio-slide-card');
+          // Width of card element + structural layout margin gap (1.5rem = 24px)
+          return firstCard ? firstCard.clientWidth + 24 : 340;
         };
-        loopTyping();
-      }
 
-      function deletingEffect() {
-        let word = words[i].split("");
-        var loopDeleting = function() {
-          if (word.length > 0) {
-            word.pop();
-            document.getElementById('typewriter-text').innerHTML = word.join("");
-          } else {
-            if (words.length > (i + 1)) {
-              i++;
-            } else {
-              i = 0;
-            }
-            setTimeout(typingEffect, 500);
-            return false;
-          }
-          timer = setTimeout(loopDeleting, 50);
-        };
-        loopDeleting();
-      }
-
-      document.addEventListener("DOMContentLoaded", function() {
-        typingEffect();
-      });
-    </script>
-
-    <script>
-      document.querySelectorAll('.skill-slide-card').forEach(card => {
-        card.addEventListener('click', function() {
-          if (this.classList.contains('active-focus')) {
-            this.classList.remove('active-focus');
-          } else {
-            document.querySelectorAll('.skill-slide-card').forEach(c => c.classList.remove('active-focus'));
-            this.classList.add('active-focus');
-            this.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-          }
+        leftArrow.addEventListener('click', () => {
+          track.scrollBy({ left: -getStepDistance(), behavior: 'smooth' });
         });
-      });
-    </script>
-  </body>
+
+        rightArrow.addEventListener('click', () => {
+          track.scrollBy({ left: getStepDistance(), behavior: 'smooth' });
+        });
+      }
+    });
+  </script>
+</body>
 </html>
