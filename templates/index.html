@@ -30,7 +30,7 @@
     <header class="bg-light sticky-top">
       <nav class="navbar navbar-expand-lg py-3 bg-dark navbar-dark">
         <div class="container-xl container-fluid">
-          <a class="navbar-brand fw-bold fs-3" href="/">Myspace</Time></a>
+          <a class="navbar-brand fw-bold fs-3" href="/">Myspace</a>
           <button
             class="navbar-toggler"
             type="button"
@@ -106,8 +106,10 @@
           </h5>
         </div>
       </div>
-      <div class="row g-4 justify-content-center">
-        <div class="col-lg-3 col-md-6 d-flex justify-content-center">
+      
+      <div class="row g-4 justify-content-start flex-nowrap skills-slider-container">
+        
+        <div class="col-lg-3 col-md-6 d-flex justify-content-center skill-slide-card">
           <div class="card card-wrapper d-flex flex-column align-items-center text-center p-4 w-100">
             <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-chart-bar" style="width: 60px; height: 60px;"></i>
             <div class="card-body">
@@ -118,7 +120,8 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6 d-flex justify-content-center">
+        
+        <div class="col-lg-3 col-md-6 d-flex justify-content-center skill-slide-card">
           <div class="card d-flex flex-column align-items-center text-center p-4 w-100">
             <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-chart-line" style="width: 60px; height: 60px;"></i>
             <div class="card-body">
@@ -129,7 +132,8 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6 d-flex justify-content-center">
+        
+        <div class="col-lg-3 col-md-6 d-flex justify-content-center skill-slide-card">
           <div class="card d-flex flex-column align-items-center text-center p-4 w-100">
             <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-chart-pie" style="width: 60px; height: 60px;"></i>
             <div class="card-body">
@@ -140,7 +144,8 @@
             </div>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6 d-flex justify-content-center">
+        
+        <div class="col-lg-3 col-md-6 d-flex justify-content-center skill-slide-card">
           <div class="card d-flex flex-column align-items-center text-center p-4 w-100">
             <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-search" style="width: 60px; height: 60px;"></i>
             <div class="card-body">
@@ -151,6 +156,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </section>
 
@@ -497,6 +503,20 @@
 
       document.addEventListener("DOMContentLoaded", function() {
         typingEffect();
+      });
+    </script>
+
+    <script>
+      document.querySelectorAll('.skill-slide-card').forEach(card => {
+        card.addEventListener('click', function() {
+          if (this.classList.contains('active-focus')) {
+            this.classList.remove('active-focus');
+          } else {
+            document.querySelectorAll('.skill-slide-card').forEach(c => c.classList.remove('active-focus'));
+            this.classList.add('active-focus');
+            this.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          }
+        });
       });
     </script>
   </body>
