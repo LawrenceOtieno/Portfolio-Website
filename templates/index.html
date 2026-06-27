@@ -5,28 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lawrence Otieno Portfolio Website | StreData</title>
     
+    <!-- Bootstrap 5 CSS -->
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
       rel="stylesheet"
       integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
       crossorigin="anonymous"
     />
+    <!-- Font Awesome Icons -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
     />
+    <!-- Bootstrap Icons (For Timeline Navigation Decorators) -->
+    <link 
+      rel="stylesheet" 
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
+    <!-- Custom CSS -->
     <link
       rel="stylesheet"
       href="{{ url_for('static', filename='css/style.css') }}"
     />
   </head>
   <body class="montserrat-400">
+    
+    <!-- ==========================================================================
+         NAVIGATION HEADER
+         ========================================================================== -->
     <header class="bg-light sticky-top">
       <nav class="navbar navbar-expand-lg py-3 bg-dark navbar-dark">
         <div class="container-xl container-fluid">
@@ -73,6 +86,9 @@
       </nav>
     </header>
 
+    <!-- ==========================================================================
+         HERO LANDING SECTION
+         ========================================================================== -->
     <section class="hero d-flex flex-column align-items-center justify-content-center position-relative" 
              style="background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.85)), url('/static/images/hero-bg.jpg') no-repeat center center/cover; min-height: 85vh;">
       
@@ -97,6 +113,9 @@
       </div>
     </section>
 
+    <!-- ==========================================================================
+         SKILLS INTERACTIVE SLIDER
+         ========================================================================== -->
     <section class="container py-5" id="skills">
       <div class="row mt-4 py-3">
         <div class="col-12 d-flex flex-column text-center justify-content-center">
@@ -160,7 +179,9 @@
       </div>
     </section>
 
-    <!-- Smooth Carousel Portfolio Section -->
+    <!-- ==========================================================================
+         PORTFOLIO CAROUSEL SHOWCASE
+         ========================================================================== -->
     <section class="container py-5" id="portfolio">
       <div class="row mt-4 py-3">
         <div class="col-12 d-flex flex-column text-center justify-content-center">
@@ -240,93 +261,122 @@
       </div>
     </section>
 
-    <section class="container py-5" id="about">
-      <div class="row mt-4 py-3">
-        <div class="col-12 d-flex flex-column text-center">
-          <h2 class="display-2">ABOUT</h2>
-          <h5 class="text-secondary fw-normal py-2">
-            Learn more about me, my background, and what motivates me.
-          </h5>
-        </div>
-      </div>
-      
-      <div class="row flex-row-reverse flex-md-row mt-5 pt-5 align-items-center">
-        <div class="col-9 col-md-5 text-md-end">
-          <p class="text-body-secondary mb-1">Foundations</p>
-          <h4 class="h3">Bridging Business & Tech</h4>
-          <p>
-            My journey began with a deep-seated fascination with how technology impacts day-to-day operational efficiency. Pursuing a Bachelor's degree in Business Information Technology allowed me to establish a robust framework for alignment between systems architecture and organizational needs.
+    <!-- ==========================================================================
+         ABOUT & TIMELINE VISUAL FLOW SECTION (Referencing About ME.docx content)
+         ========================================================================== -->
+    <section id="about" class="py-5 overflow-hidden position-relative bg-light">
+      <div class="container py-4">
+        
+        <!-- Section Header -->
+        <div class="text-center mb-5 pb-3">
+          <h1 class="display-4 fw-bold tracking-tight montserrat-400">ABOUT</h1>
+          <p class="text-muted max-width-700 mx-auto leading-relaxed">
+            Learn more about me, my background, and what motivates me based on my career roadmap.
           </p>
         </div>
-        <div class="col-3 col-md-2 img text-center">
-          <img
-            class="rounded-circle border border-5 border-dark-subtle img-fluid"
-            src="{{ url_for('static', filename='images/about-img-1.jpg') }}"
-            alt="Early passion timeline graphic"
-          />
-        </div>
-      </div>
-      
-      <div class="row justify-content-md-end mt-5 pt-5 align-items-center">
-        <div class="col-3 col-md-2 img text-center">
-          <img
-            class="rounded-circle border border-5 border-dark-subtle img-fluid"
-            src="{{ url_for('static', filename='images/about-img-2.jpg') }}"
-            alt="Higher education timeline graphic"
-          />
-        </div>
-        <div class="col-9 col-md-5">
-          <p class="text-body-secondary mb-1">Core Expertise</p>
-          <h4 class="h3">Infrastructure & IT Operations</h4>
-          <p>
-            Building upon my academic foundation, I spent several years specializing in ICT support and systems administration. Managing networks, utilizing tools like Jira and ServiceNow, and deploying infrastructure allowed me to sharpen my approach to process optimization and problem-solving.
-          </p>
-        </div>
-      </div>
-      
-      <div class="row flex-row-reverse flex-md-row mt-5 pt-5 align-items-center">
-        <div class="col-9 col-md-5 text-md-end">
-          <p class="text-body-secondary mb-1">Evolution</p>
-          <h4 class="h3">Data Analytics & Automation</h4>
-          <p>
-            To drive deeper value, my focus evolved toward transforming raw logs into structural insights. By integrating Python, SQL, and Excel workflows into analytics and pipeline development, I focus on automating repeatable data processes and mapping out complex business requirements clearly.
-          </p>
-        </div>
-        <div class="col-3 col-md-2 img text-center">
-          <img
-            class="rounded-circle border border-5 border-dark-subtle img-fluid"
-            src="{{ url_for('static', filename='images/about-img-3.jpg') }}"
-            alt="Professional experience timeline graphic"
-          />
-        </div>
-      </div>
-      
-      <div class="row justify-content-md-end mt-5 pt-5 align-items-center">
-        <div class="col-3 col-md-2 img text-center">
-          <img
-            class="rounded-circle border border-5 border-dark-subtle img-fluid"
-            src="{{ url_for('static', filename='images/about-img-4.jpg') }}"
-            alt="Future timeline graphic"
-          />
-        </div>
-        <div class="col-9 col-md-5">
-          <p class="text-body-secondary mb-1">Vision</p>
-          <h4 class="h3">Continuous Professional Excellence</h4>
-          <p>
-            I am dedicated to tackling engineering challenges where technology scales seamlessly. Whether building efficient data engineering workflows, setting up system integrations, or generating reproducible documentation, my goal is to deliver impactful, data-driven solutions.
-          </p>
-        </div>
-      </div>
 
-      <div class="row justify-content-md-center mt-5 pt-5">
-        <div class="col-3 col-md-2 d-flex justify-content-center hire-text">
-          <h2 class="h4 text-center d-flex justify-content-center align-items-center bg-primary text-white rounded-circle border border-5 border-dark-subtle" style="width: 120px; height: 120px;">
-            Your<br />Next<br />Hire
-          </h2>
+        <!-- Core Timeline Layout Spine Component -->
+        <div class="position-relative mx-auto" style="max-width: 1000px;">
+          
+          <!-- Central Dynamic Gradient Structural Line -->
+          <div class="timeline-spine position-absolute start-50 top-0 bottom-0 translate-middle-x d-none d-md-block" style="width: 2px; background: linear-gradient(to bottom, #0d6efd 0%, #ffc107 100%);"></div>
+
+          <!-- 1. Foundations Block -->
+          <div class="row align-items-center mb-5 pb-4 timeline-row position-relative">
+            <div class="col-md-6 text-md-end pe-md-5 order-2 order-md-1">
+              <div class="p-4 bg-white rounded-3 shadow-sm border border-light transition-hover">
+                <span class="text-primary fw-bold text-uppercase tracking-wider small">Foundations</span>
+                <h3 class="fw-bold h4 mt-1 mb-3">Bridging Business &amp; Tech</h3>
+                <p class="text-secondary mb-0 leading-relaxed small">
+                  My journey began with a deep-seated fascination with how technology impacts day-to-day operational efficiency. Pursuing a Bachelor's degree in Business Information Technology allowed me to establish a robust framework for alignment between systems architecture and organizational needs.
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center order-1 order-md-2 mb-4 mb-md-0 position-relative">
+              <div class="timeline-dot position-absolute start-50 top-50 translate-middle bg-primary rounded-circle d-none d-md-block" style="width: 12px; height: 12px; border: 2px solid #fff; z-index: 3;"></div>
+              <div class="timeline-img-wrap rounded-circle overflow-hidden border border-4 border-white shadow" style="width: 160px; height: 160px; z-index: 2; background: #fff;">
+                <img src="/static/images/about-img-1.jpg" alt="Foundations Graphic" class="w-100 h-100 object-fit-cover timeline-img">
+              </div>
+            </div>
+          </div>
+
+          <!-- 2. Core Expertise Block -->
+          <div class="row align-items-center mb-5 pb-4 timeline-row position-relative">
+            <div class="col-md-6 d-flex justify-content-center mb-4 mb-md-0 position-relative">
+              <div class="timeline-dot position-absolute start-50 top-50 translate-middle bg-primary rounded-circle d-none d-md-block" style="width: 12px; height: 12px; border: 2px solid #fff; z-index: 3;"></div>
+              <div class="timeline-img-wrap rounded-circle overflow-hidden border border-4 border-white shadow" style="width: 160px; height: 160px; z-index: 2; background: #fff;">
+                <img src="/static/images/about-img-2.jpg" alt="Core Infrastructure Graphics" class="w-100 h-100 object-fit-cover timeline-img">
+              </div>
+            </div>
+            <div class="col-md-6 ps-md-5">
+              <div class="p-4 bg-white rounded-3 shadow-sm border border-light transition-hover">
+                <span class="text-primary fw-bold text-uppercase tracking-wider small">Core Expertise</span>
+                <h3 class="fw-bold h4 mt-1 mb-3">Infrastructure &amp; IT Operations</h3>
+                <p class="text-secondary mb-0 leading-relaxed small">
+                  Building upon my academic foundation, I spent several years specializing in ICT support and systems administration. Managing networks, utilizing tools like Jira and ServiceNow, and deploying infrastructure allowed me to sharpen my approach to process optimization and problem-solving.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- 3. Evolution Block -->
+          <div class="row align-items-center mb-5 pb-4 timeline-row position-relative">
+            <div class="col-md-6 text-md-end pe-md-5 order-2 order-md-1">
+              <div class="p-4 bg-white rounded-3 shadow-sm border border-light transition-hover">
+                <span class="text-primary fw-bold text-uppercase tracking-wider small">Evolution</span>
+                <h3 class="fw-bold h4 mt-1 mb-3">Data Analytics &amp; Automation</h3>
+                <p class="text-secondary mb-0 leading-relaxed small">
+                  To drive deeper value, my focus evolved toward transforming raw logs into structural insights. By integrating Python, SQL, and Excel workflows into analytics and pipeline development, I focus on automating repeatable data processes and mapping out complex business requirements clearly.
+                </p>
+              </div>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center order-1 order-md-2 mb-4 mb-md-0 position-relative">
+              <div class="timeline-dot position-absolute start-50 top-50 translate-middle bg-primary rounded-circle d-none d-md-block" style="width: 12px; height: 12px; border: 2px solid #fff; z-index: 3;"></div>
+              <div class="timeline-img-wrap rounded-circle overflow-hidden border border-4 border-white shadow" style="width: 160px; height: 160px; z-index: 2; background: #fff;">
+                <img src="/static/images/about-img-3.jpg" alt="Data Analytics Integration Workflow" class="w-100 h-100 object-fit-cover timeline-img">
+              </div>
+            </div>
+          </div>
+
+          <!-- 4. Vision Block -->
+          <div class="row align-items-center mb-5 pb-4 timeline-row position-relative">
+            <div class="col-md-6 d-flex justify-content-center mb-4 mb-md-0 position-relative">
+              <div class="timeline-dot position-absolute start-50 top-50 translate-middle bg-primary rounded-circle d-none d-md-block" style="width: 12px; height: 12px; border: 2px solid #fff; z-index: 3;"></div>
+              <div class="timeline-img-wrap rounded-circle overflow-hidden border border-4 border-white shadow" style="width: 160px; height: 160px; z-index: 2; background: #fff;">
+                <img src="/static/images/about-img-4.jpg" alt="Continuous Professional Vision" class="w-100 h-100 object-fit-cover timeline-img">
+              </div>
+            </div>
+            <div class="col-md-6 ps-md-5">
+              <div class="p-4 bg-white rounded-3 shadow-sm border border-light transition-hover">
+                <span class="text-primary fw-bold text-uppercase tracking-wider small">Vision</span>
+                <h3 class="fw-bold h4 mt-1 mb-3">Continuous Professional Excellence</h3>
+                <p class="text-secondary mb-0 leading-relaxed small">
+                  I am dedicated to tackling engineering challenges where technology scales seamlessly. Whether building efficient data engineering workflows, setting up system integrations, or generating reproducible documentation, my goal is to deliver impactful, data-driven solutions.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Connecting Flow Track Arrow & Target CTAs -->
+          <div class="row justify-content-center pt-3 position-relative">
+            <div class="col-md-6 text-center position-relative">
+              <!-- Bouncing Arrow Pointer pointing directly into the final Target Node -->
+              <div class="timeline-arrow-pointer position-absolute start-50 top-0 translate-middle-x d-none d-md-block text-warning custom-bounce mb-3" style="font-size: 1.5rem; transform: translateY(-40px);">
+                <i class="bi bi-chevron-down"></i>
+              </div>
+              <div class="d-inline-flex align-items-center justify-content-center rounded-circle bg-primary text-white fw-bold shadow-lg border border-4 border-white hire-text-node" style="width: 110px; height: 110px; font-size: 0.95rem; line-height: 1.2; z-index: 4; cursor: pointer; transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 0.3s ease;">
+                Your<br>Next<br>Hire
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
 
+    <!-- ==========================================================================
+         CURRICULUM VITAE RESUME SECTION
+         ========================================================================== -->
     <section class="container py-5" id="cv">
       <div class="row mt-4 py-3">
         <div class="col-12 d-flex flex-column text-center">
@@ -439,7 +489,9 @@
       </div>
     </section>
 
-    <!-- Fixed Contact Me Section with Background Class Styling Hook -->
+    <!-- ==========================================================================
+         CONTACT FORM FOOTER WRAPPER
+         ========================================================================== -->
     <section class="py-5 contact-section-bg" id="contact">
       <div class="container-xxl py-5">
         <div class="col-12 d-flex flex-column text-center justify-content-center">
@@ -480,6 +532,9 @@
       </div>
     </section>
 
+    <!-- ==========================================================================
+         FOOTER SIGNATURE
+         ========================================================================== -->
     <footer class="bg-light py-4">
       <div class="container-xxl flex-wrap d-flex align-items-center justify-content-between">
         <p class="mb-0">Copyright © 2026 Lawrence Otieno</p>
@@ -491,19 +546,23 @@
       </div>
     </footer>
 
+    <!-- Bootstrap Bundle JS Scripts -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
       crossorigin="anonymous"
     ></script>
 
+    <!-- Lucide Icon Toolkits -->
     <script src="https://unpkg.com/lucide@0.294.0/dist/umd/lucide.js"></script>
     <script>
       lucide.createIcons();
     </script>
     
+    <!-- Dark Mode Configurations Toggle Handler -->
     <script src="{{ url_for('static', filename='javascript/darkmode.js') }}"></script>
 
+    <!-- Typewriter Animated Automation Engine -->
     <script>
       const words = ["Business Analyst", "Data Engineer", "Automation & Integration"];
       let i = 0;
@@ -548,6 +607,7 @@
       });
     </script>
 
+    <!-- Custom Skills Inline Focus Scroll Management Trigger -->
     <script>
       document.querySelectorAll('.skill-slide-card').forEach(card => {
         card.addEventListener('click', function() {
