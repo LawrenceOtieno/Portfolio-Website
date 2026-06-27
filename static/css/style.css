@@ -197,22 +197,53 @@ body {
 }
 
 /* ==========================================================================
-   5. About & Timeline Visual Styling Wrap
+   5. About & Timeline Visual Styling Wrap (Refined Layout & Typographic Fixes)
    ========================================================================== */
-.img img {
-  transition: transform 0.3s ease;
+.max-width-700 {
+  max-width: 700px;
 }
 
-.img img:hover {
-  transform: scale(1.05);
+.leading-relaxed {
+  line-height: 1.65;
 }
 
-.hire-text h2 {
-  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+/* Structural Interaction Rules for Timeline Cards */
+.transition-hover {
+  transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s ease, border-color 0.3s ease;
 }
 
+.transition-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.06) !important;
+  border-color: rgba(13, 110, 253, 0.2) !important;
+}
+
+/* Image Core Transformations */
+.timeline-img {
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+}
+
+.timeline-row:hover .timeline-img {
+  transform: scale(1.08);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Central Node Point Accent Dynamics */
+.timeline-dot {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.timeline-row:hover .timeline-dot {
+  background-color: #ffc107 !important;
+  transform: translate(-50%, -50%) scale(1.3) !important;
+}
+
+/* Next Hire Asset Button Hover Configurations */
 .hire-text h2:hover {
-  transform: rotate(-5deg) scale(1.1);
+  transform: rotate(-7deg) scale(1.12);
+  background-color: #0d6efd !important;
+  border-color: #ffc107 !important;
+  box-shadow: 0 15px 30px rgba(13, 110, 253, 0.3) !important;
 }
 
 /* ==========================================================================
