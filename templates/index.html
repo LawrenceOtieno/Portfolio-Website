@@ -160,6 +160,7 @@
       </div>
     </section>
 
+    <!-- Updated Portfolio Section Container -->
     <section class="container py-5" id="portfolio">
       <div class="row mt-4 py-3">
         <div class="col-12 d-flex flex-column text-center justify-content-center">
@@ -168,9 +169,19 @@
             A collection of projects I've worked on.
           </h5>
         </div>
-        <div class="row mt-5 mx-0 row-gap-4">
+      </div>
+      
+      <!-- Horizontal Slider Structural Wrappers -->
+      <div class="portfolio-slider-outer position-relative mt-5">
+        
+        <!-- Slider Arrow Navigation Controls -->
+        <button class="slider-arrow left-arrow" aria-label="Slide Left">&#10094;</button>
+        <button class="slider-arrow right-arrow" aria-label="Slide Right">&#10095;</button>
+
+        <!-- Infinite Running Runway Track -->
+        <div class="portfolio-slider-track">
           {% for project in projects %}
-          <div class="col-lg-4 col-md-6 col-12 card-wrapper">
+          <div class="portfolio-slide-card">
             <div class="card h-100 d-flex flex-column">
               <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none">
                 <img
@@ -196,6 +207,7 @@
           </div>
           {% endfor %}
         </div>
+        
       </div>
     </section>
 
@@ -517,6 +529,30 @@
             this.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
           }
         });
+      });
+    </script>
+
+    <!-- Portfolio Slider Interaction Controller Logic -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const track = document.querySelector('.portfolio-slider-track');
+        const leftArrow = document.querySelector('.left-arrow');
+        const rightArrow = document.querySelector('.right-arrow');
+
+        if (track && leftArrow && rightArrow) {
+          const getStepDistance = () => {
+            const firstCard = track.querySelector('.portfolio-slide-card');
+            return firstCard ? firstCard.clientWidth + 24 : 360;
+          };
+
+          leftArrow.addEventListener('click', () => {
+            track.scrollBy({ left: -getStepDistance(), behavior: 'smooth' });
+          });
+
+          rightArrow.addEventListener('click', () => {
+            track.scrollBy({ left: getStepDistance(), behavior: 'smooth' });
+          });
+        }
       });
     </script>
   </body>
