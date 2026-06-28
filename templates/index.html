@@ -35,31 +35,26 @@
     <style>
       /* ============================================================
          PORTFOLIO — SMOOTH MOBILE SCROLL SNAP CAROUSEL
-         Replaces Bootstrap's JS carousel with native CSS scroll-snap.
-         Works flawlessly on any touch device with zero jank.
          ============================================================ */
       .portfolio-scroll-track {
         display: flex;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;   /* momentum scroll on iOS */
+        -webkit-overflow-scrolling: touch;
         scroll-behavior: smooth;
         gap: 1.25rem;
         padding: 0.5rem 1rem 1.5rem;
-        /* Hide scrollbar visually but keep it functional */
         scrollbar-width: none;
         -ms-overflow-style: none;
       }
-      .portfolio-scroll-track::-webkit-scrollbar {
-        display: none;
-      }
+      .portfolio-scroll-track::-webkit-scrollbar { display: none; }
       .portfolio-scroll-track .portfolio-slide {
         flex: 0 0 min(320px, 85vw);
         scroll-snap-align: center;
         scroll-snap-stop: always;
       }
 
-      /* Dot indicators synced via JS */
+      /* Dot indicators */
       .scroll-dots {
         display: flex;
         justify-content: center;
@@ -81,19 +76,14 @@
         transform: scale(1.35);
       }
 
-      /* Desktop: wider slides, side arrows still visible */
       @media (min-width: 768px) {
-        .portfolio-scroll-track .portfolio-slide {
-          flex: 0 0 420px;
-        }
+        .portfolio-scroll-track .portfolio-slide { flex: 0 0 420px; }
       }
       @media (min-width: 1200px) {
-        .portfolio-scroll-track .portfolio-slide {
-          flex: 0 0 500px;
-        }
+        .portfolio-scroll-track .portfolio-slide { flex: 0 0 500px; }
       }
 
-      /* Desktop prev/next arrow buttons */
+      /* Arrow buttons */
       .portfolio-arrow-prev,
       .portfolio-arrow-next {
         position: absolute;
@@ -119,14 +109,12 @@
       }
       .portfolio-arrow-prev { left: -10px; }
       .portfolio-arrow-next { right: -10px; }
-
-      /* Hide arrows on small screens — swipe is enough */
       @media (max-width: 767px) {
         .portfolio-arrow-prev,
         .portfolio-arrow-next { display: none; }
       }
 
-      /* Portfolio card styling */
+      /* Portfolio card */
       .portfolio-card {
         border: 0;
         border-radius: 16px;
@@ -151,9 +139,7 @@
         object-fit: cover;
         transition: transform 0.4s ease;
       }
-      .portfolio-card:hover .card-img-wrapper img {
-        transform: scale(1.05);
-      }
+      .portfolio-card:hover .card-img-wrapper img { transform: scale(1.05); }
       .portfolio-card .card-hover-overlay {
         position: absolute;
         inset: 0;
@@ -164,9 +150,7 @@
         align-items: center;
         justify-content: center;
       }
-      .portfolio-card:hover .card-hover-overlay {
-        opacity: 1;
-      }
+      .portfolio-card:hover .card-hover-overlay { opacity: 1; }
 
       /* ============================================================
          ABOUT — MOBILE-FIRST TIMELINE
@@ -176,12 +160,7 @@
         max-width: 1000px;
         margin: 0 auto;
       }
-
-      /* Vertical spine — only on md+ */
-      .about-timeline::before {
-        content: '';
-        display: none;
-      }
+      .about-timeline::before { content: ''; display: none; }
       @media (min-width: 768px) {
         .about-timeline::before {
           content: '';
@@ -197,7 +176,6 @@
         }
       }
 
-      /* Each timeline row */
       .tl-row {
         display: flex;
         flex-direction: column;
@@ -214,20 +192,14 @@
           gap: 0;
           margin-bottom: 3.5rem;
         }
-        /* Reverse row for alternating layout */
-        .tl-row.reverse {
-          flex-direction: row-reverse;
-        }
-        .tl-row .tl-card-col {
-          flex: 0 0 calc(50% - 80px);
-        }
+        .tl-row.reverse { flex-direction: row-reverse; }
+        .tl-row .tl-card-col { flex: 0 0 calc(50% - 80px); }
         .tl-row .tl-img-col {
           flex: 0 0 160px;
           display: flex;
           justify-content: center;
           position: relative;
         }
-        /* Dot on the spine */
         .tl-row .tl-img-col::before {
           content: '';
           position: absolute;
@@ -242,14 +214,8 @@
           box-shadow: 0 0 0 2px #0d6efd;
           z-index: 4;
         }
-        .tl-row.reverse .tl-card-col {
-          text-align: right;
-          padding-right: 2rem;
-        }
-        .tl-row:not(.reverse) .tl-card-col {
-          text-align: left;
-          padding-left: 2rem;
-        }
+        .tl-row.reverse .tl-card-col { text-align: right; padding-right: 2rem; }
+        .tl-row:not(.reverse) .tl-card-col { text-align: left; padding-left: 2rem; }
       }
 
       .tl-img-circle {
@@ -263,16 +229,9 @@
         flex-shrink: 0;
       }
       @media (min-width: 768px) {
-        .tl-img-circle {
-          width: 150px;
-          height: 150px;
-        }
+        .tl-img-circle { width: 150px; height: 150px; }
       }
-      .tl-img-circle img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-      }
+      .tl-img-circle img { width: 100%; height: 100%; object-fit: cover; }
 
       .tl-card {
         background: #fff;
@@ -283,14 +242,8 @@
         transition: box-shadow 0.3s;
         width: 100%;
       }
-      @media (min-width: 768px) {
-        .tl-card {
-          width: auto;
-        }
-      }
-      .tl-card:hover {
-        box-shadow: 0 8px 28px rgba(13,110,253,.12);
-      }
+      @media (min-width: 768px) { .tl-card { width: auto; } }
+      .tl-card:hover { box-shadow: 0 8px 28px rgba(13,110,253,.12); }
       .tl-card .tl-label {
         font-size: 0.72rem;
         font-weight: 700;
@@ -298,19 +251,9 @@
         letter-spacing: 1.5px;
         color: #0d6efd;
       }
-      .tl-card h3 {
-        font-size: 1.05rem;
-        font-weight: 700;
-        margin: 0.35rem 0 0.6rem;
-      }
-      .tl-card p {
-        font-size: 0.875rem;
-        color: #6c757d;
-        line-height: 1.65;
-        margin: 0;
-      }
+      .tl-card h3 { font-size: 1.05rem; font-weight: 700; margin: 0.35rem 0 0.6rem; }
+      .tl-card p { font-size: 0.875rem; color: #6c757d; line-height: 1.65; margin: 0; }
 
-      /* Hire CTA node */
       .hire-node {
         width: 110px;
         height: 110px;
@@ -331,20 +274,13 @@
         transition: transform 0.3s cubic-bezier(.175,.885,.32,1.275), background 0.3s;
         text-decoration: none;
       }
-      .hire-node:hover {
-        transform: scale(1.1);
-        background: #0b5ed7;
-        color: #fff;
-      }
+      .hire-node:hover { transform: scale(1.1); background: #0b5ed7; color: #fff; }
 
       /* ============================================================
          CV — MODERN INTERACTIVE TABBED LAYOUT
          ============================================================ */
-      .cv-section {
-        background: #f8f9fa;
-      }
+      .cv-section { background: #f8f9fa; }
 
-      /* Tab nav pills */
       .cv-tabs {
         display: flex;
         gap: 0.5rem;
@@ -366,10 +302,7 @@
         align-items: center;
         gap: 0.4rem;
       }
-      .cv-tab-btn:hover {
-        border-color: #0d6efd;
-        color: #0d6efd;
-      }
+      .cv-tab-btn:hover { border-color: #0d6efd; color: #0d6efd; }
       .cv-tab-btn.active {
         background: #0d6efd;
         border-color: #0d6efd;
@@ -377,20 +310,13 @@
         box-shadow: 0 4px 14px rgba(13,110,253,.3);
       }
 
-      /* Tab panels */
-      .cv-panel {
-        display: none;
-        animation: fadeSlideIn 0.35s ease forwards;
-      }
-      .cv-panel.active {
-        display: block;
-      }
+      .cv-panel { display: none; animation: fadeSlideIn 0.35s ease forwards; }
+      .cv-panel.active { display: block; }
       @keyframes fadeSlideIn {
         from { opacity: 0; transform: translateY(12px); }
         to   { opacity: 1; transform: translateY(0); }
       }
 
-      /* Profile card */
       .cv-profile-card {
         background: #fff;
         border-radius: 20px;
@@ -416,11 +342,7 @@
         margin: 0.2rem;
       }
 
-      /* Experience timeline */
-      .exp-timeline {
-        position: relative;
-        padding-left: 2rem;
-      }
+      .exp-timeline { position: relative; padding-left: 2rem; }
       .exp-timeline::before {
         content: '';
         position: absolute;
@@ -440,10 +362,7 @@
         border-left: 3px solid #0d6efd;
         transition: transform 0.25s, box-shadow 0.25s;
       }
-      .exp-item:hover {
-        transform: translateX(4px);
-        box-shadow: 0 6px 24px rgba(13,110,253,.12);
-      }
+      .exp-item:hover { transform: translateX(4px); box-shadow: 0 6px 24px rgba(13,110,253,.12); }
       .exp-item::before {
         content: '';
         position: absolute;
@@ -456,26 +375,10 @@
         border: 2px solid #fff;
         box-shadow: 0 0 0 2px #0d6efd;
       }
-      .exp-date {
-        font-size: 0.75rem;
-        font-weight: 700;
-        color: #0d6efd;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-bottom: 0.3rem;
-      }
-      .exp-role {
-        font-weight: 700;
-        font-size: 1rem;
-        margin-bottom: 0.15rem;
-      }
-      .exp-company {
-        font-size: 0.875rem;
-        color: #6c757d;
-        font-weight: 500;
-      }
+      .exp-date { font-size: 0.75rem; font-weight: 700; color: #0d6efd; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.3rem; }
+      .exp-role { font-weight: 700; font-size: 1rem; margin-bottom: 0.15rem; }
+      .exp-company { font-size: 0.875rem; color: #6c757d; font-weight: 500; }
 
-      /* Skills bars */
       .skill-bar-wrapper {
         background: #fff;
         border-radius: 14px;
@@ -483,19 +386,8 @@
         box-shadow: 0 2px 10px rgba(0,0,0,.06);
         margin-bottom: 1rem;
       }
-      .skill-bar-label {
-        display: flex;
-        justify-content: space-between;
-        font-size: 0.875rem;
-        font-weight: 600;
-        margin-bottom: 0.5rem;
-      }
-      .skill-bar-track {
-        height: 8px;
-        background: #e9ecef;
-        border-radius: 999px;
-        overflow: hidden;
-      }
+      .skill-bar-label { display: flex; justify-content: space-between; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem; }
+      .skill-bar-track { height: 8px; background: #e9ecef; border-radius: 999px; overflow: hidden; }
       .skill-bar-fill {
         height: 100%;
         border-radius: 999px;
@@ -504,7 +396,6 @@
         transition: width 1s cubic-bezier(.4,0,.2,1);
       }
 
-      /* Education cards */
       .edu-card {
         background: #fff;
         border-radius: 14px;
@@ -514,11 +405,8 @@
         margin-bottom: 1rem;
         transition: transform 0.25s;
       }
-      .edu-card:hover {
-        transform: translateY(-3px);
-      }
+      .edu-card:hover { transform: translateY(-3px); }
 
-      /* Download CV button */
       .cv-download-btn {
         display: inline-flex;
         align-items: center;
@@ -534,13 +422,8 @@
         border: none;
         cursor: pointer;
       }
-      .cv-download-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(13,110,253,.4);
-        color: #fff;
-      }
+      .cv-download-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,110,253,.4); color: #fff; }
 
-      /* Social link chips */
       .social-chip {
         display: inline-flex;
         align-items: center;
@@ -555,10 +438,7 @@
         transition: background 0.2s, color 0.2s;
         margin: 0.2rem;
       }
-      .social-chip:hover {
-        background: #0d6efd;
-        color: #fff;
-      }
+      .social-chip:hover { background: #0d6efd; color: #fff; }
     </style>
   </head>
   <body class="montserrat-400">
@@ -626,68 +506,103 @@
     </section>
 
     <!-- ==========================================================================
-         SKILLS INTERACTIVE SLIDER
+         SKILLS — VIBRANT FLOATING INTERACTIVE CARDS
          ========================================================================== -->
-    <section class="container py-5" id="skills">
-      <div class="row mt-4 py-3">
-        <div class="col-12 d-flex flex-column text-center justify-content-center">
-          <h2 class="display-2">SKILLS</h2>
-          <h5 class="text-secondary fw-normal py-2">
-            Continuously improving my skills and knowledge in the field.
-          </h5>
-        </div>
-      </div>
-      <div class="row g-4 justify-content-start flex-nowrap skills-slider-container">
-        <div class="col-lg-3 col-md-6 d-flex justify-content-center skill-slide-card">
-          <div class="card card-wrapper d-flex flex-column align-items-center text-center p-4 w-100">
-            <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-chart-bar" style="width: 60px; height: 60px;"></i>
-            <div class="card-body">
-              <h3 class="card-title mt-4 h4">Business Analyst</h3>
-              <p class="card-description text-center card-text">
-                Proficient in Requirements gathering, mapping, and translating data into insights using tools such as Python, R, Excel, and SQL. Skilled in data visualization and reporting, with experience in creating dashboards and reports using tools like Tableau and Power BI.
-              </p>
-            </div>
+    <section class="skills-section py-5" id="skills">
+      <div class="container">
+        <div class="row mt-4 py-3">
+          <div class="col-12 text-center">
+            <h2 class="display-2 fw-bold">SKILLS</h2>
+            <h5 class="text-secondary fw-normal py-2">
+              Continuously improving my skills and knowledge in the field.
+            </h5>
           </div>
         </div>
-        <div class="col-lg-3 col-md-6 d-flex justify-content-center skill-slide-card">
-          <div class="card d-flex flex-column align-items-center text-center p-4 w-100">
-            <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-chart-line" style="width: 60px; height: 60px;"></i>
-            <div class="card-body">
-              <h3 class="card-title mt-4 h4">Data Engineer</h3>
-              <p class="card-description text-center card-text">
-                I have experience in building data pipelines, modeling, and moving data using tools such as Python, SQL, Cloud, and Spark.
+
+        <div class="skills-grid mt-4">
+
+          <!-- Card 1 — Business Analyst (Blue → Violet) -->
+          <div class="sk-card sk-card--blue" tabindex="0">
+            <div class="sk-card__glow"></div>
+            <div class="sk-card__orb sk-card__orb--1"></div>
+            <div class="sk-card__orb sk-card__orb--2"></div>
+            <div class="sk-card__inner">
+              <div class="sk-card__icon-wrap">
+                <i class="fa-solid fa-chart-bar"></i>
+              </div>
+              <h3 class="sk-card__title">Business Analyst</h3>
+              <p class="sk-card__text">
+                Proficient in requirements gathering, mapping, and translating data into insights using Python, R, Excel, and SQL. Skilled in dashboards and reports via Tableau and Power BI.
               </p>
+              <div class="sk-card__tags">
+                <span>Python</span><span>SQL</span><span>Power BI</span><span>Excel</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-lg-3 col-md-6 d-flex justify-content-center skill-slide-card">
-          <div class="card d-flex flex-column align-items-center text-center p-4 w-100">
-            <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-chart-pie" style="width: 60px; height: 60px;"></i>
-            <div class="card-body">
-              <h3 class="card-title mt-4 h4">Automation & Integration</h3>
-              <p class="card-description text-center card-text">
-                Skilled in building workflows, connecting systems, and automating tasks using tools such as Python, Bash, Airflow, and APIs.
+
+          <!-- Card 2 — Data Engineer (Teal → Cyan) -->
+          <div class="sk-card sk-card--teal" tabindex="0">
+            <div class="sk-card__glow"></div>
+            <div class="sk-card__orb sk-card__orb--1"></div>
+            <div class="sk-card__orb sk-card__orb--2"></div>
+            <div class="sk-card__inner">
+              <div class="sk-card__icon-wrap">
+                <i class="fa-solid fa-chart-line"></i>
+              </div>
+              <h3 class="sk-card__title">Data Engineer</h3>
+              <p class="sk-card__text">
+                Experience building data pipelines, modeling, and moving data using Python, SQL, Cloud platforms, and Spark for scalable, reliable data workflows.
               </p>
+              <div class="sk-card__tags">
+                <span>Spark</span><span>Cloud</span><span>Pipelines</span><span>SQL</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-lg-3 col-md-6 d-flex justify-content-center skill-slide-card">
-          <div class="card d-flex flex-column align-items-center text-center p-4 w-100">
-            <i class="text-white bg-primary d-flex align-items-center justify-content-center fs-2 rounded-circle fa-solid fa-search" style="width: 60px; height: 60px;"></i>
-            <div class="card-body">
-              <h3 class="card-title mt-4 h4">Documentation</h3>
-              <p class="card-description text-center card-text">
-                I create both simple and technical documentation, map business processes, and write user guides using Confluence, Markdown, and Jira to ensure technical and business procedures are reproducible.
+
+          <!-- Card 3 — Automation (Orange → Rose) -->
+          <div class="sk-card sk-card--orange" tabindex="0">
+            <div class="sk-card__glow"></div>
+            <div class="sk-card__orb sk-card__orb--1"></div>
+            <div class="sk-card__orb sk-card__orb--2"></div>
+            <div class="sk-card__inner">
+              <div class="sk-card__icon-wrap">
+                <i class="fa-solid fa-gears"></i>
+              </div>
+              <h3 class="sk-card__title">Automation &amp; Integration</h3>
+              <p class="sk-card__text">
+                Skilled in building workflows, connecting systems, and automating tasks using Python, Bash, Airflow, and APIs to eliminate repetitive operations.
               </p>
+              <div class="sk-card__tags">
+                <span>Airflow</span><span>Bash</span><span>APIs</span><span>Python</span>
+              </div>
             </div>
           </div>
+
+          <!-- Card 4 — Documentation (Purple → Pink) -->
+          <div class="sk-card sk-card--purple" tabindex="0">
+            <div class="sk-card__glow"></div>
+            <div class="sk-card__orb sk-card__orb--1"></div>
+            <div class="sk-card__orb sk-card__orb--2"></div>
+            <div class="sk-card__inner">
+              <div class="sk-card__icon-wrap">
+                <i class="fa-solid fa-file-lines"></i>
+              </div>
+              <h3 class="sk-card__title">Documentation</h3>
+              <p class="sk-card__text">
+                Creating technical and business documentation, mapping processes, and writing user guides using Confluence, Markdown, and Jira for full reproducibility.
+              </p>
+              <div class="sk-card__tags">
+                <span>Confluence</span><span>Jira</span><span>Markdown</span>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
 
     <!-- ==========================================================================
          PORTFOLIO — NATIVE SCROLL-SNAP CAROUSEL
-         Works perfectly on mobile (touch swipe) AND desktop (arrows + dots).
          ========================================================================== -->
     <section class="container py-5" id="portfolio">
       <div class="row mt-4 py-3">
@@ -699,15 +614,11 @@
         </div>
       </div>
 
-      <!-- Wrapper for arrow positioning -->
       <div class="position-relative mt-4">
-
-        <!-- Prev Arrow (desktop) -->
         <button class="portfolio-arrow-prev" id="portfolioPrev" aria-label="Previous project">
           <i class="bi bi-chevron-left fs-5"></i>
         </button>
 
-        <!-- Scroll Track (replaces Bootstrap carousel) -->
         <div class="portfolio-scroll-track" id="portfolioTrack">
           {% for project in projects %}
           <div class="portfolio-slide">
@@ -739,13 +650,11 @@
           {% endfor %}
         </div>
 
-        <!-- Next Arrow (desktop) -->
         <button class="portfolio-arrow-next" id="portfolioNext" aria-label="Next project">
           <i class="bi bi-chevron-right fs-5"></i>
         </button>
       </div>
 
-      <!-- Dot indicators below track -->
       <div class="scroll-dots mt-3" id="portfolioDots">
         {% for project in projects %}
         <button class="scroll-dot {% if loop.first %}active{% endif %}" data-index="{{ loop.index0 }}" aria-label="Slide {{ loop.index }}"></button>
@@ -759,7 +668,6 @@
     <section id="about" class="py-5 overflow-hidden position-relative bg-light">
       <div class="container py-4">
 
-        <!-- Section Header -->
         <div class="text-center mb-5">
           <h1 class="display-4 fw-bold">ABOUT</h1>
           <p class="text-muted mx-auto" style="max-width: 600px;">
@@ -785,7 +693,7 @@
             </div>
           </div>
 
-          <!-- 2. Core Expertise (reverse on desktop) -->
+          <!-- 2. Core Expertise -->
           <div class="tl-row reverse">
             <div class="tl-img-col">
               <div class="tl-img-circle">
@@ -817,7 +725,7 @@
             </div>
           </div>
 
-          <!-- 4. Vision (reverse on desktop) -->
+          <!-- 4. Vision -->
           <div class="tl-row reverse">
             <div class="tl-img-col">
               <div class="tl-img-circle">
@@ -853,7 +761,6 @@
     <section class="py-5 cv-section" id="cv">
       <div class="container py-4">
 
-        <!-- Section Header -->
         <div class="text-center mb-4">
           <h2 class="display-2">CURRICULUM VITAE</h2>
           <p class="text-secondary fw-normal">
@@ -1026,7 +933,6 @@
               <div class="skill-bar-wrapper">
                 <p class="fw-semibold mb-1 small text-uppercase text-muted" style="letter-spacing:1px;">Technical Skills</p>
                 <hr class="mt-1 mb-3">
-                <!-- Each bar: label | % | fill -->
                 <div class="mb-3">
                   <div class="skill-bar-label"><span>Python</span><span class="text-primary">85%</span></div>
                   <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
@@ -1091,7 +997,7 @@
     </section>
 
     <!-- ==========================================================================
-         CONTACT FORM FOOTER WRAPPER
+         CONTACT FORM
          ========================================================================== -->
     <section class="py-5 contact-section-bg" id="contact">
       <div class="container-xxl py-5">
@@ -1195,23 +1101,26 @@
       document.addEventListener("DOMContentLoaded", typingEffect);
     </script>
 
-    <!-- Skills Cards Click Focus -->
+    <!-- Skills Cards: 3D tilt on mouse move (desktop only) -->
     <script>
-      document.querySelectorAll('.skill-slide-card').forEach(card => {
-        card.addEventListener('click', function () {
-          document.querySelectorAll('.skill-slide-card').forEach(c => c.classList.remove('active-focus'));
-          if (!this.classList.contains('active-focus')) {
-            this.classList.add('active-focus');
-            this.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
-          }
+      document.querySelectorAll('.sk-card').forEach(card => {
+        card.addEventListener('mousemove', function (e) {
+          const rect = this.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width  / 2;
+          const y = e.clientY - rect.top  - rect.height / 2;
+          const rotX =  (y / rect.height) * -12;
+          const rotY =  (x / rect.width)  *  12;
+          this.style.transform = `translateY(-16px) scale(1.03) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
+          this.style.transition = 'transform 0.05s linear, box-shadow 0.35s ease';
+        });
+        card.addEventListener('mouseleave', function () {
+          this.style.transform = '';
+          this.style.transition = 'transform 0.5s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.35s ease';
         });
       });
     </script>
 
-    <!-- ============================================================
-         PORTFOLIO — SCROLL-SNAP CONTROLLER
-         Syncs dot indicators and arrow buttons with the scroll track.
-         ============================================================ -->
+    <!-- Portfolio Scroll-Snap Controller -->
     <script>
       (function () {
         const track  = document.getElementById('portfolioTrack');
@@ -1222,7 +1131,6 @@
 
         if (!track || !slides.length) return;
 
-        // Which slide is most visible?
         function getActiveIndex() {
           const trackRect = track.getBoundingClientRect();
           let best = 0, bestOverlap = -Infinity;
@@ -1239,7 +1147,6 @@
           dots.forEach((d, i) => d.classList.toggle('active', i === active));
         }
 
-        // Scroll to a specific slide index
         function scrollTo(idx) {
           const slide = slides[idx];
           if (!slide) return;
@@ -1251,20 +1158,10 @@
           track.scrollBy({ left: offset, behavior: 'smooth' });
         }
 
-        // Dot click
         dots.forEach((dot, i) => dot.addEventListener('click', () => scrollTo(i)));
+        prev && prev.addEventListener('click', () => scrollTo(Math.max(0, getActiveIndex() - 1)));
+        next && next.addEventListener('click', () => scrollTo(Math.min(slides.length - 1, getActiveIndex() + 1)));
 
-        // Arrow clicks
-        prev && prev.addEventListener('click', () => {
-          const idx = Math.max(0, getActiveIndex() - 1);
-          scrollTo(idx);
-        });
-        next && next.addEventListener('click', () => {
-          const idx = Math.min(slides.length - 1, getActiveIndex() + 1);
-          scrollTo(idx);
-        });
-
-        // Update dots on scroll (debounced)
         let scrollTimer;
         track.addEventListener('scroll', () => {
           clearTimeout(scrollTimer);
@@ -1273,30 +1170,25 @@
       })();
     </script>
 
-    <!-- ============================================================
-         CV TABS CONTROLLER
-         ============================================================ -->
+    <!-- CV Tabs Controller -->
     <script>
       (function () {
-        const tabBtns  = document.querySelectorAll('.cv-tab-btn');
-        const panels   = document.querySelectorAll('.cv-panel');
+        const tabBtns = document.querySelectorAll('.cv-tab-btn');
+        const panels  = document.querySelectorAll('.cv-panel');
 
         function activateTab(tabId) {
           tabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
           panels.forEach(p => {
             const isTarget = p.id === 'cv-' + tabId;
             p.classList.toggle('active', isTarget);
-            // Animate skill bars when skills tab opens
             if (isTarget && tabId === 'skills') animateBars();
           });
         }
 
         tabBtns.forEach(btn => btn.addEventListener('click', () => activateTab(btn.dataset.tab)));
 
-        // Skill bar animation
         function animateBars() {
           document.querySelectorAll('.skill-bar-fill').forEach(bar => {
-            // Reset first so animation replays each time tab opens
             bar.style.width = '0';
             requestAnimationFrame(() => {
               requestAnimationFrame(() => {
@@ -1306,7 +1198,6 @@
           });
         }
 
-        // Trigger bars if Skills tab is active on load (unlikely but safe)
         if (document.getElementById('cv-skills')?.classList.contains('active')) animateBars();
       })();
     </script>
