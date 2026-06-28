@@ -14,19 +14,22 @@ body {
   font-style: normal;
 }
 
-/* Base Utility Triggers */
-.tracking-tight { letter-spacing: -0.05em; }
-.tracking-wider { letter-spacing: 0.05em; }
-.tracking-widest { letter-spacing: 0.15em; }
-.cursor { animation: blink 1s infinite; color: #ffc107; }
+.tracking-tight   { letter-spacing: -0.05em; }
+.tracking-wider   { letter-spacing: 0.05em; }
+.tracking-widest  { letter-spacing: 0.15em; }
+
+.cursor {
+  animation: blink 1s infinite;
+  color: #ffc107;
+}
 
 @keyframes blink {
   0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+  50%       { opacity: 0; }
 }
 
 /* ==========================================================================
-   2. Hero Landing Layout Engine
+   2. Hero Section
    ========================================================================== */
 .hero {
   background-size: cover;
@@ -45,12 +48,12 @@ body {
 
 @keyframes bounce {
   0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-  40% { transform: translateY(-8px); }
-  60% { transform: translateY(-4px); }
+  40%  { transform: translateY(-8px); }
+  60%  { transform: translateY(-4px); }
 }
 
 /* ==========================================================================
-   3. Skills Horizontal Slider (Native Swipe / Focus Driven)
+   3. Skills Horizontal Slider
    ========================================================================== */
 .skills-slider-container {
   overflow-x: auto;
@@ -80,188 +83,590 @@ body {
 }
 
 /* ==========================================================================
-   4. Portfolio Carousel Track (Bootstrap 5 Override Layout)
+   4. Portfolio — Scroll-Snap Track
    ========================================================================== */
-#portfolioCarousel {
-  max-width: 900px;
-  margin: 0 auto;
-  position: relative;
+.portfolio-scroll-track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  gap: 1.25rem;
+  padding: 0.5rem 1rem 1.5rem;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-/* Individual Card Structural Dimensions */
-.portfolio-carousel-card {
-  width: 100%;
-  max-width: 500px;
+.portfolio-scroll-track::-webkit-scrollbar {
+  display: none;
+}
+
+.portfolio-scroll-track .portfolio-slide {
+  flex: 0 0 min(320px, 85vw);
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+}
+
+@media (min-width: 768px) {
+  .portfolio-scroll-track .portfolio-slide {
+    flex: 0 0 420px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .portfolio-scroll-track .portfolio-slide {
+    flex: 0 0 500px;
+  }
+}
+
+/* Portfolio Card */
+.portfolio-card {
+  border: 0;
   border-radius: 16px;
   overflow: hidden;
-  background: #ffffff;
-  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.4s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: #fff;
+  height: 100%;
 }
 
-.portfolio-carousel-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12) !important;
+.portfolio-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.14);
 }
 
-/* Maintain Proportional Image Aspect Boundaries */
-.card-img-wrapper {
-  width: 100%;
-  height: 320px;
-  background-color: #f8f9fa;
+.portfolio-card .card-img-wrapper {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
 }
 
-.card-img-wrapper img {
+.portfolio-card .card-img-wrapper img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.5s ease;
+  transition: transform 0.4s ease;
 }
 
-.portfolio-carousel-card:hover .card-img-wrapper img {
-  transform: scale(1.04);
+.portfolio-card:hover .card-img-wrapper img {
+  transform: scale(1.05);
 }
 
-/* Card Hover Interactive Visual Overlays */
-.card-hover-overlay {
+.portfolio-card .card-hover-overlay {
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(15, 23, 42, 0.4);
+  inset: 0;
+  background: rgba(13, 110, 253, 0.55);
   opacity: 0;
-  transition: opacity 0.3s ease;
+  transition: opacity 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.portfolio-carousel-card:hover .card-hover-overlay {
+.portfolio-card:hover .card-hover-overlay {
   opacity: 1;
 }
 
-/* Custom Overrides for Side Navigation Handles */
-.custom-carousel-arrow {
-  width: 50px;
-  height: 50px;
-  background-color: #212529 !important;
+/* Scroll dot indicators */
+.scroll-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 0.75rem;
+}
+
+.scroll-dot {
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
+  background: #dee2e6;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.scroll-dot.active {
+  background: #0d6efd;
+  transform: scale(1.35);
+}
+
+/* Desktop arrow buttons */
+.portfolio-arrow-prev,
+.portfolio-arrow-next {
+  position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  opacity: 0.85;
-  transition: all 0.2s ease;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid #dee2e6;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, color 0.2s;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+  color: #212529;
 }
 
-.custom-carousel-arrow:hover {
-  opacity: 1;
-  background-color: #ffc107 !important;
+.portfolio-arrow-prev:hover,
+.portfolio-arrow-next:hover {
+  background: #0d6efd;
+  color: #fff;
+  border-color: #0d6efd;
 }
 
-.custom-carousel-arrow:hover .carousel-control-prev-icon,
-.custom-carousel-arrow:hover .carousel-control-next-icon {
-  filter: invert(1) grayscale(1) brightness(0); /* Swaps white arrows to dark on hover yellow */
-}
+.portfolio-arrow-prev { left: -10px; }
+.portfolio-arrow-next { right: -10px; }
 
-.carousel-control-prev.custom-carousel-arrow { left: -25px; }
-.carousel-control-next.custom-carousel-arrow { right: -25px; }
-
-/* Dynamic Indicators Style Engine */
-.custom-indicators {
-  bottom: -40px;
-}
-
-.custom-indicators button {
-  width: 10px !important;
-  height: 10px !important;
-  border-radius: 50% !important;
-  background-color: #6c757d !important;
-  border: none !important;
-  margin: 0 6px !important;
-  transition: all 0.2s ease !important;
-}
-
-.custom-indicators button.active {
-  background-color: #ffc107 !important;
-  transform: scale(1.2);
-}
-
-/* Mobile Screen Break Viewing Adjustments */
-@media (max-width: 768px) {
-  .card-img-wrapper {
-    height: 240px;
-  }
-  .custom-carousel-arrow {
-    display: none; /* Fallback cleanly to native swipe gestures on mobile viewports */
-  }
-  #portfolioCarousel {
-    padding: 0 10px;
+@media (max-width: 767px) {
+  .portfolio-arrow-prev,
+  .portfolio-arrow-next {
+    display: none;
   }
 }
 
 /* ==========================================================================
-   5. About & Timeline Visual Styling Wrap (Alternating Connective Design)
+   5. About — Mobile-First Timeline
    ========================================================================== */
-.max-width-700 {
-  max-width: 700px;
+.about-timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
 }
 
-.leading-relaxed {
-  line-height: 1.65;
+/* Gradient spine — desktop only */
+@media (min-width: 768px) {
+  .about-timeline::before {
+    content: '';
+    display: block;
+    position: absolute;
+    left: 50%;
+    top: 0;
+    bottom: 120px;
+    width: 2px;
+    background: linear-gradient(to bottom, #0d6efd 0%, #ffc107 100%);
+    transform: translateX(-50%);
+    z-index: 0;
+  }
 }
 
-/* Structural Interaction Rules for Timeline Cards */
-.transition-hover {
-  transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s ease, border-color 0.3s ease;
-}
-
-.transition-hover:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 24px rgba(15, 23, 42, 0.06) !important;
-  border-color: rgba(13, 110, 253, 0.2) !important;
-}
-
-/* Image Core Transformations */
-.timeline-img {
-  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-
-.timeline-row:hover .timeline-img {
-  transform: scale(1.08);
-}
-
-/* Central Node Point Accent Dynamics */
-.timeline-dot {
-  transition: background-color 0.2s ease, transform 0.2s ease;
-}
-
-.timeline-row:hover .timeline-dot {
-  background-color: #ffc107 !important;
-  transform: translate(-50%, -50%) scale(1.4) !important;
-}
-
-/* Next Hire Asset Button Hover Configurations */
-.hire-text-node {
-  text-align: center;
-}
-
-.hire-text-node:hover {
-  transform: scale(1.1);
-  background-color: #ffc107 !important;
-  color: #212529 !important;
-}
-
-/* Fine-tune directional line clipping on base entries */
-.timeline-spine {
+/* Timeline row — stacked on mobile, side-by-side on desktop */
+.tl-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2.5rem;
+  position: relative;
   z-index: 1;
 }
 
-/* ==========================================================================
-   6. Global Elements & Structural Adjustments
-   ========================================================================== */
-.project-title-link {
-  transition: color 0.2s ease;
+@media (min-width: 768px) {
+  .tl-row {
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 3.5rem;
+  }
+
+  .tl-row.reverse {
+    flex-direction: row-reverse;
+  }
+
+  .tl-row .tl-card-col {
+    flex: 0 0 calc(50% - 80px);
+  }
+
+  .tl-row .tl-img-col {
+    flex: 0 0 160px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  /* Dot on the spine */
+  .tl-row .tl-img-col::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: #0d6efd;
+    border: 3px solid #fff;
+    box-shadow: 0 0 0 2px #0d6efd;
+    z-index: 4;
+    transition: background-color 0.2s, transform 0.2s;
+  }
+
+  .tl-row:hover .tl-img-col::before {
+    background: #ffc107;
+    box-shadow: 0 0 0 2px #ffc107;
+    transform: translate(-50%, -50%) scale(1.4);
+  }
+
+  .tl-row.reverse .tl-card-col {
+    text-align: right;
+    padding-right: 2rem;
+  }
+
+  .tl-row:not(.reverse) .tl-card-col {
+    text-align: left;
+    padding-left: 2rem;
+  }
 }
 
-.project-title-link:hover {
-  color: #0d6efd !important;
+/* Timeline image circle */
+.tl-img-circle {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+  background: #f8f9fa;
+  flex-shrink: 0;
+  transition: transform 0.3s ease;
+}
+
+.tl-row:hover .tl-img-circle {
+  transform: scale(1.06);
+}
+
+@media (min-width: 768px) {
+  .tl-img-circle {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+.tl-img-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Timeline card */
+.tl-card {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  border: 1px solid #e9ecef;
+  padding: 1.25rem 1.5rem;
+  transition: box-shadow 0.3s, transform 0.3s;
+  width: 100%;
+}
+
+.tl-card:hover {
+  box-shadow: 0 8px 28px rgba(13, 110, 253, 0.12);
+  transform: translateY(-3px);
+}
+
+.tl-card .tl-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #0d6efd;
+}
+
+.tl-card h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0.35rem 0 0.6rem;
+}
+
+.tl-card p {
+  font-size: 0.875rem;
+  color: #6c757d;
+  line-height: 1.65;
+  margin: 0;
+}
+
+/* Hire CTA node */
+.hire-node {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  background: #0d6efd;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 0.9rem;
+  line-height: 1.3;
+  text-align: center;
+  cursor: pointer;
+  border: 4px solid #fff;
+  box-shadow: 0 4px 20px rgba(13, 110, 253, 0.35);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s;
+  text-decoration: none;
+}
+
+.hire-node:hover {
+  transform: scale(1.1);
+  background: #ffc107;
+  color: #212529;
+}
+
+/* ==========================================================================
+   6. CV — Modern Tabbed Layout
+   ========================================================================== */
+.cv-section {
+  background: #f8f9fa;
+}
+
+/* Tab pill buttons */
+.cv-tabs {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.cv-tab-btn {
+  background: #fff;
+  border: 1.5px solid #dee2e6;
+  border-radius: 999px;
+  padding: 0.55rem 1.35rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #495057;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.cv-tab-btn:hover {
+  border-color: #0d6efd;
+  color: #0d6efd;
+}
+
+.cv-tab-btn.active {
+  background: #0d6efd;
+  border-color: #0d6efd;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(13, 110, 253, 0.3);
+}
+
+/* Tab panels */
+.cv-panel {
+  display: none;
+  animation: fadeSlideIn 0.35s ease forwards;
+}
+
+.cv-panel.active {
+  display: block;
+}
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Profile card */
+.cv-profile-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.07);
+  padding: 2rem;
+}
+
+.cv-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #0d6efd;
+  box-shadow: 0 4px 16px rgba(13, 110, 253, 0.2);
+}
+
+.cv-badge-pill {
+  display: inline-block;
+  background: #e7f0ff;
+  color: #0d6efd;
+  border-radius: 999px;
+  padding: 0.3rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  margin: 0.2rem;
+}
+
+/* Social chips */
+.social-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: #f1f3f5;
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #495057;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+  margin: 0.2rem;
+}
+
+.social-chip:hover {
+  background: #0d6efd;
+  color: #fff;
+}
+
+/* Download button */
+.cv-download-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: linear-gradient(135deg, #0d6efd, #0b5ed7);
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.75rem 2rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 16px rgba(13, 110, 253, 0.35);
+  transition: transform 0.25s, box-shadow 0.25s;
+  border: none;
+  cursor: pointer;
+}
+
+.cv-download-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(13, 110, 253, 0.4);
+  color: #fff;
+}
+
+/* Experience timeline */
+.exp-timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.exp-timeline::before {
+  content: '';
+  position: absolute;
+  left: 7px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(to bottom, #0d6efd, #ffc107);
+}
+
+.exp-item {
+  position: relative;
+  margin-bottom: 1.75rem;
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  border-left: 3px solid #0d6efd;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.exp-item:hover {
+  transform: translateX(4px);
+  box-shadow: 0 6px 24px rgba(13, 110, 253, 0.12);
+}
+
+.exp-item::before {
+  content: '';
+  position: absolute;
+  left: -2.45rem;
+  top: 1.4rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #0d6efd;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 2px #0d6efd;
+}
+
+.exp-date {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #0d6efd;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.3rem;
+}
+
+.exp-role {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 0.15rem;
+}
+
+.exp-company {
+  font-size: 0.875rem;
+  color: #6c757d;
+  font-weight: 500;
+}
+
+/* Education cards */
+.edu-card {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  border-top: 3px solid #ffc107;
+  margin-bottom: 1rem;
+  transition: transform 0.25s;
+}
+
+.edu-card:hover {
+  transform: translateY(-3px);
+}
+
+/* Skill bars */
+.skill-bar-wrapper {
+  background: #fff;
+  border-radius: 14px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  margin-bottom: 1rem;
+}
+
+.skill-bar-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.skill-bar-track {
+  height: 8px;
+  background: #e9ecef;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.skill-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #0d6efd, #6ea8fe);
+  width: 0;
+  transition: width 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   7. Contact Section
+   ========================================================================== */
+.contact-section-bg {
+  background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.9)),
+              url('/static/images/contact-bg.jpg') no-repeat center center / cover;
+  background-attachment: scroll;
 }
 
 .contact-info li i {
@@ -269,6 +674,9 @@ body {
   color: #0d6efd;
 }
 
+/* ==========================================================================
+   8. Footer
+   ========================================================================== */
 footer .social-icons a {
   transition: transform 0.2s ease, background-color 0.2s ease;
 }
@@ -279,10 +687,75 @@ footer .social-icons a:hover {
 }
 
 /* ==========================================================================
-   7. Contact Section Background Image Overlay Engine
+   9. Dark Mode Overrides
+      (Your darkmode.js toggles a `dark-mode` class on <body>)
    ========================================================================== */
-.contact-section-bg {
-  background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(15, 23, 42, 0.9)), 
-              url('/static/images/contact-bg.jpg') no-repeat center center/cover;
-  background-attachment: scroll;
+body.dark-mode {
+  background-color: #0f172a;
+  color: #f1f5f9;
+}
+
+body.dark-mode .navbar.bg-dark {
+  background-color: #020617 !important;
+}
+
+body.dark-mode .tl-card,
+body.dark-mode .cv-profile-card,
+body.dark-mode .skill-bar-wrapper,
+body.dark-mode .exp-item,
+body.dark-mode .edu-card,
+body.dark-mode .portfolio-card {
+  background: #1e293b;
+  border-color: #334155;
+  color: #f1f5f9;
+}
+
+body.dark-mode .tl-card p,
+body.dark-mode .exp-company,
+body.dark-mode .text-secondary,
+body.dark-mode .text-muted {
+  color: #94a3b8 !important;
+}
+
+body.dark-mode .skill-bar-track {
+  background: #334155;
+}
+
+body.dark-mode .cv-badge-pill {
+  background: #1e3a5f;
+  color: #93c5fd;
+}
+
+body.dark-mode .social-chip {
+  background: #1e293b;
+  color: #cbd5e1;
+}
+
+body.dark-mode .cv-section,
+body.dark-mode section.bg-light,
+body.dark-mode footer.bg-light {
+  background-color: #0f172a !important;
+}
+
+body.dark-mode .cv-tab-btn {
+  background: #1e293b;
+  border-color: #334155;
+  color: #cbd5e1;
+}
+
+body.dark-mode .cv-tab-btn.active {
+  background: #0d6efd;
+  border-color: #0d6efd;
+  color: #fff;
+}
+
+body.dark-mode .scroll-dot {
+  background: #334155;
+}
+
+body.dark-mode .portfolio-arrow-prev,
+body.dark-mode .portfolio-arrow-next {
+  background: rgba(30, 41, 59, 0.95);
+  border-color: #334155;
+  color: #f1f5f9;
 }
