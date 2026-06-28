@@ -53,34 +53,203 @@ body {
 }
 
 /* ==========================================================================
-   3. Skills Horizontal Slider
+   3. Skills — Vibrant Floating Cards
    ========================================================================== */
-.skills-slider-container {
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  -webkit-overflow-scrolling: touch;
-  padding-bottom: 15px;
+
+/* Section background — subtle dark gradient so the cards pop */
+.skills-section {
+  background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 100%);
+  position: relative;
+  overflow: hidden;
 }
 
-.skills-slider-container::-webkit-scrollbar {
-  height: 6px;
+.skills-section h2,
+.skills-section h5 {
+  color: #f1f5f9 !important;
 }
 
-.skills-slider-container::-webkit-scrollbar-thumb {
-  background: rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
+/* Responsive 2-col on mobile, 4-col on desktop */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.25rem;
+  perspective: 1200px;  /* enables per-card 3D tilt */
 }
 
-.skill-slide-card {
-  flex: 0 0 280px;
-  max-width: 280px;
+@media (min-width: 992px) {
+  .skills-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Base card */
+.sk-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  padding: 2rem 1.5rem;
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Floating animation — each card gets a different delay */
+  animation: skFloat 5s ease-in-out infinite;
+  transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+              box-shadow 0.35s ease;
+  outline: none;
 }
 
-.skill-slide-card.active-focus {
-  transform: scale(1.03);
+.sk-card:nth-child(1) { animation-delay: 0s;    }
+.sk-card:nth-child(2) { animation-delay: 0.8s;  }
+.sk-card:nth-child(3) { animation-delay: 1.6s;  }
+.sk-card:nth-child(4) { animation-delay: 2.4s;  }
+
+@keyframes skFloat {
+  0%, 100% { transform: translateY(0px);  }
+  50%       { transform: translateY(-10px); }
 }
+
+/* Pause float and lift on hover/focus */
+.sk-card:hover,
+.sk-card:focus {
+  animation-play-state: paused;
+  transform: translateY(-16px) scale(1.03);
+}
+
+/* Colour themes */
+.sk-card--blue {
+  background: linear-gradient(135deg, #1d4ed8 0%, #7c3aed 100%);
+  box-shadow: 0 8px 32px rgba(29, 78, 216, 0.45);
+}
+.sk-card--blue:hover  { box-shadow: 0 20px 50px rgba(29, 78, 216, 0.6); }
+
+.sk-card--teal {
+  background: linear-gradient(135deg, #0891b2 0%, #06b6d4 100%);
+  box-shadow: 0 8px 32px rgba(8, 145, 178, 0.45);
+}
+.sk-card--teal:hover  { box-shadow: 0 20px 50px rgba(6, 182, 212, 0.6); }
+
+.sk-card--orange {
+  background: linear-gradient(135deg, #ea580c 0%, #f43f5e 100%);
+  box-shadow: 0 8px 32px rgba(234, 88, 12, 0.45);
+}
+.sk-card--orange:hover { box-shadow: 0 20px 50px rgba(244, 63, 94, 0.6); }
+
+.sk-card--purple {
+  background: linear-gradient(135deg, #7e22ce 0%, #db2777 100%);
+  box-shadow: 0 8px 32px rgba(126, 34, 206, 0.45);
+}
+.sk-card--purple:hover { box-shadow: 0 20px 50px rgba(219, 39, 119, 0.6); }
+
+/* Decorative ambient glow blob that moves on hover */
+.sk-card__glow {
+  position: absolute;
+  top: -30%;
+  right: -20%;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  filter: blur(40px);
+  transition: transform 0.5s ease, opacity 0.4s ease;
+  pointer-events: none;
+}
+.sk-card:hover .sk-card__glow {
+  transform: translate(10px, 10px) scale(1.3);
+  opacity: 0.2;
+}
+
+/* Small floating orbs (pure decorative) */
+.sk-card__orb {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  pointer-events: none;
+}
+.sk-card__orb--1 {
+  width: 60px; height: 60px;
+  bottom: 12px; left: -16px;
+}
+.sk-card__orb--2 {
+  width: 30px; height: 30px;
+  top: 16px; right: 20px;
+}
+
+/* Card content */
+.sk-card__inner {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 0.75rem;
+}
+
+/* Icon circle */
+.sk-card__icon-wrap {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(6px);
+  transition: background 0.3s, transform 0.3s;
+  flex-shrink: 0;
+}
+.sk-card:hover .sk-card__icon-wrap {
+  background: rgba(255, 255, 255, 0.28);
+  transform: rotate(8deg) scale(1.1);
+}
+
+.sk-card__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.sk-card__text {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Tool tags row */
+.sk-card__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  justify-content: center;
+  margin-top: 0.25rem;
+}
+.sk-card__tags span {
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  border-radius: 999px;
+  padding: 0.22rem 0.7rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(4px);
+  transition: background 0.2s;
+}
+.sk-card:hover .sk-card__tags span {
+  background: rgba(255, 255, 255, 0.28);
+}
+
+/* Dark mode: section is already dark so no override needed */
 
 /* ==========================================================================
    4. Portfolio — Scroll-Snap Track
