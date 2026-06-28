@@ -35,26 +35,31 @@
     <style>
       /* ============================================================
          PORTFOLIO — SMOOTH MOBILE SCROLL SNAP CAROUSEL
+         Replaces Bootstrap's JS carousel with native CSS scroll-snap.
+         Works flawlessly on any touch device with zero jank.
          ============================================================ */
       .portfolio-scroll-track {
         display: flex;
         overflow-x: auto;
         scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
+        -webkit-overflow-scrolling: touch;   /* momentum scroll on iOS */
         scroll-behavior: smooth;
         gap: 1.25rem;
         padding: 0.5rem 1rem 1.5rem;
+        /* Hide scrollbar visually but keep it functional */
         scrollbar-width: none;
         -ms-overflow-style: none;
       }
-      .portfolio-scroll-track::-webkit-scrollbar { display: none; }
+      .portfolio-scroll-track::-webkit-scrollbar {
+        display: none;
+      }
       .portfolio-scroll-track .portfolio-slide {
         flex: 0 0 min(320px, 85vw);
         scroll-snap-align: center;
         scroll-snap-stop: always;
       }
 
-      /* Dot indicators */
+      /* Dot indicators synced via JS */
       .scroll-dots {
         display: flex;
         justify-content: center;
@@ -76,14 +81,19 @@
         transform: scale(1.35);
       }
 
+      /* Desktop: wider slides, side arrows still visible */
       @media (min-width: 768px) {
-        .portfolio-scroll-track .portfolio-slide { flex: 0 0 420px; }
+        .portfolio-scroll-track .portfolio-slide {
+          flex: 0 0 420px;
+        }
       }
       @media (min-width: 1200px) {
-        .portfolio-scroll-track .portfolio-slide { flex: 0 0 500px; }
+        .portfolio-scroll-track .portfolio-slide {
+          flex: 0 0 500px;
+        }
       }
 
-      /* Arrow buttons */
+      /* Desktop prev/next arrow buttons */
       .portfolio-arrow-prev,
       .portfolio-arrow-next {
         position: absolute;
@@ -109,12 +119,14 @@
       }
       .portfolio-arrow-prev { left: -10px; }
       .portfolio-arrow-next { right: -10px; }
+
+      /* Hide arrows on small screens — swipe is enough */
       @media (max-width: 767px) {
         .portfolio-arrow-prev,
         .portfolio-arrow-next { display: none; }
       }
 
-      /* Portfolio card */
+      /* Portfolio card styling */
       .portfolio-card {
         border: 0;
         border-radius: 16px;
@@ -139,7 +151,9 @@
         object-fit: cover;
         transition: transform 0.4s ease;
       }
-      .portfolio-card:hover .card-img-wrapper img { transform: scale(1.05); }
+      .portfolio-card:hover .card-img-wrapper img {
+        transform: scale(1.05);
+      }
       .portfolio-card .card-hover-overlay {
         position: absolute;
         inset: 0;
@@ -150,7 +164,9 @@
         align-items: center;
         justify-content: center;
       }
-      .portfolio-card:hover .card-hover-overlay { opacity: 1; }
+      .portfolio-card:hover .card-hover-overlay {
+        opacity: 1;
+      }
 
       /* ============================================================
          ABOUT — MOBILE-FIRST TIMELINE
@@ -160,7 +176,12 @@
         max-width: 1000px;
         margin: 0 auto;
       }
-      .about-timeline::before { content: ''; display: none; }
+
+      /* Vertical spine — only on md+ */
+      .about-timeline::before {
+        content: '';
+        display: none;
+      }
       @media (min-width: 768px) {
         .about-timeline::before {
           content: '';
@@ -176,6 +197,7 @@
         }
       }
 
+      /* Each timeline row */
       .tl-row {
         display: flex;
         flex-direction: column;
@@ -192,14 +214,20 @@
           gap: 0;
           margin-bottom: 3.5rem;
         }
-        .tl-row.reverse { flex-direction: row-reverse; }
-        .tl-row .tl-card-col { flex: 0 0 calc(50% - 80px); }
+        /* Reverse row for alternating layout */
+        .tl-row.reverse {
+          flex-direction: row-reverse;
+        }
+        .tl-row .tl-card-col {
+          flex: 0 0 calc(50% - 80px);
+        }
         .tl-row .tl-img-col {
           flex: 0 0 160px;
           display: flex;
           justify-content: center;
           position: relative;
         }
+        /* Dot on the spine */
         .tl-row .tl-img-col::before {
           content: '';
           position: absolute;
@@ -214,8 +242,14 @@
           box-shadow: 0 0 0 2px #0d6efd;
           z-index: 4;
         }
-        .tl-row.reverse .tl-card-col { text-align: right; padding-right: 2rem; }
-        .tl-row:not(.reverse) .tl-card-col { text-align: left; padding-left: 2rem; }
+        .tl-row.reverse .tl-card-col {
+          text-align: right;
+          padding-right: 2rem;
+        }
+        .tl-row:not(.reverse) .tl-card-col {
+          text-align: left;
+          padding-left: 2rem;
+        }
       }
 
       .tl-img-circle {
@@ -229,9 +263,16 @@
         flex-shrink: 0;
       }
       @media (min-width: 768px) {
-        .tl-img-circle { width: 150px; height: 150px; }
+        .tl-img-circle {
+          width: 150px;
+          height: 150px;
+        }
       }
-      .tl-img-circle img { width: 100%; height: 100%; object-fit: cover; }
+      .tl-img-circle img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
 
       .tl-card {
         background: #fff;
@@ -242,8 +283,14 @@
         transition: box-shadow 0.3s;
         width: 100%;
       }
-      @media (min-width: 768px) { .tl-card { width: auto; } }
-      .tl-card:hover { box-shadow: 0 8px 28px rgba(13,110,253,.12); }
+      @media (min-width: 768px) {
+        .tl-card {
+          width: auto;
+        }
+      }
+      .tl-card:hover {
+        box-shadow: 0 8px 28px rgba(13,110,253,.12);
+      }
       .tl-card .tl-label {
         font-size: 0.72rem;
         font-weight: 700;
@@ -251,9 +298,19 @@
         letter-spacing: 1.5px;
         color: #0d6efd;
       }
-      .tl-card h3 { font-size: 1.05rem; font-weight: 700; margin: 0.35rem 0 0.6rem; }
-      .tl-card p { font-size: 0.875rem; color: #6c757d; line-height: 1.65; margin: 0; }
+      .tl-card h3 {
+        font-size: 1.05rem;
+        font-weight: 700;
+        margin: 0.35rem 0 0.6rem;
+      }
+      .tl-card p {
+        font-size: 0.875rem;
+        color: #6c757d;
+        line-height: 1.65;
+        margin: 0;
+      }
 
+      /* Hire CTA node */
       .hire-node {
         width: 110px;
         height: 110px;
@@ -274,13 +331,20 @@
         transition: transform 0.3s cubic-bezier(.175,.885,.32,1.275), background 0.3s;
         text-decoration: none;
       }
-      .hire-node:hover { transform: scale(1.1); background: #0b5ed7; color: #fff; }
+      .hire-node:hover {
+        transform: scale(1.1);
+        background: #0b5ed7;
+        color: #fff;
+      }
 
       /* ============================================================
          CV — MODERN INTERACTIVE TABBED LAYOUT
          ============================================================ */
-      .cv-section { background: #f8f9fa; }
+      .cv-section {
+        background: #f8f9fa;
+      }
 
+      /* Tab nav pills */
       .cv-tabs {
         display: flex;
         gap: 0.5rem;
@@ -302,7 +366,10 @@
         align-items: center;
         gap: 0.4rem;
       }
-      .cv-tab-btn:hover { border-color: #0d6efd; color: #0d6efd; }
+      .cv-tab-btn:hover {
+        border-color: #0d6efd;
+        color: #0d6efd;
+      }
       .cv-tab-btn.active {
         background: #0d6efd;
         border-color: #0d6efd;
@@ -310,13 +377,20 @@
         box-shadow: 0 4px 14px rgba(13,110,253,.3);
       }
 
-      .cv-panel { display: none; animation: fadeSlideIn 0.35s ease forwards; }
-      .cv-panel.active { display: block; }
+      /* Tab panels */
+      .cv-panel {
+        display: none;
+        animation: fadeSlideIn 0.35s ease forwards;
+      }
+      .cv-panel.active {
+        display: block;
+      }
       @keyframes fadeSlideIn {
         from { opacity: 0; transform: translateY(12px); }
         to   { opacity: 1; transform: translateY(0); }
       }
 
+      /* Profile card */
       .cv-profile-card {
         background: #fff;
         border-radius: 20px;
@@ -342,7 +416,11 @@
         margin: 0.2rem;
       }
 
-      .exp-timeline { position: relative; padding-left: 2rem; }
+      /* Experience timeline */
+      .exp-timeline {
+        position: relative;
+        padding-left: 2rem;
+      }
       .exp-timeline::before {
         content: '';
         position: absolute;
@@ -362,7 +440,10 @@
         border-left: 3px solid #0d6efd;
         transition: transform 0.25s, box-shadow 0.25s;
       }
-      .exp-item:hover { transform: translateX(4px); box-shadow: 0 6px 24px rgba(13,110,253,.12); }
+      .exp-item:hover {
+        transform: translateX(4px);
+        box-shadow: 0 6px 24px rgba(13,110,253,.12);
+      }
       .exp-item::before {
         content: '';
         position: absolute;
@@ -375,10 +456,26 @@
         border: 2px solid #fff;
         box-shadow: 0 0 0 2px #0d6efd;
       }
-      .exp-date { font-size: 0.75rem; font-weight: 700; color: #0d6efd; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.3rem; }
-      .exp-role { font-weight: 700; font-size: 1rem; margin-bottom: 0.15rem; }
-      .exp-company { font-size: 0.875rem; color: #6c757d; font-weight: 500; }
+      .exp-date {
+        font-size: 0.75rem;
+        font-weight: 700;
+        color: #0d6efd;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        margin-bottom: 0.3rem;
+      }
+      .exp-role {
+        font-weight: 700;
+        font-size: 1rem;
+        margin-bottom: 0.15rem;
+      }
+      .exp-company {
+        font-size: 0.875rem;
+        color: #6c757d;
+        font-weight: 500;
+      }
 
+      /* Skills bars */
       .skill-bar-wrapper {
         background: #fff;
         border-radius: 14px;
@@ -386,8 +483,19 @@
         box-shadow: 0 2px 10px rgba(0,0,0,.06);
         margin-bottom: 1rem;
       }
-      .skill-bar-label { display: flex; justify-content: space-between; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem; }
-      .skill-bar-track { height: 8px; background: #e9ecef; border-radius: 999px; overflow: hidden; }
+      .skill-bar-label {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.875rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+      }
+      .skill-bar-track {
+        height: 8px;
+        background: #e9ecef;
+        border-radius: 999px;
+        overflow: hidden;
+      }
       .skill-bar-fill {
         height: 100%;
         border-radius: 999px;
@@ -396,6 +504,7 @@
         transition: width 1s cubic-bezier(.4,0,.2,1);
       }
 
+      /* Education cards */
       .edu-card {
         background: #fff;
         border-radius: 14px;
@@ -405,8 +514,11 @@
         margin-bottom: 1rem;
         transition: transform 0.25s;
       }
-      .edu-card:hover { transform: translateY(-3px); }
+      .edu-card:hover {
+        transform: translateY(-3px);
+      }
 
+      /* Download CV button */
       .cv-download-btn {
         display: inline-flex;
         align-items: center;
@@ -422,8 +534,13 @@
         border: none;
         cursor: pointer;
       }
-      .cv-download-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(13,110,253,.4); color: #fff; }
+      .cv-download-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(13,110,253,.4);
+        color: #fff;
+      }
 
+      /* Social link chips */
       .social-chip {
         display: inline-flex;
         align-items: center;
@@ -438,7 +555,10 @@
         transition: background 0.2s, color 0.2s;
         margin: 0.2rem;
       }
-      .social-chip:hover { background: #0d6efd; color: #fff; }
+      .social-chip:hover {
+        background: #0d6efd;
+        color: #fff;
+      }
     </style>
   </head>
   <body class="montserrat-400">
@@ -485,24 +605,58 @@
     <!-- ==========================================================================
          HERO LANDING SECTION
          ========================================================================== -->
-    <section class="hero d-flex flex-column align-items-center justify-content-center position-relative" 
-             style="background: linear-gradient(rgba(15,23,42,0.75), rgba(15,23,42,0.85)), url('/static/images/hero-bg.jpg') no-repeat center center/cover; min-height: 85vh;">
-      <div class="text-center px-4">
-        <p class="text-uppercase text-warning fw-bold mb-2 fs-5" style="letter-spacing: 3px;">
+    <section class="hero">
+
+      <!-- Animated particle dot grid -->
+      <div class="hero-particles" aria-hidden="true"></div>
+
+      <!-- Main content -->
+      <div class="text-center px-4 py-5">
+        <p class="text-uppercase fw-bold mb-3 fs-6" style="letter-spacing: 4px; color: #FFC107;">
           Welcome to my Portfolio
         </p>
-        <h1 class="display-2 text-white fw-extrabold mb-3 tracking-tight" style="font-weight: 800;">
+
+        <h1 class="display-1 text-white mb-2" style="font-weight: 800; letter-spacing: -1px;">
           Lawrence Otieno
         </h1>
-        <h3 class="h2 text-light fw-normal mb-5 mx-auto" style="max-width: 850px; min-height: 48px; line-height: 1.5; color: #f1f5f9;">
-          <span id="typewriter-text" class="fw-bold text-warning"></span><span class="cursor">|</span>
+
+        <!-- Gold underline accent -->
+        <div style="width: 80px; height: 4px; background: #FFC107; border-radius: 2px; margin: 0 auto 1.5rem;"></div>
+
+        <h3 class="h2 fw-normal mb-5 mx-auto" style="max-width: 850px; min-height: 48px; line-height: 1.5; color: rgba(255,255,255,0.85);">
+          <span id="typewriter-text" class="fw-bold" style="color: #2196F3;"></span><span class="cursor">|</span>
         </h3>
-        <div class="mt-4">
-          <a href="#skills" class="btn btn-lg btn-primary px-5 py-3 fw-medium rounded-pill shadow-lg text-decoration-none custom-hero-btn" style="transition: all 0.3s ease-in-out;">
-            Explore My Expertise <i class="fas fa-arrow-down ms-2 custom-bounce"></i>
-          </a>
+
+        <!-- Stats row -->
+        <div class="d-flex justify-content-center gap-4 mb-5 flex-wrap">
+          <div class="text-center">
+            <div class="fw-bold fs-3" style="color: #FFC107;">3+</div>
+            <div class="small" style="color: rgba(255,255,255,0.65);">Years Experience</div>
+          </div>
+          <div style="width: 1px; background: rgba(255,255,255,0.15);"></div>
+          <div class="text-center">
+            <div class="fw-bold fs-3" style="color: #FFC107;">4</div>
+            <div class="small" style="color: rgba(255,255,255,0.65);">Core Skills</div>
+          </div>
+          <div style="width: 1px; background: rgba(255,255,255,0.15);"></div>
+          <div class="text-center">
+            <div class="fw-bold fs-3" style="color: #FFC107;">2</div>
+            <div class="small" style="color: rgba(255,255,255,0.65);">Organisations</div>
+          </div>
         </div>
+
+        <a href="#skills" class="btn btn-lg px-5 py-3 fw-bold rounded-pill shadow-lg text-decoration-none custom-hero-btn">
+          Explore My Expertise &nbsp;<i class="fas fa-arrow-down custom-bounce"></i>
+        </a>
       </div>
+
+      <!-- Wave bottom divider -->
+      <div class="hero-wave" aria-hidden="true">
+        <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <path d="M0,30 C360,60 1080,0 1440,30 L1440,60 L0,60 Z" fill="#ffffff"/>
+        </svg>
+      </div>
+
     </section>
 
     <!-- ==========================================================================
@@ -603,6 +757,7 @@
 
     <!-- ==========================================================================
          PORTFOLIO — NATIVE SCROLL-SNAP CAROUSEL
+         Works perfectly on mobile (touch swipe) AND desktop (arrows + dots).
          ========================================================================== -->
     <section class="container py-5" id="portfolio">
       <div class="row mt-4 py-3">
@@ -614,11 +769,15 @@
         </div>
       </div>
 
+      <!-- Wrapper for arrow positioning -->
       <div class="position-relative mt-4">
+
+        <!-- Prev Arrow (desktop) -->
         <button class="portfolio-arrow-prev" id="portfolioPrev" aria-label="Previous project">
           <i class="bi bi-chevron-left fs-5"></i>
         </button>
 
+        <!-- Scroll Track (replaces Bootstrap carousel) -->
         <div class="portfolio-scroll-track" id="portfolioTrack">
           {% for project in projects %}
           <div class="portfolio-slide">
@@ -650,11 +809,13 @@
           {% endfor %}
         </div>
 
+        <!-- Next Arrow (desktop) -->
         <button class="portfolio-arrow-next" id="portfolioNext" aria-label="Next project">
           <i class="bi bi-chevron-right fs-5"></i>
         </button>
       </div>
 
+      <!-- Dot indicators below track -->
       <div class="scroll-dots mt-3" id="portfolioDots">
         {% for project in projects %}
         <button class="scroll-dot {% if loop.first %}active{% endif %}" data-index="{{ loop.index0 }}" aria-label="Slide {{ loop.index }}"></button>
@@ -668,6 +829,7 @@
     <section id="about" class="py-5 overflow-hidden position-relative bg-light">
       <div class="container py-4">
 
+        <!-- Section Header -->
         <div class="text-center mb-5">
           <h1 class="display-4 fw-bold">ABOUT</h1>
           <p class="text-muted mx-auto" style="max-width: 600px;">
@@ -693,7 +855,7 @@
             </div>
           </div>
 
-          <!-- 2. Core Expertise -->
+          <!-- 2. Core Expertise (reverse on desktop) -->
           <div class="tl-row reverse">
             <div class="tl-img-col">
               <div class="tl-img-circle">
@@ -725,7 +887,7 @@
             </div>
           </div>
 
-          <!-- 4. Vision -->
+          <!-- 4. Vision (reverse on desktop) -->
           <div class="tl-row reverse">
             <div class="tl-img-col">
               <div class="tl-img-circle">
@@ -761,6 +923,7 @@
     <section class="py-5 cv-section" id="cv">
       <div class="container py-4">
 
+        <!-- Section Header -->
         <div class="text-center mb-4">
           <h2 class="display-2">CURRICULUM VITAE</h2>
           <p class="text-secondary fw-normal">
@@ -807,22 +970,22 @@
               </div>
               <div class="flex-grow-1">
                 <h2 class="fw-bold mb-0">Lawrence Otieno</h2>
-                <p class="text-primary fw-semibold mb-3">Business Analyst · Data Engineer · Automation & Integration</p>
+                <p class="text-primary fw-semibold mb-3">IT Operations Specialist · Data Analyst · Business Analyst</p>
                 <div class="d-flex flex-wrap gap-2 mb-3">
                   <span class="cv-badge-pill"><i class="bi bi-envelope me-1"></i>lawrenceit38@gmail.com</span>
                   <span class="cv-badge-pill"><i class="bi bi-telephone me-1"></i>(254) 711 720 717</span>
                   <span class="cv-badge-pill"><i class="bi bi-geo-alt me-1"></i>Nairobi, Kenya</span>
                 </div>
                 <p class="text-secondary" style="line-height: 1.75;">
-                  Results-driven Business Process Analyst and IT Operations Professional with over 4 years of experience driving process improvement, digital transformation, systems integration, and stakeholder engagement across business and technology functions. Skilled in requirements elicitation, process mapping, workflow analysis, business process reengineering, and translating operational needs into actionable technical solutions. Experienced working with ERP, CRM, SaaS, and analytics platforms while supporting cross-functional teams through requirements gathering, workshop facilitation, process documentation, reporting, and change initiatives. Adept at collaborating with Finance, Operations, and Technology teams to improve operational efficiency, data visibility, and business outcomes. 
+                  I am an IT Operations Specialist with 3 years of experience in ICT support, and 1 year of experience in data analysis, proficient in managing and supporting IT infrastructure. In my operations, I have experience utilising monitoring and virtualisation tools such as Nagios, Ansible, and VMware. Experienced in IT infrastructure and service management with a strong command of ServiceNow. Committed to ensuring seamless IT operations through effective system integration, requirements analysis, process optimisation, user training, and data reporting.
                 </p>
                 <div>
                   <p class="fw-semibold mb-2 small text-uppercase text-muted" style="letter-spacing: 1px;">Highlights</p>
-                  <span class="cv-badge-pill">Business Analysis</span>
-                  <span class="cv-badge-pill">Data Engineering</span>
-                  <span class="cv-badge-pill">Data Reporting</span>
-                  <span class="cv-badge-pill">Process Optimisation</span>
                   <span class="cv-badge-pill">IT Operations</span>
+                  <span class="cv-badge-pill">ICT Support</span>
+                  <span class="cv-badge-pill">Data Analysis</span>
+                  <span class="cv-badge-pill">Process Optimisation</span>
+                  <span class="cv-badge-pill">System Administration</span>
                 </div>
                 <div class="mt-3">
                   <p class="fw-semibold mb-2 small text-uppercase text-muted" style="letter-spacing: 1px;">Interests</p>
@@ -933,6 +1096,7 @@
               <div class="skill-bar-wrapper">
                 <p class="fw-semibold mb-1 small text-uppercase text-muted" style="letter-spacing:1px;">Technical Skills</p>
                 <hr class="mt-1 mb-3">
+                <!-- Each bar: label | % | fill -->
                 <div class="mb-3">
                   <div class="skill-bar-label"><span>Python</span><span class="text-primary">85%</span></div>
                   <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
@@ -997,7 +1161,7 @@
     </section>
 
     <!-- ==========================================================================
-         CONTACT FORM
+         CONTACT FORM FOOTER WRAPPER
          ========================================================================== -->
     <section class="py-5 contact-section-bg" id="contact">
       <div class="container-xxl py-5">
@@ -1101,7 +1265,7 @@
       document.addEventListener("DOMContentLoaded", typingEffect);
     </script>
 
-    <!-- Skills Cards: 3D tilt on mouse move (desktop only) -->
+    <!-- Skills Cards: tilt on mouse move (desktop only) -->
     <script>
       document.querySelectorAll('.sk-card').forEach(card => {
         card.addEventListener('mousemove', function (e) {
@@ -1120,7 +1284,10 @@
       });
     </script>
 
-    <!-- Portfolio Scroll-Snap Controller -->
+    <!-- ============================================================
+         PORTFOLIO — SCROLL-SNAP CONTROLLER
+         Syncs dot indicators and arrow buttons with the scroll track.
+         ============================================================ -->
     <script>
       (function () {
         const track  = document.getElementById('portfolioTrack');
@@ -1131,6 +1298,7 @@
 
         if (!track || !slides.length) return;
 
+        // Which slide is most visible?
         function getActiveIndex() {
           const trackRect = track.getBoundingClientRect();
           let best = 0, bestOverlap = -Infinity;
@@ -1147,6 +1315,7 @@
           dots.forEach((d, i) => d.classList.toggle('active', i === active));
         }
 
+        // Scroll to a specific slide index
         function scrollTo(idx) {
           const slide = slides[idx];
           if (!slide) return;
@@ -1158,10 +1327,20 @@
           track.scrollBy({ left: offset, behavior: 'smooth' });
         }
 
+        // Dot click
         dots.forEach((dot, i) => dot.addEventListener('click', () => scrollTo(i)));
-        prev && prev.addEventListener('click', () => scrollTo(Math.max(0, getActiveIndex() - 1)));
-        next && next.addEventListener('click', () => scrollTo(Math.min(slides.length - 1, getActiveIndex() + 1)));
 
+        // Arrow clicks
+        prev && prev.addEventListener('click', () => {
+          const idx = Math.max(0, getActiveIndex() - 1);
+          scrollTo(idx);
+        });
+        next && next.addEventListener('click', () => {
+          const idx = Math.min(slides.length - 1, getActiveIndex() + 1);
+          scrollTo(idx);
+        });
+
+        // Update dots on scroll (debounced)
         let scrollTimer;
         track.addEventListener('scroll', () => {
           clearTimeout(scrollTimer);
@@ -1170,25 +1349,30 @@
       })();
     </script>
 
-    <!-- CV Tabs Controller -->
+    <!-- ============================================================
+         CV TABS CONTROLLER
+         ============================================================ -->
     <script>
       (function () {
-        const tabBtns = document.querySelectorAll('.cv-tab-btn');
-        const panels  = document.querySelectorAll('.cv-panel');
+        const tabBtns  = document.querySelectorAll('.cv-tab-btn');
+        const panels   = document.querySelectorAll('.cv-panel');
 
         function activateTab(tabId) {
           tabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
           panels.forEach(p => {
             const isTarget = p.id === 'cv-' + tabId;
             p.classList.toggle('active', isTarget);
+            // Animate skill bars when skills tab opens
             if (isTarget && tabId === 'skills') animateBars();
           });
         }
 
         tabBtns.forEach(btn => btn.addEventListener('click', () => activateTab(btn.dataset.tab)));
 
+        // Skill bar animation
         function animateBars() {
           document.querySelectorAll('.skill-bar-fill').forEach(bar => {
+            // Reset first so animation replays each time tab opens
             bar.style.width = '0';
             requestAnimationFrame(() => {
               requestAnimationFrame(() => {
@@ -1198,6 +1382,7 @@
           });
         }
 
+        // Trigger bars if Skills tab is active on load (unlikely but safe)
         if (document.getElementById('cv-skills')?.classList.contains('active')) animateBars();
       })();
     </script>
