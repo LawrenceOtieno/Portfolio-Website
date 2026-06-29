@@ -15,7 +15,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
-    <!-- Custom CSS — single source of truth for all styles -->
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
   </head>
 
@@ -55,7 +55,12 @@
          HERO
          ====================================================================== -->
     <section class="hero" id="home">
+      <!-- Animated colour orbs -->
+      <div class="hero-orb-1"></div>
+      <div class="hero-orb-2"></div>
+      <!-- Particle grid -->
       <div class="hero-particles"></div>
+      <!-- Text content -->
       <div class="text-center px-4" style="position:relative;z-index:2;">
         <p class="hero-tagline text-uppercase fw-bold mb-2 fs-5">Welcome to my Portfolio</p>
         <h1 class="display-2 text-white fw-bold mb-3">Lawrence Otieno</h1>
@@ -306,7 +311,6 @@
                   <a href="https://www.linkedin.com/in/lawrence-otieno-5b6b6212a" class="social-chip" target="_blank"><i class="bi bi-linkedin"></i> LinkedIn</a>
                 </div>
                 <div class="mt-3">
-                  <!-- ASK FOR CV — scrolls to contact section -->
                   <a href="#contact" class="cv-contact-btn">
                     <i class="bi bi-envelope-fill"></i> Ask for CV
                   </a>
@@ -464,7 +468,9 @@
         </div>
         <div class="row pt-4">
           <div class="col-12">
-            <form action="/" method="POST">
+            <!-- Status message (hidden by default) -->
+            <div id="contact-status" class="text-center mb-3" style="display:none;font-weight:600;font-size:1rem;"></div>
+            <form id="contact-form" novalidate>
               <div class="row d-flex justify-content-center">
                 <div class="col-lg-6">
                   <div class="form-floating mb-3">
@@ -487,7 +493,7 @@
                   </div>
                 </div>
                 <div class="col-12 mt-5 d-flex justify-content-center">
-                  <button class="contact-send-btn" type="submit">SEND MESSAGE</button>
+                  <button class="contact-send-btn" type="submit" id="send-btn">SEND MESSAGE</button>
                 </div>
               </div>
             </form>
@@ -602,6 +608,59 @@
           });
         }
         if (document.getElementById('cv-skills')?.classList.contains('active')) animateBars();
+      })();
+    </script>
+
+    <!-- Contact form — AJAX submission -->
+    <script>
+      (function() {
+        const form   = document.getElementById('contact-form');
+        const status = document.getElementById('contact-status');
+        const btn    = document.getElementById('send-btn');
+
+        form.addEventListener('submit', async function(e) {
+          e.preventDefault();
+
+          const name    = form.name.value.trim();
+          const email   = form.email.value.trim();
+          const phone   = form.phone.value.trim();
+          const message = form.message.value.trim();
+
+          if (!name || !email || !message) {
+            showStatus('Please fill in all required fields.', false);
+            return;
+          }
+
+          btn.disabled = true;
+          btn.textContent = 'Sending…';
+          status.style.display = 'none';
+
+          try {
+            const res = await fetch('/', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ name, email, phone, message })
+            });
+            if (res.ok) {
+              showStatus('✅ Message sent! I\'ll be in touch within 24–48 hours.', true);
+              form.reset();
+            } else {
+              const data = await res.json().catch(() => ({}));
+              showStatus('⚠️ ' + (data.error || 'Something went wrong. Please try again.'), false);
+            }
+          } catch (err) {
+            showStatus('⚠️ Network error. Please email lawrenceit38@gmail.com directly.', false);
+          } finally {
+            btn.disabled = false;
+            btn.textContent = 'SEND MESSAGE';
+          }
+        });
+
+        function showStatus(msg, ok) {
+          status.textContent = msg;
+          status.style.display = 'block';
+          status.style.color = ok ? '#4CAF50' : '#FFC107';
+        }
       })();
     </script>
 
