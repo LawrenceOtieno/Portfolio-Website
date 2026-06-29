@@ -6,606 +6,36 @@
     <title>Lawrence Otieno Portfolio Website | StreData</title>
     
     <!-- Bootstrap 5 CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD"
-      crossorigin="anonymous"
-    />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"/>
     <!-- Font Awesome Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
     <!-- Bootstrap Icons -->
-    <link 
-      rel="stylesheet" 
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
-    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
     <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <!-- Custom CSS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
+    <!-- Custom CSS — single source of truth for all styles -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-
-    <style>
-      /* ============================================================
-         PALETTE TOKENS
-         Deep Navy: #06283D  |  Vibrant Gold: #FFC107  |  Electric Blue: #2196F3
-         ============================================================ */
-      :root {
-        --navy:      #06283D;
-        --navy-mid:  #0a3550;
-        --navy-soft: #0d4470;
-        --gold:      #FFC107;
-        --gold-dim:  #e6a817;
-        --blue:      #2196F3;
-        --blue-dark: #1565C0;
-        --blue-light:#64B5F6;
-        --white:     #ffffff;
-        --off-white: #f0f4f8;
-        --muted:     #6b8ba4;
-      }
-
-      body {
-        font-family: 'Montserrat', sans-serif;
-        background-color: var(--off-white);
-        color: var(--navy);
-      }
-
-      /* ============================================================
-         NAVBAR — Deep Navy background
-         ============================================================ */
-      .navbar {
-        background-color: var(--navy) !important;
-        border-bottom: 2px solid var(--gold);
-      }
-
-      /* Dual-color brand text: "My" gold + "space" electric blue */
-      .navbar-brand {
-        font-size: 1.6rem;
-        font-weight: 800;
-        letter-spacing: 1px;
-      }
-      .brand-my    { color: var(--gold); }
-      .brand-space { color: var(--blue-light); }
-
-      .nav-link {
-        color: rgba(255,255,255,0.82) !important;
-        font-weight: 500;
-        transition: color 0.2s;
-      }
-      .nav-link:hover { color: var(--gold) !important; }
-
-      /* ============================================================
-         HERO
-         ============================================================ */
-      .hero {
-        background: linear-gradient(rgba(6,40,61,0.82), rgba(6,40,61,0.92)),
-                    url('/static/images/hero-bg.jpg') no-repeat center center/cover;
-        min-height: 85vh;
-      }
-      .hero-tagline { color: var(--gold); letter-spacing: 3px; }
-      .typewriter-accent { color: var(--gold); }
-      .hero-btn {
-        background: var(--blue);
-        border: 2px solid transparent;
-        color: var(--white);
-        border-radius: 999px;
-        padding: 0.85rem 2.5rem;
-        font-weight: 600;
-        transition: all 0.3s;
-        text-decoration: none;
-        display: inline-flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-      .hero-btn:hover {
-        background: transparent;
-        border-color: var(--gold);
-        color: var(--gold);
-      }
-
-      /* ============================================================
-         SECTION HEADINGS
-         ============================================================ */
-      .section-heading {
-        color: var(--navy);
-        font-weight: 800;
-      }
-      .section-sub { color: var(--muted); }
-
-      /* Gold underline accent for section titles */
-      .section-title-wrap {
-        display: inline-block;
-        position: relative;
-        padding-bottom: 0.5rem;
-      }
-      .section-title-wrap::after {
-        content: '';
-        position: absolute;
-        left: 50%;
-        bottom: 0;
-        transform: translateX(-50%);
-        width: 60px;
-        height: 3px;
-        background: linear-gradient(90deg, var(--gold), var(--blue));
-        border-radius: 999px;
-      }
-
-      /* ============================================================
-         SKILLS SECTION
-         ============================================================ */
-      .skills-section { background: var(--off-white); }
-
-      .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-        gap: 1.5rem;
-      }
-
-      .sk-card {
-        border-radius: 18px;
-        padding: 2rem 1.75rem;
-        position: relative;
-        overflow: hidden;
-        cursor: default;
-        transition: transform 0.4s cubic-bezier(.175,.885,.32,1.275), box-shadow 0.35s ease;
-        transform-style: preserve-3d;
-        perspective: 800px;
-      }
-      .sk-card:hover { transform: translateY(-14px) scale(1.03); }
-
-      /* Palette-aligned card colors */
-      .sk-card--blue   { background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 100%); }
-      .sk-card--teal   { background: linear-gradient(135deg, #0a4f6b 0%, #0d7bb5 100%); }
-      .sk-card--orange { background: linear-gradient(135deg, #7a4400 0%, #c87d00 100%); }
-      .sk-card--purple { background: linear-gradient(135deg, var(--blue-dark) 0%, #0d47a1 100%); }
-
-      .sk-card__glow {
-        position: absolute; inset: -60px;
-        background: radial-gradient(circle at 50% 50%, rgba(255,193,7,0.18), transparent 70%);
-        opacity: 0; transition: opacity 0.4s;
-        pointer-events: none;
-      }
-      .sk-card:hover .sk-card__glow { opacity: 1; }
-
-      .sk-card__orb {
-        position: absolute; border-radius: 50%;
-        background: rgba(255,255,255,0.07);
-        pointer-events: none;
-      }
-      .sk-card__orb--1 { width: 120px; height: 120px; top: -40px; right: -30px; }
-      .sk-card__orb--2 { width: 70px;  height: 70px;  bottom: 20px; left: -20px; }
-
-      .sk-card__icon-wrap {
-        width: 56px; height: 56px;
-        border-radius: 14px;
-        background: rgba(255,255,255,0.12);
-        display: flex; align-items: center; justify-content: center;
-        margin-bottom: 1.25rem;
-        font-size: 1.5rem;
-        color: var(--gold);
-        border: 1px solid rgba(255,193,7,0.3);
-      }
-      .sk-card__title { font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 0.75rem; }
-      .sk-card__text  { font-size: 0.82rem; color: rgba(255,255,255,0.75); line-height: 1.7; }
-      .sk-card__tags  { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
-      .sk-card__tags span {
-        background: rgba(255,255,255,0.13);
-        color: var(--gold);
-        border: 1px solid rgba(255,193,7,0.4);
-        border-radius: 999px;
-        padding: 0.2rem 0.7rem;
-        font-size: 0.72rem;
-        font-weight: 600;
-      }
-
-      /* ============================================================
-         PORTFOLIO — SMOOTH MOBILE SCROLL SNAP CAROUSEL
-         ============================================================ */
-      .portfolio-scroll-track {
-        display: flex;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        scroll-behavior: smooth;
-        gap: 1.25rem;
-        padding: 0.5rem 1rem 1.5rem;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-      }
-      .portfolio-scroll-track::-webkit-scrollbar { display: none; }
-      .portfolio-scroll-track .portfolio-slide {
-        flex: 0 0 min(320px, 85vw);
-        scroll-snap-align: center;
-        scroll-snap-stop: always;
-      }
-
-      .scroll-dots { display: flex; justify-content: center; gap: 8px; margin-top: 0.75rem; }
-      .scroll-dot {
-        width: 8px; height: 8px; border-radius: 50%;
-        background: #b0c4d8; border: none; padding: 0;
-        cursor: pointer; transition: background 0.3s, transform 0.3s;
-      }
-      .scroll-dot.active { background: var(--blue); transform: scale(1.35); }
-
-      @media (min-width: 768px) {
-        .portfolio-scroll-track .portfolio-slide { flex: 0 0 420px; }
-      }
-      @media (min-width: 1200px) {
-        .portfolio-scroll-track .portfolio-slide { flex: 0 0 500px; }
-      }
-
-      .portfolio-arrow-prev,
-      .portfolio-arrow-next {
-        position: absolute; top: 50%; transform: translateY(-50%);
-        z-index: 10;
-        background: var(--white);
-        border: 1.5px solid #c9d8e8;
-        border-radius: 50%; width: 44px; height: 44px;
-        display: flex; align-items: center; justify-content: center;
-        cursor: pointer;
-        transition: background 0.2s, color 0.2s, box-shadow 0.2s;
-        box-shadow: 0 2px 10px rgba(6,40,61,.12);
-        color: var(--navy);
-      }
-      .portfolio-arrow-prev:hover,
-      .portfolio-arrow-next:hover {
-        background: var(--blue); color: var(--white); border-color: var(--blue);
-      }
-      .portfolio-arrow-prev { left: -10px; }
-      .portfolio-arrow-next { right: -10px; }
-      @media (max-width: 767px) {
-        .portfolio-arrow-prev, .portfolio-arrow-next { display: none; }
-      }
-
-      .portfolio-card {
-        border: 0; border-radius: 16px; overflow: hidden;
-        box-shadow: 0 4px 20px rgba(6,40,61,.1);
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-        background: var(--white); height: 100%;
-      }
-      .portfolio-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(33,150,243,.18); }
-      .portfolio-card .card-img-wrapper {
-        position: relative; overflow: hidden; aspect-ratio: 16/9;
-      }
-      .portfolio-card .card-img-wrapper img {
-        width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease;
-      }
-      .portfolio-card:hover .card-img-wrapper img { transform: scale(1.05); }
-      .portfolio-card .card-hover-overlay {
-        position: absolute; inset: 0;
-        background: rgba(6,40,61,0.72);
-        opacity: 0; transition: opacity 0.3s;
-        display: flex; align-items: center; justify-content: center;
-      }
-      .portfolio-card:hover .card-hover-overlay { opacity: 1; }
-      .portfolio-card .card-body h4 { color: var(--navy); }
-
-      /* ============================================================
-         ABOUT — MOBILE-FIRST TIMELINE
-         ============================================================ */
-      #about { background: var(--navy) !important; }
-      #about h1.display-4 { color: var(--white); }
-      #about p.text-muted { color: var(--blue-light) !important; }
-
-      .about-timeline {
-        position: relative; max-width: 1000px; margin: 0 auto;
-      }
-      .about-timeline::before { content: ''; display: none; }
-      @media (min-width: 768px) {
-        .about-timeline::before {
-          content: '';
-          display: block;
-          position: absolute;
-          left: 50%; top: 0; bottom: 120px;
-          width: 2px;
-          background: linear-gradient(to bottom, var(--blue) 0%, var(--gold) 100%);
-          transform: translateX(-50%); z-index: 0;
-        }
-      }
-
-      .tl-row {
-        display: flex; flex-direction: column;
-        align-items: center; gap: 1rem; margin-bottom: 2.5rem;
-        position: relative; z-index: 1;
-      }
-      @media (min-width: 768px) {
-        .tl-row { flex-direction: row; align-items: center; gap: 0; margin-bottom: 3.5rem; }
-        .tl-row.reverse { flex-direction: row-reverse; }
-        .tl-row .tl-card-col { flex: 0 0 calc(50% - 80px); }
-        .tl-row .tl-img-col {
-          flex: 0 0 160px; display: flex; justify-content: center; position: relative;
-        }
-        .tl-row .tl-img-col::before {
-          content: ''; position: absolute; left: 50%; top: 50%;
-          transform: translate(-50%, -50%);
-          width: 14px; height: 14px; border-radius: 50%;
-          background: var(--gold); border: 3px solid var(--navy);
-          box-shadow: 0 0 0 2px var(--gold); z-index: 4;
-        }
-        .tl-row.reverse .tl-card-col { text-align: right; padding-right: 2rem; }
-        .tl-row:not(.reverse) .tl-card-col { text-align: left; padding-left: 2rem; }
-      }
-
-      .tl-img-circle {
-        width: 130px; height: 130px; border-radius: 50%; overflow: hidden;
-        border: 4px solid var(--gold);
-        box-shadow: 0 4px 20px rgba(255,193,7,.3);
-        background: var(--navy-mid); flex-shrink: 0;
-      }
-      @media (min-width: 768px) { .tl-img-circle { width: 150px; height: 150px; } }
-      .tl-img-circle img { width: 100%; height: 100%; object-fit: cover; }
-
-      .tl-card {
-        background: rgba(255,255,255,0.06);
-        border-radius: 14px;
-        box-shadow: 0 2px 12px rgba(0,0,0,.2);
-        border: 1px solid rgba(255,193,7,0.2);
-        padding: 1.25rem 1.5rem;
-        transition: box-shadow 0.3s, border-color 0.3s;
-        width: 100%;
-        backdrop-filter: blur(4px);
-      }
-      @media (min-width: 768px) { .tl-card { width: auto; } }
-      .tl-card:hover {
-        box-shadow: 0 8px 28px rgba(33,150,243,.25);
-        border-color: var(--blue);
-      }
-      .tl-card .tl-label {
-        font-size: 0.72rem; font-weight: 700;
-        text-transform: uppercase; letter-spacing: 1.5px;
-        color: var(--gold);
-      }
-      .tl-card h3 { font-size: 1.05rem; font-weight: 700; margin: 0.35rem 0 0.6rem; color: var(--white); }
-      .tl-card p  { font-size: 0.875rem; color: rgba(255,255,255,0.68); line-height: 1.65; margin: 0; }
-
-      .hire-node {
-        width: 110px; height: 110px; border-radius: 50%;
-        background: var(--gold);
-        color: var(--navy);
-        display: flex; flex-direction: column; align-items: center;
-        justify-content: center; font-weight: 800; font-size: 0.9rem;
-        line-height: 1.3; text-align: center;
-        cursor: pointer;
-        border: 4px solid var(--white);
-        box-shadow: 0 4px 24px rgba(255,193,7,.4);
-        transition: transform 0.3s cubic-bezier(.175,.885,.32,1.275), background 0.3s;
-        text-decoration: none;
-      }
-      .hire-node:hover { transform: scale(1.1); background: var(--blue); color: var(--white); }
-
-      /* ============================================================
-         CV — MODERN INTERACTIVE TABBED LAYOUT
-         ============================================================ */
-      .cv-section { background: var(--off-white); }
-
-      .cv-tabs {
-        display: flex; gap: 0.5rem; flex-wrap: wrap;
-        justify-content: center; margin-bottom: 2rem;
-      }
-      .cv-tab-btn {
-        background: var(--white);
-        border: 1.5px solid #c9d8e8;
-        border-radius: 999px; padding: 0.55rem 1.35rem;
-        font-size: 0.875rem; font-weight: 600;
-        color: var(--navy); cursor: pointer;
-        transition: all 0.25s ease;
-        display: flex; align-items: center; gap: 0.4rem;
-      }
-      .cv-tab-btn:hover { border-color: var(--blue); color: var(--blue); }
-      .cv-tab-btn.active {
-        background: var(--navy); border-color: var(--navy);
-        color: var(--gold); box-shadow: 0 4px 14px rgba(6,40,61,.3);
-      }
-
-      .cv-panel { display: none; animation: fadeSlideIn 0.35s ease forwards; }
-      .cv-panel.active { display: block; }
-      @keyframes fadeSlideIn {
-        from { opacity: 0; transform: translateY(12px); }
-        to   { opacity: 1; transform: translateY(0); }
-      }
-
-      .cv-profile-card {
-        background: var(--white); border-radius: 20px;
-        box-shadow: 0 2px 16px rgba(6,40,61,.1); padding: 2rem;
-        border-top: 3px solid var(--blue);
-      }
-      .cv-avatar {
-        width: 120px; height: 120px; border-radius: 50%;
-        object-fit: cover; border: 4px solid var(--blue);
-        box-shadow: 0 4px 16px rgba(33,150,243,.25);
-      }
-      .cv-badge-pill {
-        display: inline-block;
-        background: #e3f2fd; color: var(--navy);
-        border-radius: 999px; padding: 0.3rem 0.85rem;
-        font-size: 0.78rem; font-weight: 600; margin: 0.2rem;
-        border: 1px solid rgba(33,150,243,0.2);
-      }
-
-      .exp-timeline { position: relative; padding-left: 2rem; }
-      .exp-timeline::before {
-        content: ''; position: absolute; left: 7px; top: 0; bottom: 0;
-        width: 2px; background: linear-gradient(to bottom, var(--blue), var(--gold));
-      }
-      .exp-item {
-        position: relative; margin-bottom: 1.75rem;
-        background: var(--white); border-radius: 14px;
-        padding: 1.25rem 1.5rem;
-        box-shadow: 0 2px 10px rgba(6,40,61,.08);
-        border-left: 3px solid var(--blue);
-        transition: transform 0.25s, box-shadow 0.25s;
-      }
-      .exp-item:hover { transform: translateX(4px); box-shadow: 0 6px 24px rgba(33,150,243,.15); }
-      .exp-item::before {
-        content: ''; position: absolute;
-        left: -2.45rem; top: 1.4rem;
-        width: 12px; height: 12px; border-radius: 50%;
-        background: var(--blue); border: 2px solid var(--white);
-        box-shadow: 0 0 0 2px var(--blue);
-      }
-      .exp-date { font-size: 0.75rem; font-weight: 700; color: var(--blue); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 0.3rem; }
-      .exp-role { font-weight: 700; font-size: 1rem; margin-bottom: 0.15rem; color: var(--navy); }
-      .exp-company { font-size: 0.875rem; color: var(--muted); font-weight: 500; }
-
-      .skill-bar-wrapper {
-        background: var(--white); border-radius: 14px; padding: 1.5rem;
-        box-shadow: 0 2px 10px rgba(6,40,61,.08); margin-bottom: 1rem;
-        border-top: 2px solid var(--navy);
-      }
-      .skill-bar-label { display: flex; justify-content: space-between; font-size: 0.875rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--navy); }
-      .skill-bar-label span:last-child { color: var(--blue); }
-      .skill-bar-track { height: 8px; background: #dce8f5; border-radius: 999px; overflow: hidden; }
-      .skill-bar-fill {
-        height: 100%; border-radius: 999px;
-        background: linear-gradient(90deg, var(--navy), var(--blue));
-        width: 0; transition: width 1s cubic-bezier(.4,0,.2,1);
-      }
-
-      .edu-card {
-        background: var(--white); border-radius: 14px; padding: 1.25rem 1.5rem;
-        box-shadow: 0 2px 10px rgba(6,40,61,.08);
-        border-top: 3px solid var(--gold); margin-bottom: 1rem;
-        transition: transform 0.25s;
-      }
-      .edu-card:hover { transform: translateY(-3px); }
-
-      /* ── CV DOWNLOAD BUTTON ── */
-      .cv-download-btn {
-        display: inline-flex; align-items: center; gap: 0.5rem;
-        background: linear-gradient(135deg, var(--navy), var(--navy-soft));
-        color: var(--gold); border-radius: 999px; padding: 0.75rem 2rem;
-        font-weight: 700; text-decoration: none;
-        box-shadow: 0 4px 16px rgba(6,40,61,.35);
-        transition: transform 0.25s, box-shadow 0.25s, background 0.25s;
-        border: 2px solid var(--gold); cursor: pointer;
-      }
-      .cv-download-btn:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(255,193,7,.3);
-        background: var(--gold); color: var(--navy);
-      }
-
-      .social-chip {
-        display: inline-flex; align-items: center; gap: 0.4rem;
-        background: #e8f4ff; border-radius: 999px;
-        padding: 0.4rem 0.9rem; font-size: 0.8rem; font-weight: 600;
-        color: var(--navy); text-decoration: none;
-        transition: background 0.2s, color 0.2s; margin: 0.2rem;
-        border: 1px solid rgba(33,150,243,0.2);
-      }
-      .social-chip:hover { background: var(--blue); color: var(--white); border-color: var(--blue); }
-
-      /* ============================================================
-         CONTACT SECTION
-         ============================================================ */
-      .contact-section-bg {
-        background: linear-gradient(135deg, var(--navy) 0%, var(--navy-soft) 60%, var(--blue-dark) 100%);
-        border-top: 3px solid var(--gold);
-      }
-      .contact-section-bg h2 { color: var(--gold); }
-      .contact-section-bg .form-control {
-        background: rgba(255,255,255,0.08);
-        border: 1.5px solid rgba(255,255,255,0.2);
-        color: var(--white);
-        border-radius: 10px;
-      }
-      .contact-section-bg .form-control::placeholder { color: rgba(255,255,255,0.4); }
-      .contact-section-bg .form-control:focus {
-        background: rgba(255,255,255,0.12);
-        border-color: var(--gold);
-        box-shadow: 0 0 0 3px rgba(255,193,7,0.15);
-        color: var(--white);
-      }
-      .contact-section-bg .form-floating label { color: rgba(255,255,255,0.5); }
-      .contact-section-bg .btn-send {
-        background: var(--gold); color: var(--navy);
-        border: none; border-radius: 999px; font-weight: 700;
-        padding: 0.75rem 2.5rem; font-size: 1rem;
-        transition: background 0.25s, transform 0.25s;
-      }
-      .contact-section-bg .btn-send:hover { background: var(--blue); color: var(--white); transform: translateY(-2px); }
-
-      /* ============================================================
-         FOOTER
-         ============================================================ */
-      footer {
-        background: var(--navy) !important;
-        border-top: 2px solid var(--gold);
-      }
-      footer p { color: rgba(255,255,255,0.7); }
-      .social-icon-link {
-        background: var(--blue) !important;
-        transition: background 0.2s !important;
-      }
-      .social-icon-link:hover { background: var(--gold) !important; color: var(--navy) !important; }
-
-      /* ============================================================
-         DARK MODE TOGGLE BTN
-         ============================================================ */
-      .dark-toggle-btn {
-        background: rgba(255,255,255,0.1);
-        border: 1.5px solid rgba(255,193,7,0.4);
-        color: var(--gold);
-        width: 44px; height: 44px;
-        border-radius: 50%;
-        display: flex; align-items: center; justify-content: center;
-        transition: background 0.2s;
-      }
-      .dark-toggle-btn:hover { background: var(--gold); color: var(--navy); }
-
-      /* ============================================================
-         TEXTAREA LABEL FIX — prevent "Enter Message*" & placeholder overlap
-         ============================================================ */
-      .form-floating > textarea.form-control { padding-top: 1.875rem; }
-      .form-floating > textarea.form-control ~ label { padding-top: 0.65rem; }
-
-      /* ============================================================
-         UTILITY
-         ============================================================ */
-      .custom-bounce {
-        animation: bounce 1.4s infinite;
-      }
-      @keyframes bounce {
-        0%, 100% { transform: translateY(0); }
-        50%       { transform: translateY(6px); }
-      }
-      .cursor {
-        animation: blink 0.75s step-end infinite;
-      }
-      @keyframes blink { 50% { opacity: 0; } }
-    </style>
   </head>
-  <body>
-    
-    <!-- ==========================================================================
-         NAVIGATION HEADER
-         ========================================================================== -->
+
+  <body class="montserrat-400">
+
+    <!-- ======================================================================
+         NAVIGATION
+         ====================================================================== -->
     <header class="sticky-top">
       <nav class="navbar navbar-expand-lg py-3">
-        <div class="container-xl container-fluid">
-          <!-- DUAL-COLOR BRAND: "My" = Gold | "space" = Electric Blue -->
-          <a class="navbar-brand fw-bold fs-3" href="/">
+        <div class="container-xl">
+          <a class="navbar-brand" href="/">
             <span class="brand-my">My</span><span class="brand-space">space</span>
           </a>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
+          <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navbarMain"
+            aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <div class="collapse navbar-collapse" id="navbarMain">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <li class="nav-item mx-2"><a class="nav-link" href="#skills">Skills</a></li>
               <li class="nav-item mx-2"><a class="nav-link" href="#portfolio">Portfolio</a></li>
@@ -614,130 +44,92 @@
               <li class="nav-item mx-2"><a class="nav-link" href="#contact">Contact</a></li>
             </ul>
           </div>
-          <button
-            onclick="toggleDarkMode()"
-            class="dark-toggle-btn ms-3"
-            aria-label="Toggle Dark Mode"
-          >
+          <button onclick="toggleDarkMode()" class="dark-toggle-btn ms-3" aria-label="Toggle Dark Mode">
             <i data-lucide="sun" style="width:18px;height:18px;"></i>
           </button>
         </div>
       </nav>
     </header>
 
-    <!-- ==========================================================================
-         HERO LANDING SECTION
-         ========================================================================== -->
-    <section class="hero d-flex flex-column align-items-center justify-content-center position-relative">
-      <div class="text-center px-4">
-        <p class="text-uppercase fw-bold mb-2 fs-5 hero-tagline" style="letter-spacing: 3px;">
-          Welcome to my Portfolio
-        </p>
-        <h1 class="display-2 text-white fw-bold mb-3" style="font-weight: 800;">
-          Lawrence Otieno
-        </h1>
-        <h3 class="h2 text-light fw-normal mb-5 mx-auto" style="max-width: 850px; min-height: 48px; line-height: 1.5;">
-          <span id="typewriter-text" class="fw-bold typewriter-accent"></span><span class="cursor" style="color:var(--gold);">|</span>
+    <!-- ======================================================================
+         HERO
+         ====================================================================== -->
+    <section class="hero" id="home">
+      <div class="hero-particles"></div>
+      <div class="text-center px-4" style="position:relative;z-index:2;">
+        <p class="hero-tagline text-uppercase fw-bold mb-2 fs-5">Welcome to my Portfolio</p>
+        <h1 class="display-2 text-white fw-bold mb-3">Lawrence Otieno</h1>
+        <h3 class="h2 fw-normal mb-5 mx-auto" style="max-width:850px;min-height:48px;line-height:1.5;color:rgba(255,255,255,0.9);">
+          <span id="typewriter-text" class="fw-bold" style="color:#FFC107;"></span><span class="cursor">|</span>
         </h3>
-        <div class="mt-4">
-          <a href="#skills" class="hero-btn">
-            Explore My Expertise <i class="fas fa-arrow-down ms-2 custom-bounce"></i>
-          </a>
-        </div>
+        <a href="#skills" class="hero-cta-btn">
+          Explore My Expertise <i class="fas fa-arrow-down ms-2 bounce-icon"></i>
+        </a>
       </div>
     </section>
 
-    <!-- ==========================================================================
-         SKILLS — VIBRANT FLOATING INTERACTIVE CARDS
-         ========================================================================== -->
+    <!-- ======================================================================
+         SKILLS — dark navy section
+         ====================================================================== -->
     <section class="skills-section py-5" id="skills">
       <div class="container">
         <div class="row mt-4 py-3">
           <div class="col-12 text-center">
-            <div class="section-title-wrap">
-              <h2 class="display-2 fw-bold section-heading">SKILLS</h2>
+            <div class="section-title-wrap mx-auto">
+              <h2 class="display-2 fw-bold skills-heading">SKILLS</h2>
             </div>
-            <h5 class="section-sub fw-normal py-2 mt-3">
+            <p class="skills-sub fw-normal py-2 mt-3">
               Continuously improving my skills and knowledge in the field.
-            </h5>
+            </p>
           </div>
         </div>
-
         <div class="skills-grid mt-4">
 
-          <!-- Card 1 — Business Analyst -->
           <div class="sk-card sk-card--blue" tabindex="0">
             <div class="sk-card__glow"></div>
             <div class="sk-card__orb sk-card__orb--1"></div>
             <div class="sk-card__orb sk-card__orb--2"></div>
             <div class="sk-card__inner">
-              <div class="sk-card__icon-wrap">
-                <i class="fa-solid fa-chart-bar"></i>
-              </div>
+              <div class="sk-card__icon-wrap"><i class="fa-solid fa-chart-bar"></i></div>
               <h3 class="sk-card__title">Business Analyst</h3>
-              <p class="sk-card__text">
-                Proficient in requirements gathering, mapping, and translating data into insights using Python, R, Excel, and SQL. Skilled in dashboards and reports via Tableau and Power BI.
-              </p>
-              <div class="sk-card__tags">
-                <span>Python</span><span>SQL</span><span>Power BI</span><span>Excel</span>
-              </div>
+              <p class="sk-card__text">Proficient in requirements gathering, mapping, and translating data into insights using Python, R, Excel, and SQL. Skilled in dashboards and reports via Tableau and Power BI.</p>
+              <div class="sk-card__tags"><span>Python</span><span>SQL</span><span>Power BI</span><span>Excel</span></div>
             </div>
           </div>
 
-          <!-- Card 2 — Data Engineer -->
           <div class="sk-card sk-card--teal" tabindex="0">
             <div class="sk-card__glow"></div>
             <div class="sk-card__orb sk-card__orb--1"></div>
             <div class="sk-card__orb sk-card__orb--2"></div>
             <div class="sk-card__inner">
-              <div class="sk-card__icon-wrap">
-                <i class="fa-solid fa-chart-line"></i>
-              </div>
+              <div class="sk-card__icon-wrap"><i class="fa-solid fa-chart-line"></i></div>
               <h3 class="sk-card__title">Data Engineer</h3>
-              <p class="sk-card__text">
-                Experience building data pipelines, modeling, and moving data using Python, SQL, Cloud platforms, and Spark for scalable, reliable data workflows.
-              </p>
-              <div class="sk-card__tags">
-                <span>Spark</span><span>Cloud</span><span>Pipelines</span><span>SQL</span>
-              </div>
+              <p class="sk-card__text">Experience building data pipelines, modeling, and moving data using Python, SQL, Cloud platforms, and Spark for scalable, reliable data workflows.</p>
+              <div class="sk-card__tags"><span>Spark</span><span>Cloud</span><span>Pipelines</span><span>SQL</span></div>
             </div>
           </div>
 
-          <!-- Card 3 — Automation -->
           <div class="sk-card sk-card--orange" tabindex="0">
             <div class="sk-card__glow"></div>
             <div class="sk-card__orb sk-card__orb--1"></div>
             <div class="sk-card__orb sk-card__orb--2"></div>
             <div class="sk-card__inner">
-              <div class="sk-card__icon-wrap">
-                <i class="fa-solid fa-gears"></i>
-              </div>
+              <div class="sk-card__icon-wrap"><i class="fa-solid fa-gears"></i></div>
               <h3 class="sk-card__title">Automation &amp; Integration</h3>
-              <p class="sk-card__text">
-                Skilled in building workflows, connecting systems, and automating tasks using Python, Bash, Airflow, and APIs to eliminate repetitive operations.
-              </p>
-              <div class="sk-card__tags">
-                <span>Airflow</span><span>Bash</span><span>APIs</span><span>Python</span>
-              </div>
+              <p class="sk-card__text">Skilled in building workflows, connecting systems, and automating tasks using Python, Bash, Airflow, and APIs to eliminate repetitive operations.</p>
+              <div class="sk-card__tags"><span>Airflow</span><span>Bash</span><span>APIs</span><span>Python</span></div>
             </div>
           </div>
 
-          <!-- Card 4 — Documentation -->
           <div class="sk-card sk-card--purple" tabindex="0">
             <div class="sk-card__glow"></div>
             <div class="sk-card__orb sk-card__orb--1"></div>
             <div class="sk-card__orb sk-card__orb--2"></div>
             <div class="sk-card__inner">
-              <div class="sk-card__icon-wrap">
-                <i class="fa-solid fa-file-lines"></i>
-              </div>
+              <div class="sk-card__icon-wrap"><i class="fa-solid fa-file-lines"></i></div>
               <h3 class="sk-card__title">Documentation</h3>
-              <p class="sk-card__text">
-                Creating technical and business documentation, mapping processes, and writing user guides using Confluence, Markdown, and Jira for full reproducibility.
-              </p>
-              <div class="sk-card__tags">
-                <span>Confluence</span><span>Jira</span><span>Markdown</span>
-              </div>
+              <p class="sk-card__text">Creating technical and business documentation, mapping processes, and writing user guides using Confluence, Markdown, and Jira for full reproducibility.</p>
+              <div class="sk-card__tags"><span>Confluence</span><span>Jira</span><span>Markdown</span></div>
             </div>
           </div>
 
@@ -745,87 +137,78 @@
       </div>
     </section>
 
-    <!-- ==========================================================================
-         PORTFOLIO — NATIVE SCROLL-SNAP CAROUSEL
-         ========================================================================== -->
-    <section class="container py-5" id="portfolio">
-      <div class="row mt-4 py-3">
-        <div class="col-12 d-flex flex-column text-center justify-content-center">
-          <div class="section-title-wrap mx-auto">
-            <h2 class="display-2 section-heading">PORTFOLIO</h2>
-          </div>
-          <h5 class="section-sub fw-normal py-2 mt-3">
-            A collection of projects I've worked on.
-          </h5>
-        </div>
-      </div>
-
-      <div class="position-relative mt-4">
-        <button class="portfolio-arrow-prev" id="portfolioPrev" aria-label="Previous project">
-          <i class="bi bi-chevron-left fs-5"></i>
-        </button>
-
-        <div class="portfolio-scroll-track" id="portfolioTrack">
-          {% for project in projects %}
-          <div class="portfolio-slide">
-            <div class="portfolio-card">
-              <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none d-block">
-                <div class="card-img-wrapper">
-                  <img
-                    src="{{ url_for('static', filename=project.image) }}"
-                    alt="{{ project.name }}"
-                    loading="lazy"
-                  />
-                  <div class="card-hover-overlay">
-                    <span class="btn btn-light rounded-pill px-4 fw-medium shadow">
-                      View Project <i class="fas fa-external-link-alt ms-1"></i>
-                    </span>
-                  </div>
-                </div>
-                <div class="card-body p-3 text-center">
-                  <h4 class="h5 mb-2">{{ project.name }}</h4>
-                  <div class="d-flex flex-wrap justify-content-center gap-1">
-                    {% for tag in project.tags %}
-                    <span class="badge px-2 py-1" style="background:var(--navy);color:var(--gold);">{{ tag }}</span>
-                    {% endfor %}
-                  </div>
-                </div>
-              </a>
+    <!-- ======================================================================
+         PORTFOLIO
+         ====================================================================== -->
+    <section class="portfolio-section py-5" id="portfolio">
+      <div class="container">
+        <div class="row mt-4 py-3">
+          <div class="col-12 text-center">
+            <div class="section-title-wrap mx-auto">
+              <h2 class="display-2 fw-bold portfolio-heading">PORTFOLIO</h2>
             </div>
+            <p class="portfolio-sub fw-normal py-2 mt-3">A collection of projects I've worked on.</p>
           </div>
+        </div>
+
+        <div class="position-relative mt-4">
+          <button class="portfolio-arrow-prev" id="portfolioPrev" aria-label="Previous project">
+            <i class="bi bi-chevron-left fs-5"></i>
+          </button>
+          <div class="portfolio-scroll-track" id="portfolioTrack">
+            {% for project in projects %}
+            <div class="portfolio-slide">
+              <div class="portfolio-card">
+                <a href="{{ project.link }}" target="_blank" rel="noopener noreferrer" class="text-decoration-none d-block">
+                  <div class="card-img-wrapper">
+                    <img src="{{ url_for('static', filename=project.image) }}" alt="{{ project.name }}" loading="lazy"/>
+                    <div class="card-hover-overlay">
+                      <span class="btn btn-light rounded-pill px-4 fw-medium shadow">
+                        View Project <i class="fas fa-external-link-alt ms-1"></i>
+                      </span>
+                    </div>
+                  </div>
+                  <div class="card-body p-3 text-center">
+                    <h4 class="h5 mb-2 portfolio-card-title">{{ project.name }}</h4>
+                    <div class="d-flex flex-wrap justify-content-center gap-1">
+                      {% for tag in project.tags %}
+                      <span class="portfolio-tag">{{ tag }}</span>
+                      {% endfor %}
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+          <button class="portfolio-arrow-next" id="portfolioNext" aria-label="Next project">
+            <i class="bi bi-chevron-right fs-5"></i>
+          </button>
+        </div>
+        <div class="scroll-dots mt-3" id="portfolioDots">
+          {% for project in projects %}
+          <button class="scroll-dot {% if loop.first %}active{% endif %}" data-index="{{ loop.index0 }}" aria-label="Slide {{ loop.index }}"></button>
           {% endfor %}
         </div>
-
-        <button class="portfolio-arrow-next" id="portfolioNext" aria-label="Next project">
-          <i class="bi bi-chevron-right fs-5"></i>
-        </button>
-      </div>
-
-      <div class="scroll-dots mt-3" id="portfolioDots">
-        {% for project in projects %}
-        <button class="scroll-dot {% if loop.first %}active{% endif %}" data-index="{{ loop.index0 }}" aria-label="Slide {{ loop.index }}"></button>
-        {% endfor %}
       </div>
     </section>
 
-    <!-- ==========================================================================
-         ABOUT — MOBILE-FIRST TIMELINE
-         ========================================================================== -->
-    <section id="about" class="py-5 overflow-hidden position-relative">
+    <!-- ======================================================================
+         ABOUT — dark navy background
+         ====================================================================== -->
+    <section id="about" class="about-section py-5 overflow-hidden">
       <div class="container py-4">
-
         <div class="text-center mb-5">
-          <div class="section-title-wrap mx-auto" style="--after-bg: var(--gold);">
-            <h1 class="display-4 fw-bold" style="color:var(--white);">ABOUT</h1>
+          <div class="section-title-wrap mx-auto">
+            <h2 class="display-4 fw-bold about-heading">ABOUT</h2>
           </div>
-          <p class="mx-auto mt-3" style="max-width:600px; color: var(--blue-light);">
+          <p class="about-sub mx-auto mt-3" style="max-width:600px;">
             Learn more about me, my background, and what motivates me based on my career roadmap.
           </p>
         </div>
 
         <div class="about-timeline">
 
-          <!-- 1. Foundations -->
           <div class="tl-row">
             <div class="tl-card-col order-2 order-md-1">
               <div class="tl-card">
@@ -835,18 +218,13 @@
               </div>
             </div>
             <div class="tl-img-col order-1 order-md-2">
-              <div class="tl-img-circle">
-                <img src="/static/images/about-img-1.jpg" alt="Foundations" />
-              </div>
+              <div class="tl-img-circle"><img src="/static/images/about-img-1.jpg" alt="Foundations"/></div>
             </div>
           </div>
 
-          <!-- 2. Core Expertise -->
           <div class="tl-row reverse">
             <div class="tl-img-col">
-              <div class="tl-img-circle">
-                <img src="/static/images/about-img-2.jpg" alt="Core Infrastructure" />
-              </div>
+              <div class="tl-img-circle"><img src="/static/images/about-img-2.jpg" alt="Core Infrastructure"/></div>
             </div>
             <div class="tl-card-col">
               <div class="tl-card">
@@ -857,7 +235,6 @@
             </div>
           </div>
 
-          <!-- 3. Evolution -->
           <div class="tl-row">
             <div class="tl-card-col order-2 order-md-1">
               <div class="tl-card">
@@ -867,18 +244,13 @@
               </div>
             </div>
             <div class="tl-img-col order-1 order-md-2">
-              <div class="tl-img-circle">
-                <img src="/static/images/about-img-3.jpg" alt="Data Analytics" />
-              </div>
+              <div class="tl-img-circle"><img src="/static/images/about-img-3.jpg" alt="Data Analytics"/></div>
             </div>
           </div>
 
-          <!-- 4. Vision -->
           <div class="tl-row reverse">
             <div class="tl-img-col">
-              <div class="tl-img-circle">
-                <img src="/static/images/about-img-4.jpg" alt="Vision" />
-              </div>
+              <div class="tl-img-circle"><img src="/static/images/about-img-4.jpg" alt="Vision"/></div>
             </div>
             <div class="tl-card-col">
               <div class="tl-card">
@@ -889,13 +261,10 @@
             </div>
           </div>
 
-          <!-- Hire CTA -->
           <div class="text-center pt-2 pb-3">
             <div class="d-flex flex-column align-items-center gap-2">
-              <i class="bi bi-chevron-down fs-4 custom-bounce" style="color:var(--gold);"></i>
-              <a href="#contact" class="hire-node">
-                Your<br>Next<br>Hire
-              </a>
+              <i class="bi bi-chevron-down fs-4 bounce-icon" style="color:#FFC107;"></i>
+              <a href="#contact" class="hire-node">Your<br>Next<br>Hire</a>
             </div>
           </div>
 
@@ -903,72 +272,59 @@
       </div>
     </section>
 
-    <!-- ==========================================================================
-         CV — MODERN INTERACTIVE TABBED SECTION
-         ========================================================================== -->
-    <section class="py-5 cv-section" id="cv">
+    <!-- ======================================================================
+         CV — light off-white section
+         ====================================================================== -->
+    <section class="cv-section py-5" id="cv">
       <div class="container py-4">
 
         <div class="text-center mb-4">
           <div class="section-title-wrap mx-auto">
-            <h2 class="display-2 section-heading">CURRICULUM VITAE</h2>
+            <h2 class="display-2 fw-bold cv-heading">CURRICULUM VITAE</h2>
           </div>
-          <p class="section-sub fw-normal mt-3">
+          <p class="cv-sub fw-normal mt-3">
             A snapshot of my growth as an IT Operations Specialist, ICT Officer, and Data Analyst.
           </p>
         </div>
 
-        <!-- Tab Navigation -->
         <div class="cv-tabs" role="tablist">
-          <button class="cv-tab-btn active" data-tab="profile" role="tab">
-            <i class="bi bi-person-fill"></i> Profile
-          </button>
-          <button class="cv-tab-btn" data-tab="experience" role="tab">
-            <i class="bi bi-briefcase-fill"></i> Experience
-          </button>
-          <button class="cv-tab-btn" data-tab="education" role="tab">
-            <i class="bi bi-mortarboard-fill"></i> Education
-          </button>
-          <button class="cv-tab-btn" data-tab="skills" role="tab">
-            <i class="bi bi-bar-chart-fill"></i> Skills
-          </button>
+          <button class="cv-tab-btn active" data-tab="profile" role="tab"><i class="bi bi-person-fill"></i> Profile</button>
+          <button class="cv-tab-btn" data-tab="experience" role="tab"><i class="bi bi-briefcase-fill"></i> Experience</button>
+          <button class="cv-tab-btn" data-tab="education" role="tab"><i class="bi bi-mortarboard-fill"></i> Education</button>
+          <button class="cv-tab-btn" data-tab="skills" role="tab"><i class="bi bi-bar-chart-fill"></i> Skills</button>
         </div>
 
-        <!-- ── PROFILE TAB ── -->
+        <!-- PROFILE TAB -->
         <div class="cv-panel active" id="cv-profile">
           <div class="cv-profile-card">
             <div class="d-flex flex-column flex-md-row align-items-center align-items-md-start gap-4">
               <div class="text-center flex-shrink-0">
-                <img
-                  class="cv-avatar"
-                  src="{{ url_for('static', filename='images/Lawrence - img.jpeg') }}"
-                  alt="Lawrence Otieno"
-                />
+                <img class="cv-avatar" src="{{ url_for('static', filename='images/Lawrence - img.jpeg') }}" alt="Lawrence Otieno"/>
                 <div class="mt-3">
                   <a href="https://x.com/Otieno360" class="social-chip" target="_blank"><i class="bi bi-twitter-x"></i> Twitter</a>
                   <a href="https://www.facebook.com/lawrence.otieno.5458/" class="social-chip" target="_blank"><i class="bi bi-facebook"></i> Facebook</a>
                   <a href="https://www.linkedin.com/in/lawrence-otieno-5b6b6212a" class="social-chip" target="_blank"><i class="bi bi-linkedin"></i> LinkedIn</a>
                 </div>
                 <div class="mt-3">
-                  <!-- FUNCTIONAL CV DOWNLOAD — generates PDF via JS -->
-                  <button class="cv-download-btn" id="cvDownloadBtn" onclick="downloadCV()">
-                    <i class="bi bi-download"></i> Download CV
-                  </button>
+                  <!-- ASK FOR CV — scrolls to contact section -->
+                  <a href="#contact" class="cv-contact-btn">
+                    <i class="bi bi-envelope-fill"></i> Ask for CV
+                  </a>
                 </div>
               </div>
               <div class="flex-grow-1">
-                <h2 class="fw-bold mb-0" style="color:var(--navy);">Lawrence Otieno</h2>
-                <p class="fw-semibold mb-3" style="color:var(--blue);">Business Analyst · Data Engineer · Automation &amp; Integration</p>
+                <h2 class="fw-bold mb-0 cv-name">Lawrence Otieno</h2>
+                <p class="fw-semibold mb-3 cv-title">Business Analyst · Data Engineer · Automation &amp; Integration</p>
                 <div class="d-flex flex-wrap gap-2 mb-3">
                   <span class="cv-badge-pill"><i class="bi bi-envelope me-1"></i>lawrenceit38@gmail.com</span>
                   <span class="cv-badge-pill"><i class="bi bi-telephone me-1"></i>(254) 711 720 717</span>
                   <span class="cv-badge-pill"><i class="bi bi-geo-alt me-1"></i>Nairobi, Kenya</span>
                 </div>
-                <p class="text-secondary" style="line-height: 1.75;">
-                  Results-driven Business Process Analyst and IT Operations Professional with over 4 years of experience driving process improvement, digital transformation, systems integration, and stakeholder engagement across business and technology functions. Skilled in requirements elicitation, process mapping, workflow analysis, business process reengineering, and translating operational needs into actionable technical solutions. Experienced working with ERP, CRM, SaaS, and analytics platforms while supporting cross-functional teams through requirements gathering, workshop facilitation, process documentation, reporting, and change initiatives. Adept at collaborating with Finance, Operations, and Technology teams to improve operational efficiency, data visibility, and business outcomes.
+                <p class="cv-bio">
+                  Results-driven Business Process Analyst and IT Operations Professional with over 4 years of experience driving process improvement, digital transformation, systems integration, and stakeholder engagement across business and technology functions. Skilled in requirements elicitation, process mapping, workflow analysis, business process reengineering, and translating operational needs into actionable technical solutions. Experienced working with ERP, CRM, SaaS, and analytics platforms while supporting cross-functional teams through requirements gathering, workshop facilitation, process documentation, reporting, and change initiatives.
                 </p>
                 <div>
-                  <p class="fw-semibold mb-2 small text-uppercase" style="letter-spacing: 1px; color:var(--muted);">Highlights</p>
+                  <p class="cv-label-sm">Highlights</p>
                   <span class="cv-badge-pill">Business Analysis</span>
                   <span class="cv-badge-pill">Data Engineering</span>
                   <span class="cv-badge-pill">Data Reporting</span>
@@ -976,7 +332,7 @@
                   <span class="cv-badge-pill">IT Operations</span>
                 </div>
                 <div class="mt-3">
-                  <p class="fw-semibold mb-2 small text-uppercase" style="letter-spacing: 1px; color:var(--muted);">Interests</p>
+                  <p class="cv-label-sm">Interests</p>
                   <span class="cv-badge-pill">📚 Science Fiction</span>
                   <span class="cv-badge-pill">✈️ Travel &amp; Adventure</span>
                   <span class="cv-badge-pill">💻 Open Source</span>
@@ -988,157 +344,103 @@
           </div>
         </div>
 
-        <!-- ── EXPERIENCE TAB ── -->
+        <!-- EXPERIENCE TAB -->
         <div class="cv-panel" id="cv-experience">
           <div class="exp-timeline">
-
             <div class="exp-item">
               <div class="exp-date"><i class="bi bi-calendar3 me-1"></i> Feb 2024 — Present</div>
               <div class="exp-role">Business Analyst</div>
               <div class="exp-company">AESOPS Kenya</div>
-              <p class="text-secondary small mt-2 mb-0">
-                Requirements gathering, process mapping, data analysis, and stakeholder reporting. Translating business needs into data-driven solutions using Python, SQL, Power BI, and Excel.
-              </p>
+              <p class="exp-desc">Requirements gathering, process mapping, data analysis, and stakeholder reporting. Translating business needs into data-driven solutions using Python, SQL, Power BI, and Excel.</p>
             </div>
-
             <div class="exp-item">
               <div class="exp-date"><i class="bi bi-calendar3 me-1"></i> Dec 2021 — Feb 2024</div>
               <div class="exp-role">Tech Support — ICT Officer</div>
               <div class="exp-company">AESOPS Kenya</div>
-              <p class="text-secondary small mt-2 mb-0">
-                End-to-end ICT support, network administration, and system deployment. Managed IT infrastructure, performed troubleshooting, and coordinated service desk operations.
-              </p>
+              <p class="exp-desc">End-to-end ICT support, network administration, and system deployment. Managed IT infrastructure, performed troubleshooting, and coordinated service desk operations.</p>
             </div>
-
             <div class="exp-item">
               <div class="exp-date"><i class="bi bi-calendar3 me-1"></i> May 2020 — Aug 2021</div>
               <div class="exp-role">ICT Officer</div>
               <div class="exp-company">Kwick Credit Limited</div>
-              <p class="text-secondary small mt-2 mb-0">
-                Managed IT service desk using ServiceNow and Jira. Handled hardware/software support, network security, and process documentation.
-              </p>
+              <p class="exp-desc">Managed IT service desk using ServiceNow and Jira. Handled hardware/software support, network security, and process documentation.</p>
             </div>
-
-            <div class="exp-item" style="border-left-color: var(--gold);">
-              <div class="exp-date" style="color:var(--gold-dim);"><i class="bi bi-calendar3 me-1"></i> Apr 2019 — Jun 2019</div>
+            <div class="exp-item exp-item--gold">
+              <div class="exp-date exp-date--gold"><i class="bi bi-calendar3 me-1"></i> Apr 2019 — Jun 2019</div>
               <div class="exp-role">ICT Help Desk Support — Internship</div>
               <div class="exp-company">Kenya Power and Lighting Company (KPLC)</div>
-              <p class="text-secondary small mt-2 mb-0">
-                First-line technical support and incident resolution. Gained hands-on experience with enterprise IT systems in a high-volume environment.
-              </p>
+              <p class="exp-desc">First-line technical support and incident resolution. Gained hands-on experience with enterprise IT systems in a high-volume environment.</p>
             </div>
-
           </div>
         </div>
 
-        <!-- ── EDUCATION TAB ── -->
+        <!-- EDUCATION TAB -->
         <div class="cv-panel" id="cv-education">
           <div class="row g-3">
-
             <div class="col-md-6">
               <div class="edu-card h-100">
                 <div class="d-flex align-items-start gap-3">
-                  <i class="bi bi-mortarboard-fill fs-2 flex-shrink-0" style="color:var(--gold);"></i>
+                  <i class="bi bi-mortarboard-fill edu-icon flex-shrink-0"></i>
                   <div>
-                    <p class="text-muted small mb-1">2015 – 2019</p>
-                    <h5 class="fw-bold mb-1" style="color:var(--navy);">Bachelor of Business Information Technology</h5>
-                    <p class="text-secondary small mb-0">Taita Taveta University</p>
+                    <p class="edu-year">2015 – 2019</p>
+                    <h5 class="edu-title">Bachelor of Business Information Technology</h5>
+                    <p class="edu-inst">Taita Taveta University</p>
                   </div>
                 </div>
               </div>
             </div>
-
             <div class="col-md-6">
               <div class="edu-card h-100">
                 <div class="d-flex align-items-start gap-3">
-                  <i class="bi bi-award-fill fs-2 flex-shrink-0" style="color:var(--gold);"></i>
+                  <i class="bi bi-award-fill edu-icon flex-shrink-0"></i>
                   <div>
-                    <p class="text-muted small mb-1">Certification</p>
-                    <h5 class="fw-bold mb-1" style="color:var(--navy);">CCNA — Cisco Certified Network Associate</h5>
-                    <p class="text-secondary small mb-0">Networking foundations and configuration</p>
+                    <p class="edu-year">Certification</p>
+                    <h5 class="edu-title">CCNA — Cisco Certified Network Associate</h5>
+                    <p class="edu-inst">Networking foundations and configuration</p>
                   </div>
                 </div>
               </div>
             </div>
-
             <div class="col-md-6">
               <div class="edu-card h-100">
                 <div class="d-flex align-items-start gap-3">
-                  <i class="bi bi-book-fill fs-2 flex-shrink-0" style="color:var(--gold);"></i>
+                  <i class="bi bi-book-fill edu-icon flex-shrink-0"></i>
                   <div>
-                    <p class="text-muted small mb-1">2017</p>
-                    <h5 class="fw-bold mb-1" style="color:var(--navy);">Information Systems Management</h5>
-                    <p class="text-secondary small mb-0">Taita Taveta University</p>
+                    <p class="edu-year">2017</p>
+                    <h5 class="edu-title">Information Systems Management</h5>
+                    <p class="edu-inst">Taita Taveta University</p>
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
 
-        <!-- ── SKILLS TAB ── -->
+        <!-- SKILLS TAB -->
         <div class="cv-panel" id="cv-skills">
           <div class="row g-3">
             <div class="col-md-6">
               <div class="skill-bar-wrapper">
-                <p class="fw-semibold mb-1 small text-uppercase" style="letter-spacing:1px; color:var(--navy);">Technical Skills</p>
+                <p class="skill-group-label">Technical Skills</p>
                 <hr class="mt-1 mb-3">
-                <div class="mb-3">
-                  <div class="skill-bar-label"><span>Python</span><span>85%</span></div>
-                  <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
-                </div>
-                <div class="mb-3">
-                  <div class="skill-bar-label"><span>SQL</span><span>80%</span></div>
-                  <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
-                </div>
-                <div class="mb-3">
-                  <div class="skill-bar-label"><span>Excel / Power BI</span><span>90%</span></div>
-                  <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
-                </div>
-                <div class="mb-3">
-                  <div class="skill-bar-label"><span>ServiceNow / Jira</span><span>88%</span></div>
-                  <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div>
-                </div>
-                <div class="mb-3">
-                  <div class="skill-bar-label"><span>Ansible / VMware</span><span>70%</span></div>
-                  <div class="skill-bar-track"><div class="skill-bar-fill" data-width="70"></div></div>
-                </div>
-                <div class="mb-0">
-                  <div class="skill-bar-label"><span>GitHub</span><span>78%</span></div>
-                  <div class="skill-bar-track"><div class="skill-bar-fill" data-width="78"></div></div>
-                </div>
+                <div class="mb-3"><div class="skill-bar-label"><span>Python</span><span>85%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div></div>
+                <div class="mb-3"><div class="skill-bar-label"><span>SQL</span><span>80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div></div>
+                <div class="mb-3"><div class="skill-bar-label"><span>Excel / Power BI</span><span>90%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div></div>
+                <div class="mb-3"><div class="skill-bar-label"><span>ServiceNow / Jira</span><span>88%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div></div>
+                <div class="mb-3"><div class="skill-bar-label"><span>Ansible / VMware</span><span>70%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="70"></div></div></div>
+                <div class="mb-0"><div class="skill-bar-label"><span>GitHub</span><span>78%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="78"></div></div></div>
               </div>
             </div>
-
             <div class="col-md-6">
               <div class="skill-bar-wrapper">
-                <p class="fw-semibold mb-1 small text-uppercase" style="letter-spacing:1px; color:var(--navy);">Competencies</p>
+                <p class="skill-group-label">Competencies</p>
                 <hr class="mt-1 mb-3">
-                <div class="mb-3">
-                  <div class="skill-bar-label"><span>Process Optimisation</span><span>87%</span></div>
-                  <div class="skill-bar-track"><div class="skill-bar-fill" data-width="87"></div></div>
-                </div>
-                <div class="mb-3">
-                  <div class="skill-bar-label"><span>Data Reporting</span><span>85%</span></div>
-                  <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
-                </div>
-                <div class="mb-3">
-                  <div class="skill-bar-label"><span>Technical Documentation</span><span>92%</span></div>
-                  <div class="skill-bar-track"><div class="skill-bar-fill" data-width="92"></div></div>
-                </div>
-                <div class="mb-3">
-                  <div class="skill-bar-label"><span>System Administration</span><span>80%</span></div>
-                  <div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div>
-                </div>
-                <div class="mb-3">
-                  <div class="skill-bar-label"><span>Network &amp; Security</span><span>75%</span></div>
-                  <div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div>
-                </div>
-                <div class="mb-0">
-                  <div class="skill-bar-label"><span>Requirements Analysis</span><span>83%</span></div>
-                  <div class="skill-bar-track"><div class="skill-bar-fill" data-width="83"></div></div>
-                </div>
+                <div class="mb-3"><div class="skill-bar-label"><span>Process Optimisation</span><span>87%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="87"></div></div></div>
+                <div class="mb-3"><div class="skill-bar-label"><span>Data Reporting</span><span>85%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div></div>
+                <div class="mb-3"><div class="skill-bar-label"><span>Technical Documentation</span><span>92%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="92"></div></div></div>
+                <div class="mb-3"><div class="skill-bar-label"><span>System Administration</span><span>80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div></div>
+                <div class="mb-3"><div class="skill-bar-label"><span>Network &amp; Security</span><span>75%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div></div>
+                <div class="mb-0"><div class="skill-bar-label"><span>Requirements Analysis</span><span>83%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="83"></div></div></div>
               </div>
             </div>
           </div>
@@ -1147,51 +449,45 @@
       </div>
     </section>
 
-    <!-- ==========================================================================
-         CONTACT FORM
-         ========================================================================== -->
-    <section class="py-5 contact-section-bg" id="contact">
+    <!-- ======================================================================
+         CONTACT
+         ====================================================================== -->
+    <section class="contact-section py-5" id="contact">
       <div class="container-xxl py-5">
-        <div class="col-12 d-flex flex-column text-center justify-content-center">
-          <h2 class="display-2">CONTACT ME</h2>
-          <p class="text-white fw-normal py-2">
+        <div class="col-12 text-center mb-4">
+          <div class="section-title-wrap mx-auto">
+            <h2 class="display-2 fw-bold contact-heading">CONTACT ME</h2>
+          </div>
+          <p class="contact-sub fw-normal py-2 mt-2">
             Interested if I'd be the right fit for your team? Fill in this form and I will respond within 24–48 hours.
           </p>
         </div>
-        <div class="row pt-4 mt-5">
+        <div class="row pt-4">
           <div class="col-12">
             <form action="/" method="POST">
               <div class="row d-flex justify-content-center">
                 <div class="col-lg-6">
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="name" id="floatingInput" placeholder="Enter Name*" required />
+                    <input type="text" class="form-control" name="name" id="floatingInput" placeholder="Enter Name*" required/>
                     <label for="floatingInput">Enter Name*</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input type="email" class="form-control" name="email" id="floatingEmail" placeholder="Enter Email*" required />
+                    <input type="email" class="form-control" name="email" id="floatingEmail" placeholder="Enter Email*" required/>
                     <label for="floatingEmail">Enter Email*</label>
                   </div>
                   <div class="form-floating mb-3">
-                    <input type="text" class="form-control" name="phone" id="floatingPhone" placeholder="Enter Phone*" required />
+                    <input type="text" class="form-control" name="phone" id="floatingPhone" placeholder="Enter Phone*" required/>
                     <label for="floatingPhone">Enter Phone*</label>
                   </div>
                 </div>
-                <!-- FIX 1: Textarea label no longer overlaps placeholder text -->
                 <div class="col-lg-6">
-                  <div class="form-floating mb-3" style="height:205px;">
-                    <textarea
-                      class="form-control"
-                      name="message"
-                      placeholder="Leave a comment here"
-                      id="floatingMessage"
-                      style="height:205px; resize:none;"
-                      required
-                    ></textarea>
+                  <div class="form-floating" style="height:205px;">
+                    <textarea class="form-control" name="message" placeholder="Leave a comment here" id="floatingMessage" style="height:205px;resize:none;" required></textarea>
                     <label for="floatingMessage">Enter Message*</label>
                   </div>
                 </div>
                 <div class="col-12 mt-5 d-flex justify-content-center">
-                  <button class="btn-send btn btn-lg" type="submit">SEND MESSAGE</button>
+                  <button class="contact-send-btn" type="submit">SEND MESSAGE</button>
                 </div>
               </div>
             </form>
@@ -1200,334 +496,113 @@
       </div>
     </section>
 
-    <!-- ==========================================================================
+    <!-- ======================================================================
          FOOTER
-         ========================================================================== -->
+         ====================================================================== -->
     <footer class="py-4">
-      <div class="container-xxl flex-wrap d-flex align-items-center justify-content-between">
-        <p class="mb-0" style="color:rgba(255,255,255,0.7);">Copyright &copy; 2026 Lawrence Otieno</p>
-        <ul class="social-icons d-flex list-unstyled mb-0">
-          <li><a href="https://x.com/Otieno360" class="social-icon-link mx-2 text-white d-flex align-items-center justify-content-center text-decoration-none rounded-circle" style="width:30px;height:30px;"><small><i class="fa-brands fa-twitter"></i></small></a></li>
-          <li><a href="https://www.facebook.com/lawrence.otieno.5458/" class="social-icon-link mx-2 text-white d-flex align-items-center justify-content-center text-decoration-none rounded-circle" style="width:30px;height:30px;"><small><i class="fa-brands fa-facebook-f"></i></small></a></li>
-          <li><a href="https://www.linkedin.com/in/lawrence-otieno-5b6b6212a" class="social-icon-link mx-2 text-white d-flex align-items-center justify-content-center text-decoration-none rounded-circle" style="width:30px;height:30px;"><small><i class="fa-brands fa-linkedin-in"></i></small></a></li>
+      <div class="container-xxl d-flex flex-wrap align-items-center justify-content-between">
+        <p class="mb-0 footer-copy">Copyright &copy; 2026 Lawrence Otieno</p>
+        <ul class="d-flex list-unstyled mb-0 gap-2">
+          <li><a href="https://x.com/Otieno360" class="footer-social-link" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a></li>
+          <li><a href="https://www.facebook.com/lawrence.otieno.5458/" class="footer-social-link" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a></li>
+          <li><a href="https://www.linkedin.com/in/lawrence-otieno-5b6b6212a" class="footer-social-link" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a></li>
         </ul>
       </div>
     </footer>
 
-    <!-- Bootstrap Bundle JS -->
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-      crossorigin="anonymous"
-    ></script>
-
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@0.294.0/dist/umd/lucide.js"></script>
     <script>lucide.createIcons();</script>
-
     <!-- Dark Mode -->
     <script src="{{ url_for('static', filename='javascript/darkmode.js') }}"></script>
 
     <!-- Typewriter -->
     <script>
       const words = ["Business Analyst", "Data Engineer", "Automation & Integration"];
-      let i = 0;
-
+      let wi = 0;
       function typingEffect() {
-        let word = words[i].split("");
-        (function loopTyping() {
-          if (word.length > 0) {
-            document.getElementById('typewriter-text').innerHTML += word.shift();
-          } else {
-            setTimeout(deletingEffect, 2000); return;
-          }
-          setTimeout(loopTyping, 100);
+        let word = words[wi].split("");
+        (function loop() {
+          if (word.length > 0) { document.getElementById('typewriter-text').innerHTML += word.shift(); }
+          else { setTimeout(deletingEffect, 2000); return; }
+          setTimeout(loop, 100);
         })();
       }
-
       function deletingEffect() {
-        let word = words[i].split("");
-        (function loopDeleting() {
-          if (word.length > 0) {
-            word.pop();
-            document.getElementById('typewriter-text').innerHTML = word.join("");
-          } else {
-            i = (i + 1) < words.length ? i + 1 : 0;
-            setTimeout(typingEffect, 500); return;
-          }
-          setTimeout(loopDeleting, 50);
+        let word = words[wi].split("");
+        (function loop() {
+          if (word.length > 0) { word.pop(); document.getElementById('typewriter-text').innerHTML = word.join(""); }
+          else { wi = (wi + 1) < words.length ? wi + 1 : 0; setTimeout(typingEffect, 500); return; }
+          setTimeout(loop, 50);
         })();
       }
-
       document.addEventListener("DOMContentLoaded", typingEffect);
     </script>
 
-    <!-- Skills Cards: 3D tilt on mouse move (desktop only) -->
+    <!-- Skills 3D tilt -->
     <script>
       document.querySelectorAll('.sk-card').forEach(card => {
-        card.addEventListener('mousemove', function (e) {
-          const rect = this.getBoundingClientRect();
-          const x = e.clientX - rect.left - rect.width  / 2;
-          const y = e.clientY - rect.top  - rect.height / 2;
-          const rotX =  (y / rect.height) * -12;
-          const rotY =  (x / rect.width)  *  12;
-          this.style.transform = `translateY(-16px) scale(1.03) rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-          this.style.transition = 'transform 0.05s linear, box-shadow 0.35s ease';
+        card.addEventListener('mousemove', function(e) {
+          const r = this.getBoundingClientRect();
+          const x = e.clientX - r.left - r.width / 2;
+          const y = e.clientY - r.top - r.height / 2;
+          this.style.transform = `translateY(-16px) scale(1.03) rotateX(${(y/r.height)*-12}deg) rotateY(${(x/r.width)*12}deg)`;
+          this.style.transition = 'transform 0.05s linear';
         });
-        card.addEventListener('mouseleave', function () {
+        card.addEventListener('mouseleave', function() {
           this.style.transform = '';
-          this.style.transition = 'transform 0.5s cubic-bezier(0.175,0.885,0.32,1.275), box-shadow 0.35s ease';
+          this.style.transition = 'transform 0.5s cubic-bezier(0.175,0.885,0.32,1.275)';
         });
       });
     </script>
 
-    <!-- Portfolio Scroll-Snap Controller -->
+    <!-- Portfolio scroll controller -->
     <script>
-      (function () {
-        const track  = document.getElementById('portfolioTrack');
-        const dots   = document.querySelectorAll('.scroll-dot');
-        const slides = document.querySelectorAll('.portfolio-slide');
-        const prev   = document.getElementById('portfolioPrev');
-        const next   = document.getElementById('portfolioNext');
-
+      (function() {
+        const track = document.getElementById('portfolioTrack');
+        const dots  = document.querySelectorAll('.scroll-dot');
+        const slides= document.querySelectorAll('.portfolio-slide');
+        const prev  = document.getElementById('portfolioPrev');
+        const next  = document.getElementById('portfolioNext');
         if (!track || !slides.length) return;
-
-        function getActiveIndex() {
-          const trackRect = track.getBoundingClientRect();
-          let best = 0, bestOverlap = -Infinity;
-          slides.forEach((slide, idx) => {
-            const r = slide.getBoundingClientRect();
-            const overlap = Math.min(r.right, trackRect.right) - Math.max(r.left, trackRect.left);
-            if (overlap > bestOverlap) { bestOverlap = overlap; best = idx; }
-          });
+        function activeIdx() {
+          const tr = track.getBoundingClientRect(); let best=0, bestO=-Infinity;
+          slides.forEach((s,i) => { const r=s.getBoundingClientRect(); const o=Math.min(r.right,tr.right)-Math.max(r.left,tr.left); if(o>bestO){bestO=o;best=i;} });
           return best;
         }
-
-        function updateDots() {
-          const active = getActiveIndex();
-          dots.forEach((d, i) => d.classList.toggle('active', i === active));
-        }
-
+        function updateDots() { const a=activeIdx(); dots.forEach((d,i)=>d.classList.toggle('active',i===a)); }
         function scrollTo(idx) {
-          const slide = slides[idx];
-          if (!slide) return;
-          const offset = slide.getBoundingClientRect().left - track.getBoundingClientRect().left
-                       - (track.getBoundingClientRect().width / 2)
-                       + (slide.getBoundingClientRect().width / 2);
-          track.scrollBy({ left: offset, behavior: 'smooth' });
+          const s=slides[idx]; if(!s) return;
+          const off=s.getBoundingClientRect().left-track.getBoundingClientRect().left-(track.getBoundingClientRect().width/2)+(s.getBoundingClientRect().width/2);
+          track.scrollBy({left:off,behavior:'smooth'});
         }
-
-        dots.forEach((dot, i) => dot.addEventListener('click', () => scrollTo(i)));
-        prev && prev.addEventListener('click', () => scrollTo(Math.max(0, getActiveIndex() - 1)));
-        next && next.addEventListener('click', () => scrollTo(Math.min(slides.length - 1, getActiveIndex() + 1)));
-
-        let scrollTimer;
-        track.addEventListener('scroll', () => {
-          clearTimeout(scrollTimer);
-          scrollTimer = setTimeout(updateDots, 80);
-        }, { passive: true });
+        dots.forEach((d,i)=>d.addEventListener('click',()=>scrollTo(i)));
+        prev&&prev.addEventListener('click',()=>scrollTo(Math.max(0,activeIdx()-1)));
+        next&&next.addEventListener('click',()=>scrollTo(Math.min(slides.length-1,activeIdx()+1)));
+        let t; track.addEventListener('scroll',()=>{clearTimeout(t);t=setTimeout(updateDots,80);},{passive:true});
       })();
     </script>
 
-    <!-- CV Tabs Controller -->
+    <!-- CV tabs -->
     <script>
-      (function () {
-        const tabBtns = document.querySelectorAll('.cv-tab-btn');
-        const panels  = document.querySelectorAll('.cv-panel');
-
-        function activateTab(tabId) {
-          tabBtns.forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
-          panels.forEach(p => {
-            const isTarget = p.id === 'cv-' + tabId;
-            p.classList.toggle('active', isTarget);
-            if (isTarget && tabId === 'skills') animateBars();
-          });
+      (function() {
+        const btns   = document.querySelectorAll('.cv-tab-btn');
+        const panels = document.querySelectorAll('.cv-panel');
+        function activate(id) {
+          btns.forEach(b=>b.classList.toggle('active',b.dataset.tab===id));
+          panels.forEach(p=>{const on=p.id==='cv-'+id; p.classList.toggle('active',on); if(on&&id==='skills') animateBars();});
         }
-
-        tabBtns.forEach(btn => btn.addEventListener('click', () => activateTab(btn.dataset.tab)));
-
+        btns.forEach(b=>b.addEventListener('click',()=>activate(b.dataset.tab)));
         function animateBars() {
-          document.querySelectorAll('.skill-bar-fill').forEach(bar => {
-            bar.style.width = '0';
-            requestAnimationFrame(() => requestAnimationFrame(() => {
-              bar.style.width = bar.dataset.width + '%';
-            }));
+          document.querySelectorAll('.skill-bar-fill').forEach(bar=>{
+            bar.style.width='0';
+            requestAnimationFrame(()=>requestAnimationFrame(()=>{ bar.style.width=bar.dataset.width+'%'; }));
           });
         }
-
         if (document.getElementById('cv-skills')?.classList.contains('active')) animateBars();
       })();
-    </script>
-
-    <!-- =========================================================================
-         CV DOWNLOAD — ATS-Friendly PDF generated client-side via jsPDF
-         ========================================================================= -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script>
-      function downloadCV() {
-        const btn = document.getElementById('cvDownloadBtn');
-        btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Generating…';
-        btn.disabled = true;
-
-        setTimeout(() => {
-          const { jsPDF } = window.jspdf;
-          const doc = new jsPDF({ unit: 'pt', format: 'a4' });
-
-          const navy  = [6,  40,  61];
-          const gold  = [255, 193, 7];
-          const blue  = [33, 150, 243];
-          const grey  = [100, 100, 100];
-          const lgrey = [220, 220, 220];
-
-          const PW = doc.internal.pageSize.getWidth();
-          const PH = doc.internal.pageSize.getHeight();
-          const L  = 48, R = PW - 48;
-          const COL_W = PW - L * 2;
-          let y = 0;
-
-          // ── HEADER BAND ──
-          doc.setFillColor(...navy);
-          doc.rect(0, 0, PW, 110, 'F');
-
-          doc.setFillColor(...gold);
-          doc.rect(0, 106, PW, 4, 'F');
-
-          doc.setFontSize(28).setFont('helvetica', 'bold').setTextColor(255,255,255);
-          doc.text('LAWRENCE OTIENO', L, 46);
-
-          doc.setFontSize(11).setFont('helvetica', 'normal').setTextColor(...gold);
-          doc.text('Business Analyst  ·  Data Engineer  ·  Automation & Integration', L, 66);
-
-          doc.setFontSize(9).setTextColor(180, 210, 240);
-          doc.text('lawrenceit38@gmail.com', L, 84);
-          doc.text('|', L + 162, 84);
-          doc.text('+254 711 720 717', L + 172, 84);
-          doc.text('|', L + 270, 84);
-          doc.text('Nairobi, Kenya', L + 280, 84);
-          doc.text('|', L + 354, 84);
-          doc.text('linkedin.com/in/lawrence-otieno-5b6b6212a', L + 364, 84);
-
-          y = 130;
-
-          // ── SECTION HELPER ──
-          function section(title) {
-            doc.setFillColor(...navy);
-            doc.rect(L, y, COL_W, 18, 'F');
-            doc.setFontSize(9).setFont('helvetica', 'bold').setTextColor(255,255,255);
-            doc.text(title.toUpperCase(), L + 8, y + 12.5);
-            y += 24;
-          }
-
-          function bulletLine(text, indent = 0) {
-            doc.setFontSize(9).setFont('helvetica', 'normal').setTextColor(...grey);
-            const lines = doc.splitTextToSize('• ' + text, COL_W - indent - 8);
-            doc.text(lines, L + 8 + indent, y);
-            y += lines.length * 12 + 2;
-          }
-
-          function labeledLine(label, value) {
-            doc.setFontSize(9).setFont('helvetica', 'bold').setTextColor(...navy);
-            doc.text(label, L + 8, y);
-            doc.setFont('helvetica', 'normal').setTextColor(...grey);
-            const lines = doc.splitTextToSize(value, COL_W - 90);
-            doc.text(lines, L + 90, y);
-            y += Math.max(lines.length * 12, 14);
-          }
-
-          function expItem(date, role, company, desc) {
-            doc.setFontSize(9).setFont('helvetica', 'bold').setTextColor(...navy);
-            doc.text(role, L + 8, y);
-            doc.setFont('helvetica', 'normal').setTextColor(...blue);
-            doc.text(company, L + 8, y + 12);
-            doc.setFontSize(8).setTextColor(...grey);
-            doc.text(date, R - doc.getTextWidth(date), y);
-            y += 18;
-            const lines = doc.splitTextToSize(desc, COL_W - 16);
-            doc.setFontSize(8.5).setTextColor(...grey);
-            doc.text(lines, L + 8, y);
-            y += lines.length * 11 + 10;
-            doc.setDrawColor(...lgrey);
-            doc.line(L, y, R, y);
-            y += 8;
-          }
-
-          function skillRow(skill, pct) {
-            doc.setFontSize(9).setFont('helvetica', 'normal').setTextColor(...navy);
-            doc.text(skill, L + 8, y);
-            const barX = L + 170, barW = COL_W - 170 - 8, barH = 6;
-            doc.setFillColor(...lgrey);
-            doc.roundedRect(barX, y - 7, barW, barH, 3, 3, 'F');
-            doc.setFillColor(...blue);
-            doc.roundedRect(barX, y - 7, barW * (pct / 100), barH, 3, 3, 'F');
-            doc.setFontSize(8).setTextColor(...grey);
-            doc.text(pct + '%', R - 20, y);
-            y += 14;
-          }
-
-          // ── PROFILE SUMMARY ──
-          section('Professional Summary');
-          const summary = 'Results-driven Business Process Analyst and IT Operations Professional with over 4 years of experience driving process improvement, digital transformation, systems integration, and stakeholder engagement. Skilled in requirements elicitation, process mapping, workflow analysis, and translating operational needs into actionable technical solutions. Experienced with ERP, CRM, SaaS, and analytics platforms.';
-          doc.setFontSize(9).setFont('helvetica', 'normal').setTextColor(...grey);
-          const sumLines = doc.splitTextToSize(summary, COL_W - 16);
-          doc.text(sumLines, L + 8, y);
-          y += sumLines.length * 12 + 14;
-
-          // ── EXPERIENCE ──
-          section('Work Experience');
-          expItem('Feb 2024 – Present', 'Business Analyst', 'AESOPS Kenya',
-            'Requirements gathering and process mapping for cross-functional teams. Translated business needs into data-driven solutions using Python, SQL, Power BI, and Excel. Delivered stakeholder reports and contributed to digital transformation initiatives.');
-          expItem('Dec 2021 – Feb 2024', 'Tech Support – ICT Officer', 'AESOPS Kenya',
-            'End-to-end ICT support, network administration, and system deployment. Managed IT infrastructure, performed troubleshooting, and coordinated service desk operations using Jira and ServiceNow.');
-          expItem('May 2020 – Aug 2021', 'ICT Officer', 'Kwick Credit Limited',
-            'Managed IT service desk using ServiceNow and Jira. Handled hardware/software support, network security, and process documentation across multiple departments.');
-          expItem('Apr 2019 – Jun 2019', 'ICT Help Desk Support Intern', 'Kenya Power & Lighting Company (KPLC)',
-            'Provided first-line technical support and incident resolution in a high-volume enterprise environment. Developed foundational skills in IT systems and customer service.');
-
-          // ── EDUCATION ──
-          section('Education & Certifications');
-          labeledLine('2015 – 2019', 'Bachelor of Business Information Technology — Taita Taveta University');
-          labeledLine('Certification', 'CCNA – Cisco Certified Network Associate (Networking & Configuration)');
-          labeledLine('2017', 'Information Systems Management — Taita Taveta University');
-          y += 6;
-
-          // ── TECHNICAL SKILLS ──
-          section('Technical Skills');
-          const techSkills = [
-            ['Python', 85], ['SQL', 80], ['Excel / Power BI', 90],
-            ['ServiceNow / Jira', 88], ['Ansible / VMware', 70], ['GitHub', 78],
-          ];
-          techSkills.forEach(([s, p]) => skillRow(s, p));
-          y += 6;
-
-          section('Core Competencies');
-          const compSkills = [
-            ['Process Optimisation', 87], ['Data Reporting', 85],
-            ['Technical Documentation', 92], ['System Administration', 80],
-            ['Network & Security', 75], ['Requirements Analysis', 83],
-          ];
-          compSkills.forEach(([s, p]) => skillRow(s, p));
-          y += 6;
-
-          // ── KEY TOOLS ──
-          section('Key Tools & Technologies');
-          bulletLine('Data & Analytics: Python (Pandas, NumPy), SQL, Excel, Power BI, Tableau');
-          bulletLine('Infrastructure: Ansible, VMware, Active Directory, Network Configuration');
-          bulletLine('ITSM Platforms: ServiceNow, Jira, Confluence');
-          bulletLine('DevOps & Automation: GitHub, Bash scripting, Apache Airflow, REST APIs');
-          bulletLine('Cloud: AWS basics, Google Cloud Platform basics');
-          y += 10;
-
-          // ── FOOTER ──
-          doc.setFillColor(...navy);
-          doc.rect(0, PH - 28, PW, 28, 'F');
-          doc.setFontSize(8).setFont('helvetica', 'normal').setTextColor(...gold);
-          doc.text('Lawrence Otieno — CV  |  lawrenceit38@gmail.com  |  +254 711 720 717  |  Nairobi, Kenya', PW / 2, PH - 10, { align: 'center' });
-
-          doc.save('Lawrence_Otieno_CV.pdf');
-          btn.innerHTML = '<i class="bi bi-download"></i> Download CV';
-          btn.disabled = false;
-        }, 100);
-      }
     </script>
 
   </body>
