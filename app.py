@@ -8,14 +8,8 @@ from flask import Flask, render_template, request, jsonify
 app = Flask(__name__)
 
 # ── Email configuration ──────────────────────────────────────────────────────
-# Set these two environment variables on your server before running the app:
-#
-#   export MAIL_USER="lawrenceit38@gmail.com"
-#   export MAIL_PASS="znoakpmfdjqnreox"
-#
-# ─────────────────────────────────────────────────────────────────────────────
 MAIL_USER = os.environ.get("MAIL_USER", "lawrenceit38@gmail.com")
-MAIL_PASS = os.environ.get("MAIL_PASS", "")
+MAIL_PASS = os.environ.get("MAIL_PASS", "gudinyadebzxmvl")
 MAIL_TO   = "lawrenceit38@gmail.com"
 
 # Updated projects list
@@ -34,9 +28,9 @@ projects = [
 def send_email(name: str, email: str, phone: str, message: str) -> None:
     """Send a contact-form notification to MAIL_TO via Gmail SMTP."""
     msg = MIMEMultipart("alternative")
-    msg["Subject"] = f"Portfolio Contact: {name}"
-    msg["From"]    = MAIL_USER
-    msg["To"]      = MAIL_TO
+    msg["Subject"]  = f"Portfolio Contact: {name}"
+    msg["From"]     = MAIL_USER
+    msg["To"]       = MAIL_TO
     msg["Reply-To"] = email
 
     html_body = f"""
