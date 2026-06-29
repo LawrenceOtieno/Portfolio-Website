@@ -38,6 +38,10 @@ body {
 @keyframes heroOrb { 0% { transform: translate(0,0) scale(1); } 100% { transform: translate(40px,30px) scale(1.15); } }
 @keyframes particleShift { 0% { background-position: 0 0, 30px 30px; } 100% { background-position: 60px 60px, 90px 90px; } }
 @keyframes fadeSlideIn { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
+@keyframes riverFlow {
+  0%   { background-position: 50% 100%; }
+  100% { background-position: 50% 60%; }
+}
 
 .cursor     { animation: blink 0.75s step-end infinite; color: var(--gold); }
 .bounce-icon{ animation: bounce 1.6s ease-in-out infinite; display:inline-block; }
@@ -81,26 +85,76 @@ body {
 .dark-toggle-btn:hover { background: var(--gold); color: var(--navy); }
 
 /* ==========================================================================
-   3. HERO
+   3. HERO — River through rocks with rich dark overlay
    ========================================================================== */
 .hero {
-  position: relative; min-height: 85vh;
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  position: relative;
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   overflow: hidden;
-  background:
-    linear-gradient(135deg, rgba(6,40,61,0.96) 0%, rgba(33,150,243,0.15) 50%, rgba(6,40,61,0.97) 100%),
-    url('/static/images/hero-bg.jpg') no-repeat center center / cover;
+  /* Deep navy gradient fills the top (text area) strongly,
+     fades gently toward the bottom where the river image lives */
+  background-color: var(--navy);
 }
-.hero::before, .hero::after {
-  content: ''; position: absolute; border-radius: 50%;
-  filter: blur(80px); opacity: 0.35;
-  animation: heroOrb 8s ease-in-out infinite alternate; pointer-events: none;
+
+/* Bottom river/rocks photo layer — faded, lives beneath everything */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  /* Unsplash river-through-rocks photo — royalty-free */
+  background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center 70%;
+  /* Strong top fade so text stays crisp; subtle visibility at bottom */
+  -webkit-mask-image: linear-gradient(to bottom,
+    transparent 0%,
+    transparent 35%,
+    rgba(0,0,0,0.18) 55%,
+    rgba(0,0,0,0.38) 75%,
+    rgba(0,0,0,0.45) 100%
+  );
+  mask-image: linear-gradient(to bottom,
+    transparent 0%,
+    transparent 35%,
+    rgba(0,0,0,0.18) 55%,
+    rgba(0,0,0,0.38) 75%,
+    rgba(0,0,0,0.45) 100%
+  );
+  animation: riverFlow 18s ease-in-out infinite alternate;
+  z-index: 0;
+  pointer-events: none;
 }
-.hero::before { width:520px;height:520px;background:radial-gradient(circle,var(--blue) 0%,transparent 70%);top:-120px;left:-100px; }
-.hero::after  { width:400px;height:400px;background:radial-gradient(circle,var(--gold) 0%,transparent 70%);bottom:-80px;right:-80px;animation-delay:3s; }
+
+/* Animated colour orbs — above the photo, below the text */
+.hero-orb-1, .hero-orb-2 {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.30;
+  animation: heroOrb 8s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: 1;
+}
+.hero-orb-1 {
+  width: 520px; height: 520px;
+  background: radial-gradient(circle, var(--blue) 0%, transparent 70%);
+  top: -120px; left: -100px;
+}
+.hero-orb-2 {
+  width: 400px; height: 400px;
+  background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
+  bottom: -80px; right: -80px;
+  animation-delay: 3s;
+}
 
 .hero-particles {
-  position: absolute; inset: 0; pointer-events: none;
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
   background-image:
     radial-gradient(circle, rgba(255,193,7,0.18) 1px, transparent 1px),
     radial-gradient(circle, rgba(33,150,243,0.12) 1px, transparent 1px);
@@ -108,6 +162,13 @@ body {
   background-position: 0 0, 30px 30px;
   animation: particleShift 20s linear infinite;
 }
+
+/* Text wrapper — sits above all pseudo layers */
+.hero > div[style*="z-index"] {
+  position: relative;
+  z-index: 2;
+}
+
 .hero-tagline { color: var(--gold); letter-spacing: 3px; }
 .hero-cta-btn {
   display: inline-flex; align-items: center; gap: 0.5rem;
