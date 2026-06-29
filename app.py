@@ -11,37 +11,25 @@ app = Flask(__name__)
 # Set these two environment variables on your server before running the app:
 #
 #   export MAIL_USER="lawrenceit38@gmail.com"
-#   export MAIL_PASS="your_gmail_app_password"
+#   export MAIL_PASS="znoakpmfdjqnreox"
 #
-# Generate an App Password at: https://myaccount.google.com/apppasswords
-# (requires 2-Step Verification to be enabled on the Gmail account)
 # ─────────────────────────────────────────────────────────────────────────────
 MAIL_USER = os.environ.get("MAIL_USER", "lawrenceit38@gmail.com")
-MAIL_PASS = os.environ.get("MAIL_PASS", "")          # App Password — never hard-code
+MAIL_PASS = os.environ.get("MAIL_PASS", "")
 MAIL_TO   = "lawrenceit38@gmail.com"
 
-# Sample projects data — replace/extend as needed
+# Updated projects list
 projects = [
-    {
-        "name": "Data Pipeline Automation",
-        "image": "images/project1.jpg",
-        "link": "#",
-        "tags": ["Python", "Airflow", "SQL"],
-    },
-    {
-        "name": "Business Intelligence Dashboard",
-        "image": "images/project2.jpg",
-        "link": "#",
-        "tags": ["Power BI", "Excel", "DAX"],
-    },
-    {
-        "name": "IT Service Desk Analytics",
-        "image": "images/project3.jpg",
-        "link": "#",
-        "tags": ["ServiceNow", "Python", "Tableau"],
-    },
+    {"name": "Movies Rating Dashboard", "image": "images/moviesr.png", "tags": ["Python", "HTML", "Streamlit"], "link": "https://github.com/LawrenceOtieno/MovieRatingsDashboard"},
+    {"name": "Gazebo Indoor Environment Generator for PX4 Autopilot", "image": "images/gazebo.png", "tags": ["Python", "Shell", "PX4 Autopilot","Gazebo Simulator"], "link": "https://github.com/LawrenceOtieno/gazebo-indoor-gen"},
+    {"name": "KRA Nil Automator", "image": "images/automator.png", "tags": ["Python", "HTML", "Playwright", "Waitress"], "link": "https://github.com/LawrenceOtieno/kra-nil-automator"},
+    {"name": "HRM Executive Dashboard", "image": "images/dashboard.png", "tags": ["Python", "Pandas", "Numpy", "Plotly", "Streamlit"], "link": "https://github.com/LawrenceOtieno/hrm-executive-dashboard"},
+    {"name": "Statistical Review and A/B Testing for New York City TLC Project", "image": "images/AB_Test.png", "tags": ["Python", "SKLearn", "BigQuery"], "link": "#"},
+    {"name": "Customer Churn Turnover- ML", "image": "images/churn_rate.png", "tags": ["Python", "Keras"], "link": "#"},
+    {"name": "Blog on using PACE as an analytical framework", "image": "images/pace.png", "tags": ["WordPress"], "link": "#"},
+    {"name": "COVID-19 fatalities and risk of conflicts - Youth Bulge", "image": "images/COVID-19_youth.jpg", "tags": ["Excel", "R", "Research"], "link": "#"},
+    {"name": "Human Resource Management (HRM)- Executive Dashboard", "image": "images/HRM.png", "tags": ["Tableau"], "link": "#"},
 ]
-
 
 def send_email(name: str, email: str, phone: str, message: str) -> None:
     """Send a contact-form notification to MAIL_TO via Gmail SMTP."""
@@ -100,21 +88,15 @@ def contact():
         return jsonify({"ok": False, "error": "Please fill in all required fields."}), 400
 
     if not MAIL_PASS:
-        # Graceful fallback — log to console and tell the user
-        app.logger.warning(
-            "MAIL_PASS not set. Contact from %s <%s>: %s", name, email, message
-        )
-        return jsonify({"ok": False, "error": "Mail not configured on the server. Please email lawrenceit38@gmail.com directly."}), 500
+        app.logger.warning("MAIL_PASS not set.")
+        return jsonify({"ok": False, "error": "Server mail not configured."}), 500
 
     try:
         send_email(name, email, phone, message)
-        return jsonify({"ok": True, "message": "Message sent! I'll be in touch within 24–48 hours."})
-    except smtplib.SMTPAuthenticationError:
-        app.logger.exception("SMTP auth failed")
-        return jsonify({"ok": False, "error": "Server mail authentication failed. Please contact lawrenceit38@gmail.com directly."}), 500
+        return jsonify({"ok": True, "message": "Message sent!"})
     except Exception as exc:
         app.logger.exception("Failed to send email: %s", exc)
-        return jsonify({"ok": False, "error": "Something went wrong. Please try again or email lawrenceit38@gmail.com."}), 500
+        return jsonify({"ok": False, "error": "Failed to send email."}), 500
 
 
 if __name__ == "__main__":
