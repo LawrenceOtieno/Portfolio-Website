@@ -4,26 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lawrence Otieno Portfolio Website | StreData</title>
-    
-    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous"/>
-    <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
-    <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
   </head>
 
   <body class="montserrat-400">
 
-    <!-- ======================================================================
-         NAVIGATION
-         ====================================================================== -->
+    <!-- NAVIGATION -->
     <header class="sticky-top">
       <nav class="navbar navbar-expand-lg py-3">
         <div class="container-xl">
@@ -51,16 +43,11 @@
       </nav>
     </header>
 
-    <!-- ======================================================================
-         HERO
-         ====================================================================== -->
+    <!-- HERO -->
     <section class="hero" id="home">
-      <!-- Animated colour orbs -->
       <div class="hero-orb-1"></div>
       <div class="hero-orb-2"></div>
-      <!-- Particle grid -->
       <div class="hero-particles"></div>
-      <!-- Text content -->
       <div class="text-center px-4" style="position:relative;z-index:2;">
         <p class="hero-tagline text-uppercase fw-bold mb-2 fs-5">Welcome to my Portfolio</p>
         <h1 class="display-2 text-white fw-bold mb-3">Lawrence Otieno</h1>
@@ -73,9 +60,7 @@
       </div>
     </section>
 
-    <!-- ======================================================================
-         SKILLS — dark navy section
-         ====================================================================== -->
+    <!-- SKILLS -->
     <section class="skills-section py-5" id="skills">
       <div class="container">
         <div class="row mt-4 py-3">
@@ -83,17 +68,12 @@
             <div class="section-title-wrap mx-auto">
               <h2 class="display-2 fw-bold skills-heading">SKILLS</h2>
             </div>
-            <p class="skills-sub fw-normal py-2 mt-3">
-              Continuously improving my skills and knowledge in the field.
-            </p>
+            <p class="skills-sub fw-normal py-2 mt-3">Continuously improving my skills and knowledge in the field.</p>
           </div>
         </div>
         <div class="skills-grid mt-4">
-
           <div class="sk-card sk-card--blue" tabindex="0">
-            <div class="sk-card__glow"></div>
-            <div class="sk-card__orb sk-card__orb--1"></div>
-            <div class="sk-card__orb sk-card__orb--2"></div>
+            <div class="sk-card__glow"></div><div class="sk-card__orb sk-card__orb--1"></div><div class="sk-card__orb sk-card__orb--2"></div>
             <div class="sk-card__inner">
               <div class="sk-card__icon-wrap"><i class="fa-solid fa-chart-bar"></i></div>
               <h3 class="sk-card__title">Business Analyst</h3>
@@ -101,11 +81,8 @@
               <div class="sk-card__tags"><span>Python</span><span>SQL</span><span>Power BI</span><span>Excel</span></div>
             </div>
           </div>
-
           <div class="sk-card sk-card--teal" tabindex="0">
-            <div class="sk-card__glow"></div>
-            <div class="sk-card__orb sk-card__orb--1"></div>
-            <div class="sk-card__orb sk-card__orb--2"></div>
+            <div class="sk-card__glow"></div><div class="sk-card__orb sk-card__orb--1"></div><div class="sk-card__orb sk-card__orb--2"></div>
             <div class="sk-card__inner">
               <div class="sk-card__icon-wrap"><i class="fa-solid fa-chart-line"></i></div>
               <h3 class="sk-card__title">Data Engineer</h3>
@@ -113,11 +90,8 @@
               <div class="sk-card__tags"><span>Spark</span><span>Cloud</span><span>Pipelines</span><span>SQL</span></div>
             </div>
           </div>
-
           <div class="sk-card sk-card--orange" tabindex="0">
-            <div class="sk-card__glow"></div>
-            <div class="sk-card__orb sk-card__orb--1"></div>
-            <div class="sk-card__orb sk-card__orb--2"></div>
+            <div class="sk-card__glow"></div><div class="sk-card__orb sk-card__orb--1"></div><div class="sk-card__orb sk-card__orb--2"></div>
             <div class="sk-card__inner">
               <div class="sk-card__icon-wrap"><i class="fa-solid fa-gears"></i></div>
               <h3 class="sk-card__title">Automation &amp; Integration</h3>
@@ -125,11 +99,8 @@
               <div class="sk-card__tags"><span>Airflow</span><span>Bash</span><span>APIs</span><span>Python</span></div>
             </div>
           </div>
-
           <div class="sk-card sk-card--purple" tabindex="0">
-            <div class="sk-card__glow"></div>
-            <div class="sk-card__orb sk-card__orb--1"></div>
-            <div class="sk-card__orb sk-card__orb--2"></div>
+            <div class="sk-card__glow"></div><div class="sk-card__orb sk-card__orb--1"></div><div class="sk-card__orb sk-card__orb--2"></div>
             <div class="sk-card__inner">
               <div class="sk-card__icon-wrap"><i class="fa-solid fa-file-lines"></i></div>
               <h3 class="sk-card__title">Documentation</h3>
@@ -137,14 +108,11 @@
               <div class="sk-card__tags"><span>Confluence</span><span>Jira</span><span>Markdown</span></div>
             </div>
           </div>
-
         </div>
       </div>
     </section>
 
-    <!-- ======================================================================
-         PORTFOLIO
-         ====================================================================== -->
+    <!-- PORTFOLIO -->
     <section class="portfolio-section py-5" id="portfolio">
       <div class="container">
         <div class="row mt-4 py-3">
@@ -155,11 +123,8 @@
             <p class="portfolio-sub fw-normal py-2 mt-3">A collection of projects I've worked on.</p>
           </div>
         </div>
-
         <div class="position-relative mt-4">
-          <button class="portfolio-arrow-prev" id="portfolioPrev" aria-label="Previous project">
-            <i class="bi bi-chevron-left fs-5"></i>
-          </button>
+          <button class="portfolio-arrow-prev" id="portfolioPrev" aria-label="Previous project"><i class="bi bi-chevron-left fs-5"></i></button>
           <div class="portfolio-scroll-track" id="portfolioTrack">
             {% for project in projects %}
             <div class="portfolio-slide">
@@ -168,17 +133,13 @@
                   <div class="card-img-wrapper">
                     <img src="{{ url_for('static', filename=project.image) }}" alt="{{ project.name }}" loading="lazy"/>
                     <div class="card-hover-overlay">
-                      <span class="btn btn-light rounded-pill px-4 fw-medium shadow">
-                        View Project <i class="fas fa-external-link-alt ms-1"></i>
-                      </span>
+                      <span class="btn btn-light rounded-pill px-4 fw-medium shadow">View Project <i class="fas fa-external-link-alt ms-1"></i></span>
                     </div>
                   </div>
                   <div class="card-body p-3 text-center">
                     <h4 class="h5 mb-2 portfolio-card-title">{{ project.name }}</h4>
                     <div class="d-flex flex-wrap justify-content-center gap-1">
-                      {% for tag in project.tags %}
-                      <span class="portfolio-tag">{{ tag }}</span>
-                      {% endfor %}
+                      {% for tag in project.tags %}<span class="portfolio-tag">{{ tag }}</span>{% endfor %}
                     </div>
                   </div>
                 </a>
@@ -186,9 +147,7 @@
             </div>
             {% endfor %}
           </div>
-          <button class="portfolio-arrow-next" id="portfolioNext" aria-label="Next project">
-            <i class="bi bi-chevron-right fs-5"></i>
-          </button>
+          <button class="portfolio-arrow-next" id="portfolioNext" aria-label="Next project"><i class="bi bi-chevron-right fs-5"></i></button>
         </div>
         <div class="scroll-dots mt-3" id="portfolioDots">
           {% for project in projects %}
@@ -198,98 +157,58 @@
       </div>
     </section>
 
-    <!-- ======================================================================
-         ABOUT — dark navy background
-         ====================================================================== -->
+    <!-- ABOUT -->
     <section id="about" class="about-section py-5 overflow-hidden">
       <div class="container py-4">
         <div class="text-center mb-5">
           <div class="section-title-wrap mx-auto">
             <h2 class="display-4 fw-bold about-heading">ABOUT</h2>
           </div>
-          <p class="about-sub mx-auto mt-3" style="max-width:600px;">
-            Learn more about me, my background, and what motivates me based on my career roadmap.
-          </p>
+          <p class="about-sub mx-auto mt-3" style="max-width:600px;">Learn more about me, my background, and what motivates me based on my career roadmap.</p>
         </div>
-
         <div class="about-timeline">
-
           <div class="tl-row">
             <div class="tl-card-col order-2 order-md-1">
-              <div class="tl-card">
-                <span class="tl-label">Foundations</span>
-                <h3>Bridging Business &amp; Tech</h3>
-                <p>My journey began with a deep-seated fascination with how technology impacts day-to-day operational efficiency. Pursuing a Bachelor's degree in Business Information Technology allowed me to establish a robust framework for alignment between systems architecture and organizational needs.</p>
-              </div>
+              <div class="tl-card"><span class="tl-label">Foundations</span><h3>Bridging Business &amp; Tech</h3><p>My journey began with a deep-seated fascination with how technology impacts day-to-day operational efficiency. Pursuing a Bachelor's degree in Business Information Technology allowed me to establish a robust framework for alignment between systems architecture and organizational needs.</p></div>
             </div>
-            <div class="tl-img-col order-1 order-md-2">
-              <div class="tl-img-circle"><img src="/static/images/about-img-1.jpg" alt="Foundations"/></div>
-            </div>
+            <div class="tl-img-col order-1 order-md-2"><div class="tl-img-circle"><img src="/static/images/about-img-1.jpg" alt="Foundations"/></div></div>
           </div>
-
           <div class="tl-row reverse">
-            <div class="tl-img-col">
-              <div class="tl-img-circle"><img src="/static/images/about-img-2.jpg" alt="Core Infrastructure"/></div>
-            </div>
+            <div class="tl-img-col"><div class="tl-img-circle"><img src="/static/images/about-img-2.jpg" alt="Core Infrastructure"/></div></div>
             <div class="tl-card-col">
-              <div class="tl-card">
-                <span class="tl-label">Core Expertise</span>
-                <h3>Infrastructure &amp; IT Operations</h3>
-                <p>Building upon my academic foundation, I spent several years specialising in ICT support and systems administration. Managing networks, utilizing tools like Jira and ServiceNow, and deploying infrastructure allowed me to sharpen my approach to process optimisation and problem-solving.</p>
-              </div>
+              <div class="tl-card"><span class="tl-label">Core Expertise</span><h3>Infrastructure &amp; IT Operations</h3><p>Building upon my academic foundation, I spent several years specialising in ICT support and systems administration. Managing networks, utilizing tools like Jira and ServiceNow, and deploying infrastructure allowed me to sharpen my approach to process optimisation and problem-solving.</p></div>
             </div>
           </div>
-
           <div class="tl-row">
             <div class="tl-card-col order-2 order-md-1">
-              <div class="tl-card">
-                <span class="tl-label">Evolution</span>
-                <h3>Data Analytics &amp; Automation</h3>
-                <p>To drive deeper value, my focus evolved toward transforming raw logs into structural insights. By integrating Python, SQL, and Excel workflows into analytics and pipeline development, I focus on automating repeatable data processes and mapping out complex business requirements clearly.</p>
-              </div>
+              <div class="tl-card"><span class="tl-label">Evolution</span><h3>Data Analytics &amp; Automation</h3><p>To drive deeper value, my focus evolved toward transforming raw logs into structural insights. By integrating Python, SQL, and Excel workflows into analytics and pipeline development, I focus on automating repeatable data processes and mapping out complex business requirements clearly.</p></div>
             </div>
-            <div class="tl-img-col order-1 order-md-2">
-              <div class="tl-img-circle"><img src="/static/images/about-img-3.jpg" alt="Data Analytics"/></div>
-            </div>
+            <div class="tl-img-col order-1 order-md-2"><div class="tl-img-circle"><img src="/static/images/about-img-3.jpg" alt="Data Analytics"/></div></div>
           </div>
-
           <div class="tl-row reverse">
-            <div class="tl-img-col">
-              <div class="tl-img-circle"><img src="/static/images/about-img-4.jpg" alt="Vision"/></div>
-            </div>
+            <div class="tl-img-col"><div class="tl-img-circle"><img src="/static/images/about-img-4.jpg" alt="Vision"/></div></div>
             <div class="tl-card-col">
-              <div class="tl-card">
-                <span class="tl-label">Vision</span>
-                <h3>Continuous Professional Excellence</h3>
-                <p>I am dedicated to tackling engineering challenges where technology scales seamlessly. Whether building efficient data engineering workflows, setting up system integrations, or generating reproducible documentation, my goal is to deliver impactful, data-driven solutions.</p>
-              </div>
+              <div class="tl-card"><span class="tl-label">Vision</span><h3>Continuous Professional Excellence</h3><p>I am dedicated to tackling engineering challenges where technology scales seamlessly. Whether building efficient data engineering workflows, setting up system integrations, or generating reproducible documentation, my goal is to deliver impactful, data-driven solutions.</p></div>
             </div>
           </div>
-
           <div class="text-center pt-2 pb-3">
             <div class="d-flex flex-column align-items-center gap-2">
               <i class="bi bi-chevron-down fs-4 bounce-icon" style="color:#FFC107;"></i>
               <a href="#contact" class="hire-node">Your<br>Next<br>Hire</a>
             </div>
           </div>
-
         </div>
       </div>
     </section>
 
-    <!-- ======================================================================
-         CV — light off-white section
-         ====================================================================== -->
+    <!-- CV — Updated from real CV, no referees -->
     <section class="cv-section py-5" id="cv">
       <div class="container py-4">
-
         <div class="text-center mb-4">
           <div class="section-title-wrap mx-auto">
             <h2 class="display-2 fw-bold cv-heading">CURRICULUM VITAE</h2>
           </div>
-          <p class="cv-sub fw-normal mt-3">
-            A snapshot of my growth as an IT Operations Specialist, ICT Officer, and Data Analyst.
-          </p>
+          <p class="cv-sub fw-normal mt-3">A snapshot of my growth as a Business Analyst, IT Operations Professional, and Data Engineer.</p>
         </div>
 
         <div class="cv-tabs" role="tablist">
@@ -309,31 +228,51 @@
                   <a href="https://x.com/Otieno360" class="social-chip" target="_blank"><i class="bi bi-twitter-x"></i> Twitter</a>
                   <a href="https://www.facebook.com/lawrence.otieno.5458/" class="social-chip" target="_blank"><i class="bi bi-facebook"></i> Facebook</a>
                   <a href="https://www.linkedin.com/in/lawrence-otieno-5b6b6212a" class="social-chip" target="_blank"><i class="bi bi-linkedin"></i> LinkedIn</a>
+                  <a href="https://github.com/LawrenceOtieno" class="social-chip" target="_blank"><i class="bi bi-github"></i> GitHub</a>
                 </div>
                 <div class="mt-3">
-                  <a href="#contact" class="cv-contact-btn">
-                    <i class="bi bi-envelope-fill"></i> Ask for CV
-                  </a>
+                  <a href="#contact" class="cv-contact-btn"><i class="bi bi-envelope-fill"></i> Ask for CV</a>
                 </div>
               </div>
               <div class="flex-grow-1">
-                <h2 class="fw-bold mb-0 cv-name">Lawrence Otieno</h2>
-                <p class="fw-semibold mb-3 cv-title">Business Analyst · Data Engineer · Automation &amp; Integration</p>
+                <h2 class="fw-bold mb-0 cv-name">Lawrence Omondi Otieno</h2>
+                <p class="fw-semibold mb-3 cv-title">Business Analyst · IT Operations Professional · Data Engineer</p>
                 <div class="d-flex flex-wrap gap-2 mb-3">
                   <span class="cv-badge-pill"><i class="bi bi-envelope me-1"></i>lawrenceit38@gmail.com</span>
-                  <span class="cv-badge-pill"><i class="bi bi-telephone me-1"></i>(254) 711 720 717</span>
+                  <span class="cv-badge-pill"><i class="bi bi-telephone me-1"></i>(+254) 711 720 717</span>
                   <span class="cv-badge-pill"><i class="bi bi-geo-alt me-1"></i>Nairobi, Kenya</span>
                 </div>
                 <p class="cv-bio">
                   Results-driven Business Process Analyst and IT Operations Professional with over 4 years of experience driving process improvement, digital transformation, systems integration, and stakeholder engagement across business and technology functions. Skilled in requirements elicitation, process mapping, workflow analysis, business process reengineering, and translating operational needs into actionable technical solutions. Experienced working with ERP, CRM, SaaS, and analytics platforms while supporting cross-functional teams through requirements gathering, workshop facilitation, process documentation, reporting, and change initiatives.
                 </p>
                 <div>
-                  <p class="cv-label-sm">Highlights</p>
-                  <span class="cv-badge-pill">Business Analysis</span>
-                  <span class="cv-badge-pill">Data Engineering</span>
-                  <span class="cv-badge-pill">Data Reporting</span>
-                  <span class="cv-badge-pill">Process Optimisation</span>
-                  <span class="cv-badge-pill">IT Operations</span>
+                  <p class="cv-label-sm">Core Skills &amp; Expertise</p>
+                  <span class="cv-badge-pill">Business Process Analysis</span>
+                  <span class="cv-badge-pill">Requirements Gathering</span>
+                  <span class="cv-badge-pill">Agile &amp; Scrum</span>
+                  <span class="cv-badge-pill">Stakeholder Engagement</span>
+                  <span class="cv-badge-pill">Process Mapping</span>
+                  <span class="cv-badge-pill">Data Analytics</span>
+                  <span class="cv-badge-pill">KPI Design</span>
+                  <span class="cv-badge-pill">Digital Transformation</span>
+                  <span class="cv-badge-pill">Systems Integration</span>
+                  <span class="cv-badge-pill">Gap Analysis</span>
+                </div>
+                <div class="mt-3">
+                  <p class="cv-label-sm">Tools &amp; Technologies</p>
+                  <span class="cv-badge-pill">Python · SQL · PowerShell · Bash</span>
+                  <span class="cv-badge-pill">Power BI · Looker · Excel</span>
+                  <span class="cv-badge-pill">SAP · SAGE · Syspro · ServiceNow</span>
+                  <span class="cv-badge-pill">Power Automate · APIs</span>
+                  <span class="cv-badge-pill">VMware · Ansible · Nagios</span>
+                </div>
+                <div class="mt-3">
+                  <p class="cv-label-sm">Certifications</p>
+                  <span class="cv-badge-pill">Agile Project Management – HP Life</span>
+                  <span class="cv-badge-pill">AI for Business Professionals – HP Life</span>
+                  <span class="cv-badge-pill">Project Management – Google</span>
+                  <span class="cv-badge-pill">Google AI Training – Coursera</span>
+                  <span class="cv-badge-pill">Pursuing CBAP</span>
                 </div>
                 <div class="mt-3">
                   <p class="cv-label-sm">Interests</p>
@@ -351,30 +290,35 @@
         <!-- EXPERIENCE TAB -->
         <div class="cv-panel" id="cv-experience">
           <div class="exp-timeline">
+
             <div class="exp-item">
               <div class="exp-date"><i class="bi bi-calendar3 me-1"></i> Feb 2024 — Present</div>
               <div class="exp-role">Business Analyst</div>
               <div class="exp-company">AESOPS Kenya</div>
-              <p class="exp-desc">Requirements gathering, process mapping, data analysis, and stakeholder reporting. Translating business needs into data-driven solutions using Python, SQL, Power BI, and Excel.</p>
+              <p class="exp-desc">Collaborate with business and technical stakeholders to translate operational requirements into structured analytical and technical solutions. Map current-state processes and design future-state workflows aligned with strategic objectives. Develop Power BI and Excel dashboards to support leadership decision-making. Facilitate stakeholder workshops to document business requirements and system enhancement requests. Participate in Agile workflows including sprint planning and requirements clarification.</p>
             </div>
+
             <div class="exp-item">
               <div class="exp-date"><i class="bi bi-calendar3 me-1"></i> Dec 2021 — Feb 2024</div>
-              <div class="exp-role">Tech Support — ICT Officer</div>
+              <div class="exp-role">Service Desk Analyst</div>
               <div class="exp-company">AESOPS Kenya</div>
-              <p class="exp-desc">End-to-end ICT support, network administration, and system deployment. Managed IT infrastructure, performed troubleshooting, and coordinated service desk operations.</p>
+              <p class="exp-desc">Supported ERP and SaaS platforms while improving operational workflows and reporting visibility. Analyzed ticketing trends and system performance data to identify recurring issues. Contributed to automation and system integration initiatives improving reporting efficiency. Developed SOPs, technical documentation, and user guides. Led process improvement initiatives that reduced operational inefficiencies and improved service delivery performance.</p>
             </div>
+
             <div class="exp-item">
               <div class="exp-date"><i class="bi bi-calendar3 me-1"></i> May 2020 — Aug 2021</div>
-              <div class="exp-role">ICT Officer</div>
-              <div class="exp-company">Kwick Credit Limited</div>
-              <p class="exp-desc">Managed IT service desk using ServiceNow and Jira. Handled hardware/software support, network security, and process documentation.</p>
+              <div class="exp-role">ICT Support – Service Solutions</div>
+              <div class="exp-company">L-IFT (Low-Income Financial Transformation), Netherlands</div>
+              <p class="exp-desc">Supported survey and financial data platforms ensuring data quality, consistency, and integrity. Assisted with data migration and cloud transition initiatives improving analytics accessibility. Analyzed operational data to support reporting and decision-making for finance and operations teams. Developed technical reports and process documentation supporting system improvements and compliance.</p>
             </div>
+
             <div class="exp-item exp-item--gold">
               <div class="exp-date exp-date--gold"><i class="bi bi-calendar3 me-1"></i> Apr 2019 — Jun 2019</div>
-              <div class="exp-role">ICT Help Desk Support — Internship</div>
+              <div class="exp-role">IT Help Desk Support — Internship</div>
               <div class="exp-company">Kenya Power and Lighting Company (KPLC)</div>
-              <p class="exp-desc">First-line technical support and incident resolution. Gained hands-on experience with enterprise IT systems in a high-volume environment.</p>
+              <p class="exp-desc">Supported IT operations through ticket analysis, reporting, and technical troubleshooting. Assisted in preparing reports on service performance and issue resolution trends. Developed user documentation reducing repetitive support requests and improving system adoption.</p>
             </div>
+
           </div>
         </div>
 
@@ -387,8 +331,8 @@
                   <i class="bi bi-mortarboard-fill edu-icon flex-shrink-0"></i>
                   <div>
                     <p class="edu-year">2015 – 2019</p>
-                    <h5 class="edu-title">Bachelor of Business Information Technology</h5>
-                    <p class="edu-inst">Taita Taveta University</p>
+                    <h5 class="edu-title">Bachelor of Business Information Technology (BBIT)</h5>
+                    <p class="edu-inst">Taita Taveta University, Kenya</p>
                   </div>
                 </div>
               </div>
@@ -398,9 +342,9 @@
                 <div class="d-flex align-items-start gap-3">
                   <i class="bi bi-award-fill edu-icon flex-shrink-0"></i>
                   <div>
-                    <p class="edu-year">Certification</p>
-                    <h5 class="edu-title">CCNA — Cisco Certified Network Associate</h5>
-                    <p class="edu-inst">Networking foundations and configuration</p>
+                    <p class="edu-year">2014</p>
+                    <h5 class="edu-title">Kenya Certificate of Secondary Education (KCSE)</h5>
+                    <p class="edu-inst">Kanga School, Kenya — Grade B+</p>
                   </div>
                 </div>
               </div>
@@ -408,11 +352,23 @@
             <div class="col-md-6">
               <div class="edu-card h-100">
                 <div class="d-flex align-items-start gap-3">
-                  <i class="bi bi-book-fill edu-icon flex-shrink-0"></i>
+                  <i class="bi bi-patch-check-fill edu-icon flex-shrink-0"></i>
                   <div>
-                    <p class="edu-year">2017</p>
-                    <h5 class="edu-title">Information Systems Management</h5>
-                    <p class="edu-inst">Taita Taveta University</p>
+                    <p class="edu-year">Professional Certifications</p>
+                    <h5 class="edu-title">Agile Project Management · AI for Business · Critical Thinking in the AI Era</h5>
+                    <p class="edu-inst">HP Life</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="edu-card h-100">
+                <div class="d-flex align-items-start gap-3">
+                  <i class="bi bi-google edu-icon flex-shrink-0"></i>
+                  <div>
+                    <p class="edu-year">Professional Certifications</p>
+                    <h5 class="edu-title">Project Management · Google AI Training</h5>
+                    <p class="edu-inst">Google / Coursera · Currently Pursuing CBAP</p>
                   </div>
                 </div>
               </div>
@@ -428,23 +384,23 @@
                 <p class="skill-group-label">Technical Skills</p>
                 <hr class="mt-1 mb-3">
                 <div class="mb-3"><div class="skill-bar-label"><span>Python</span><span>85%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div></div>
-                <div class="mb-3"><div class="skill-bar-label"><span>SQL</span><span>80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div></div>
-                <div class="mb-3"><div class="skill-bar-label"><span>Excel / Power BI</span><span>90%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div></div>
+                <div class="mb-3"><div class="skill-bar-label"><span>SQL</span><span>82%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="82"></div></div></div>
+                <div class="mb-3"><div class="skill-bar-label"><span>Power BI / Excel / Looker</span><span>90%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div></div>
                 <div class="mb-3"><div class="skill-bar-label"><span>ServiceNow / Jira</span><span>88%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div></div>
-                <div class="mb-3"><div class="skill-bar-label"><span>Ansible / VMware</span><span>70%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="70"></div></div></div>
-                <div class="mb-0"><div class="skill-bar-label"><span>GitHub</span><span>78%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="78"></div></div></div>
+                <div class="mb-3"><div class="skill-bar-label"><span>Ansible / VMware / Nagios</span><span>72%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="72"></div></div></div>
+                <div class="mb-0"><div class="skill-bar-label"><span>Power Automate / APIs</span><span>80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div></div>
               </div>
             </div>
             <div class="col-md-6">
               <div class="skill-bar-wrapper">
                 <p class="skill-group-label">Competencies</p>
                 <hr class="mt-1 mb-3">
-                <div class="mb-3"><div class="skill-bar-label"><span>Process Optimisation</span><span>87%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="87"></div></div></div>
-                <div class="mb-3"><div class="skill-bar-label"><span>Data Reporting</span><span>85%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div></div>
+                <div class="mb-3"><div class="skill-bar-label"><span>Business Process Analysis</span><span>90%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div></div>
+                <div class="mb-3"><div class="skill-bar-label"><span>Requirements Gathering</span><span>88%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div></div>
+                <div class="mb-3"><div class="skill-bar-label"><span>Data Reporting &amp; KPI Design</span><span>87%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="87"></div></div></div>
                 <div class="mb-3"><div class="skill-bar-label"><span>Technical Documentation</span><span>92%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="92"></div></div></div>
-                <div class="mb-3"><div class="skill-bar-label"><span>System Administration</span><span>80%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="80"></div></div></div>
-                <div class="mb-3"><div class="skill-bar-label"><span>Network &amp; Security</span><span>75%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="75"></div></div></div>
-                <div class="mb-0"><div class="skill-bar-label"><span>Requirements Analysis</span><span>83%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="83"></div></div></div>
+                <div class="mb-3"><div class="skill-bar-label"><span>Stakeholder Engagement</span><span>85%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div></div>
+                <div class="mb-0"><div class="skill-bar-label"><span>Agile &amp; Scrum</span><span>83%</span></div><div class="skill-bar-track"><div class="skill-bar-fill" data-width="83"></div></div></div>
               </div>
             </div>
           </div>
@@ -453,11 +409,54 @@
       </div>
     </section>
 
-    <!-- ======================================================================
-         CONTACT — posts to /contact (JSON), shows toast on success/error
-         ====================================================================== -->
+    <!-- CONTACT — with animated workstation illustration at bottom -->
     <section class="contact-section py-5" id="contact">
-      <div class="container-xxl py-5">
+
+      <!-- Animated SVG illustration — faded, sits at the very bottom -->
+      <div class="contact-illustration" aria-hidden="true">
+        <svg viewBox="0 0 700 260" xmlns="http://www.w3.org/2000/svg" class="contact-svg">
+          <!-- Desk -->
+          <rect x="80" y="180" width="420" height="14" rx="6" fill="rgba(255,193,7,0.35)"/>
+          <rect x="110" y="194" width="16" height="55" rx="4" fill="rgba(255,193,7,0.25)"/>
+          <rect x="454" y="194" width="16" height="55" rx="4" fill="rgba(255,193,7,0.25)"/>
+          <!-- Monitor stand -->
+          <rect x="267" y="155" width="16" height="28" rx="3" fill="rgba(100,181,246,0.45)"/>
+          <rect x="245" y="176" width="60" height="6" rx="3" fill="rgba(100,181,246,0.35)"/>
+          <!-- Monitor -->
+          <rect x="170" y="80" width="210" height="78" rx="8" fill="rgba(6,40,61,0.55)" stroke="rgba(100,181,246,0.5)" stroke-width="2.5"/>
+          <!-- Screen glow lines -->
+          <rect x="185" y="95" width="140" height="5" rx="2" fill="rgba(100,181,246,0.4)"/>
+          <rect x="185" y="106" width="100" height="5" rx="2" fill="rgba(100,181,246,0.28)"/>
+          <rect x="185" y="117" width="120" height="5" rx="2" fill="rgba(100,181,246,0.22)"/>
+          <rect x="185" y="128" width="80" height="5" rx="2" fill="rgba(255,193,7,0.35)"/>
+          <!-- Keyboard -->
+          <rect x="200" y="168" width="150" height="14" rx="4" fill="rgba(100,181,246,0.3)" stroke="rgba(100,181,246,0.2)" stroke-width="1"/>
+          <!-- Chair back -->
+          <rect x="430" y="100" width="28" height="75" rx="14" fill="rgba(255,193,7,0.22)"/>
+          <!-- Chair seat -->
+          <rect x="418" y="172" width="54" height="12" rx="6" fill="rgba(255,193,7,0.22)"/>
+          <!-- Chair legs -->
+          <line x1="428" y1="184" x2="415" y2="215" stroke="rgba(255,193,7,0.2)" stroke-width="4" stroke-linecap="round"/>
+          <line x1="462" y1="184" x2="475" y2="215" stroke="rgba(255,193,7,0.2)" stroke-width="4" stroke-linecap="round"/>
+          <!-- Person body -->
+          <rect x="403" y="128" width="42" height="50" rx="10" fill="rgba(33,150,243,0.35)"/>
+          <!-- Person head -->
+          <circle cx="424" cy="112" r="18" fill="rgba(33,150,243,0.4)"/>
+          <!-- Person arm reaching to keyboard -->
+          <path d="M403 148 Q370 158 330 172" stroke="rgba(33,150,243,0.35)" stroke-width="10" stroke-linecap="round" fill="none" class="svg-arm"/>
+          <!-- Floating particles / code dots -->
+          <circle cx="140" cy="110" r="3" fill="rgba(255,193,7,0.4)" class="svg-dot svg-dot-1"/>
+          <circle cx="530" cy="95" r="2.5" fill="rgba(100,181,246,0.4)" class="svg-dot svg-dot-2"/>
+          <circle cx="560" cy="140" r="2" fill="rgba(255,193,7,0.3)" class="svg-dot svg-dot-3"/>
+          <circle cx="120" cy="150" r="2" fill="rgba(100,181,246,0.3)" class="svg-dot svg-dot-4"/>
+          <circle cx="600" cy="120" r="3" fill="rgba(255,193,7,0.25)" class="svg-dot svg-dot-5"/>
+          <!-- Small flying data bits -->
+          <rect x="138" y="88" width="18" height="4" rx="2" fill="rgba(100,181,246,0.25)" class="svg-bit svg-bit-1"/>
+          <rect x="530" y="115" width="14" height="4" rx="2" fill="rgba(255,193,7,0.25)" class="svg-bit svg-bit-2"/>
+        </svg>
+      </div>
+
+      <div class="container-xxl py-5" style="position:relative;z-index:2;">
         <div class="col-12 text-center mb-4">
           <div class="section-title-wrap mx-auto">
             <h2 class="display-2 fw-bold contact-heading">CONTACT ME</h2>
@@ -468,25 +467,7 @@
         </div>
         <div class="row pt-4">
           <div class="col-12">
-
-            <!-- Toast notification — shown top-right on submit result -->
-            <div id="contactToast" style="
-              display:none;
-              position:fixed;
-              top:24px;
-              right:24px;
-              z-index:9999;
-              padding:1rem 1.5rem;
-              border-radius:12px;
-              font-family:'Montserrat',sans-serif;
-              font-weight:600;
-              font-size:.9rem;
-              box-shadow:0 8px 32px rgba(0,0,0,.25);
-              min-width:280px;
-              text-align:center;
-              transition:opacity .3s ease;
-            "></div>
-
+            <div id="contactToast" style="display:none;position:fixed;top:24px;right:24px;z-index:9999;padding:1rem 1.5rem;border-radius:12px;font-family:'Montserrat',sans-serif;font-weight:600;font-size:.9rem;box-shadow:0 8px 32px rgba(0,0,0,.25);min-width:280px;text-align:center;transition:opacity .3s ease;"></div>
             <form id="contact-form" novalidate>
               <div class="row d-flex justify-content-center">
                 <div class="col-lg-6">
@@ -514,15 +495,12 @@
                 </div>
               </div>
             </form>
-
           </div>
         </div>
       </div>
     </section>
 
-    <!-- ======================================================================
-         FOOTER
-         ====================================================================== -->
+    <!-- FOOTER -->
     <footer class="py-4">
       <div class="container-xxl d-flex flex-wrap align-items-center justify-content-between">
         <p class="mb-0 footer-copy">Copyright &copy; 2026 Lawrence Otieno</p>
@@ -534,12 +512,10 @@
       </div>
     </footer>
 
-    <!-- Bootstrap JS -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-    <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@0.294.0/dist/umd/lucide.js"></script>
     <script>lucide.createIcons();</script>
-    <!-- Dark Mode -->
     <script src="{{ url_for('static', filename='javascript/darkmode.js') }}"></script>
 
     <!-- Typewriter -->
@@ -629,13 +605,12 @@
       })();
     </script>
 
-    <!-- Contact form — AJAX POST to /contact, palette-matched toast feedback -->
+    <!-- Contact form AJAX -->
     <script>
       (function () {
         const form  = document.getElementById('contact-form');
         const toast = document.getElementById('contactToast');
         const btn   = document.getElementById('send-btn');
-
         function showToast(msg, ok) {
           toast.textContent      = msg;
           toast.style.background = ok ? '#06283D' : '#7f1d1d';
@@ -643,51 +618,20 @@
           toast.style.border     = ok ? '2px solid #FFC107' : '2px solid #f87171';
           toast.style.display    = 'block';
           toast.style.opacity    = '1';
-          // Auto-dismiss after 5 seconds
-          setTimeout(() => {
-            toast.style.opacity = '0';
-            setTimeout(() => { toast.style.display = 'none'; }, 350);
-          }, 5000);
+          setTimeout(() => { toast.style.opacity='0'; setTimeout(()=>{ toast.style.display='none'; },350); }, 5000);
         }
-
-        form.addEventListener('submit', async function (e) {
+        form.addEventListener('submit', async function(e) {
           e.preventDefault();
-
-          const payload = {
-            name:    form.name.value.trim(),
-            email:   form.email.value.trim(),
-            phone:   form.phone.value.trim(),
-            message: form.message.value.trim()
-          };
-
-          if (!payload.name || !payload.email || !payload.message) {
-            showToast('⚠️ Please fill in Name, Email and Message.', false);
-            return;
-          }
-
-          btn.disabled    = true;
-          btn.textContent = 'Sending…';
-
+          const payload = { name:form.name.value.trim(), email:form.email.value.trim(), phone:form.phone.value.trim(), message:form.message.value.trim() };
+          if (!payload.name || !payload.email || !payload.message) { showToast('⚠️ Please fill in Name, Email and Message.', false); return; }
+          btn.disabled = true; btn.textContent = 'Sending…';
           try {
-            const res  = await fetch('/contact', {
-              method:  'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body:    JSON.stringify(payload)
-            });
-            const data = await res.json().catch(() => ({}));
-
-            if (res.ok && data.ok) {
-              showToast('✅ Message sent! I\'ll be in touch within 24–48 hours.', true);
-              form.reset();
-            } else {
-              showToast('⚠️ ' + (data.error || 'Something went wrong. Please try again.'), false);
-            }
-          } catch (err) {
-            showToast('⚠️ Network error. Email lawrenceit38@gmail.com directly.', false);
-          } finally {
-            btn.disabled    = false;
-            btn.textContent = 'SEND MESSAGE';
-          }
+            const res  = await fetch('/contact', { method:'POST', headers:{'Content-Type':'application/json'}, body:JSON.stringify(payload) });
+            const data = await res.json().catch(()=>({}));
+            if (res.ok && data.ok) { showToast("✅ Message sent! I'll be in touch within 24–48 hours.", true); form.reset(); }
+            else { showToast('⚠️ ' + (data.error || 'Something went wrong.'), false); }
+          } catch(err) { showToast('⚠️ Network error. Email lawrenceit38@gmail.com directly.', false); }
+          finally { btn.disabled=false; btn.textContent='SEND MESSAGE'; }
         });
       })();
     </script>
