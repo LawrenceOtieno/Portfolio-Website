@@ -38,16 +38,35 @@ body {
 @keyframes heroOrb      { 0% { transform:translate(0,0) scale(1); } 100% { transform:translate(40px,30px) scale(1.15); } }
 @keyframes particleShift{ 0% { background-position:0 0,30px 30px; } 100% { background-position:60px 60px,90px 90px; } }
 @keyframes fadeSlideIn  { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
-@keyframes riverFlow    { 0% { background-position:50% 100%; } 100% { background-position:50% 60%; } }
 
-/* SVG illustration animations */
-@keyframes svgFloat     { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-8px); } }
-@keyframes svgPulse     { 0%,100% { opacity:0.4; } 50% { opacity:0.8; } }
-@keyframes svgDrift     { 0% { transform:translateX(0); } 50% { transform:translateX(12px); } 100% { transform:translateX(0); } }
-@keyframes svgTyping    { 0%,100% { transform:translateY(0) translateX(0); } 25% { transform:translateY(-3px) translateX(2px); } 75% { transform:translateY(2px) translateX(-2px); } }
+/* River flow — runs on ALL screen sizes */
+@keyframes riverFlow {
+  0%   { background-position: 50% 85%; }
+  50%  { background-position: 52% 65%; }
+  100% { background-position: 50% 80%; }
+}
 
-.cursor      { animation:blink 0.75s step-end infinite; color:var(--gold); }
-.bounce-icon { animation:bounce 1.6s ease-in-out infinite; display:inline-block; }
+/* Contact photo parallax drift */
+@keyframes photoDrift {
+  0%   { transform: scale(1.08) translateX(0px)   translateY(0px); }
+  25%  { transform: scale(1.10) translateX(-6px)  translateY(-4px); }
+  50%  { transform: scale(1.08) translateX(-10px) translateY(-8px); }
+  75%  { transform: scale(1.10) translateX(-4px)  translateY(-3px); }
+  100% { transform: scale(1.08) translateX(0px)   translateY(0px); }
+}
+
+/* Gold shimmer sweep across contact overlay */
+@keyframes shimmer {
+  0%   { background-position: -200% center; }
+  100% { background-position:  200% center; }
+}
+
+/* Toast slide-in */
+@keyframes toastIn  { from { opacity:0; transform:translateY(-18px); } to { opacity:1; transform:translateY(0); } }
+@keyframes toastOut { from { opacity:1; } to { opacity:0; transform:translateY(-12px); } }
+
+.cursor      { animation: blink 0.75s step-end infinite; color:var(--gold); }
+.bounce-icon { animation: bounce 1.6s ease-in-out infinite; display:inline-block; }
 
 /* ==========================================================================
    2. NAVBAR
@@ -67,21 +86,109 @@ body {
 .dark-toggle-btn:hover { background:var(--gold); color:var(--navy); }
 
 /* ==========================================================================
-   3. HERO
+   3. HERO — River background visible & animated on ALL devices
    ========================================================================== */
-.hero { position:relative; min-height:85vh; display:flex; flex-direction:column; align-items:center; justify-content:center; overflow:hidden; background-color:var(--navy); }
+.hero {
+  position: relative;
+  min-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  background-color: var(--navy);
+}
 
-.hero::after { content:''; position:absolute; inset:0; background-image:url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80'); background-repeat:no-repeat; background-size:cover; background-position:center 70%; -webkit-mask-image:linear-gradient(to bottom,transparent 0%,transparent 35%,rgba(0,0,0,0.18) 55%,rgba(0,0,0,0.38) 75%,rgba(0,0,0,0.45) 100%); mask-image:linear-gradient(to bottom,transparent 0%,transparent 35%,rgba(0,0,0,0.18) 55%,rgba(0,0,0,0.38) 75%,rgba(0,0,0,0.45) 100%); animation:riverFlow 18s ease-in-out infinite alternate; z-index:0; pointer-events:none; }
+/* River photo layer — uses the animation on every screen size.
+   On mobile we shift the background-size to 'auto 55%' so the
+   landscape portion (bottom of the image) is clearly visible
+   and the motion is obvious even on a narrow viewport. */
+.hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 80%;
+  /* Mask: fully transparent at top (text zone), fades in toward bottom */
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent  0%,
+    transparent  30%,
+    rgba(0,0,0,0.15) 48%,
+    rgba(0,0,0,0.40) 70%,
+    rgba(0,0,0,0.50) 100%
+  );
+  mask-image: linear-gradient(
+    to bottom,
+    transparent  0%,
+    transparent  30%,
+    rgba(0,0,0,0.15) 48%,
+    rgba(0,0,0,0.40) 70%,
+    rgba(0,0,0,0.50) 100%
+  );
+  /* animation runs on all screen sizes — no media-query gate */
+  animation: riverFlow 12s ease-in-out infinite alternate;
+  z-index: 0;
+  pointer-events: none;
+  will-change: background-position;
+}
 
-.hero-orb-1,.hero-orb-2 { position:absolute; border-radius:50%; filter:blur(80px); opacity:0.30; animation:heroOrb 8s ease-in-out infinite alternate; pointer-events:none; z-index:1; }
+/* On mobile, reduce the mask so more of the image shows */
+@media (max-width: 767px) {
+  .hero::after {
+    background-size: auto 50%;
+    background-position: 50% 100%;
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      transparent  0%,
+      transparent  25%,
+      rgba(0,0,0,0.20) 42%,
+      rgba(0,0,0,0.55) 65%,
+      rgba(0,0,0,0.65) 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      transparent  0%,
+      transparent  25%,
+      rgba(0,0,0,0.20) 42%,
+      rgba(0,0,0,0.55) 65%,
+      rgba(0,0,0,0.65) 100%
+    );
+    animation: riverFlow 8s ease-in-out infinite alternate;
+  }
+}
+
+.hero-orb-1,.hero-orb-2 {
+  position: absolute; border-radius: 50%; filter: blur(80px);
+  opacity: 0.30; animation: heroOrb 8s ease-in-out infinite alternate;
+  pointer-events: none; z-index: 1;
+}
 .hero-orb-1 { width:520px; height:520px; background:radial-gradient(circle,var(--blue) 0%,transparent 70%); top:-120px; left:-100px; }
 .hero-orb-2 { width:400px; height:400px; background:radial-gradient(circle,var(--gold) 0%,transparent 70%); bottom:-80px; right:-80px; animation-delay:3s; }
 
-.hero-particles { position:absolute; inset:0; pointer-events:none; z-index:1; background-image:radial-gradient(circle,rgba(255,193,7,0.18) 1px,transparent 1px),radial-gradient(circle,rgba(33,150,243,0.12) 1px,transparent 1px); background-size:60px 60px,90px 90px; background-position:0 0,30px 30px; animation:particleShift 20s linear infinite; }
+.hero-particles {
+  position: absolute; inset: 0; pointer-events: none; z-index: 1;
+  background-image:
+    radial-gradient(circle,rgba(255,193,7,0.18) 1px,transparent 1px),
+    radial-gradient(circle,rgba(33,150,243,0.12) 1px,transparent 1px);
+  background-size: 60px 60px, 90px 90px;
+  background-position: 0 0, 30px 30px;
+  animation: particleShift 20s linear infinite;
+}
+
 .hero > div[style*="z-index"] { position:relative; z-index:2; }
 
 .hero-tagline { color:var(--gold); letter-spacing:3px; }
-.hero-cta-btn { display:inline-flex; align-items:center; gap:0.5rem; background:var(--blue); border:2px solid var(--blue); color:#fff; border-radius:999px; padding:0.85rem 2.5rem; font-weight:600; letter-spacing:0.5px; text-decoration:none; font-family:'Montserrat',sans-serif; font-size:1rem; transition:all 0.3s; }
+.hero-cta-btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: var(--blue); border: 2px solid var(--blue);
+  color: #fff; border-radius: 999px; padding: 0.85rem 2.5rem;
+  font-weight: 600; letter-spacing: 0.5px; text-decoration: none;
+  font-family: 'Montserrat',sans-serif; font-size: 1rem;
+  transition: all 0.3s;
+}
 .hero-cta-btn:hover { background:var(--gold); border-color:var(--gold); color:var(--navy); transform:translateY(-3px); }
 
 /* ==========================================================================
@@ -254,43 +361,99 @@ body {
 .skill-bar-fill { height:100%;border-radius:999px;background:linear-gradient(90deg,var(--navy),var(--blue));width:0;transition:width 1s cubic-bezier(.4,0,.2,1); }
 
 /* ==========================================================================
-   9. CONTACT — with animated workstation illustration
+   9. CONTACT — Professional photo background, dynamic & responsive
    ========================================================================== */
 .contact-section {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(135deg, var(--navy) 0%, var(--navy-mid) 60%, var(--blue-dark) 100%);
   border-top: 3px solid var(--gold);
+  /* Fallback colour while image loads */
+  background-color: var(--navy);
 }
 
-/* Illustration container — fixed at very bottom, non-intrusive */
-.contact-illustration {
+/* ── Photo layer ── */
+/* The image is placed in the HTML as <div class="contact-bg-photo"></div>
+   so it can be animated independently of the overlay. */
+.contact-bg-photo {
   position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
-  max-width: 700px;
-  opacity: 0.22;
-  pointer-events: none;
+  inset: 0;
+  background-image: url('/static/images/Background_Image.jpeg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  /* Subtle continuous drift — gives it life on all screen sizes */
+  animation: photoDrift 18s ease-in-out infinite;
+  will-change: transform;
+  z-index: 0;
+}
+
+/* ── Dark + colour overlay on top of photo ── */
+/* Left-to-right: opaque navy → semi-transparent navy-mid so the photo
+   shows on the right half (desktop) or fades in on mobile bottom. */
+.contact-bg-photo::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    /* radial glow keeps the gold accent alive */
+    radial-gradient(ellipse at 15% 50%, rgba(255,193,7,0.08) 0%, transparent 60%),
+    /* main directional overlay */
+    linear-gradient(
+      105deg,
+      rgba(6,40,61,0.96)  0%,
+      rgba(6,40,61,0.88) 38%,
+      rgba(10,61,92,0.72) 60%,
+      rgba(10,61,92,0.45) 80%,
+      rgba(10,61,92,0.20) 100%
+    );
+}
+
+/* ── Shimmering gold line that sweeps across periodically ── */
+.contact-bg-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255,193,7,0.06) 50%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 8s linear infinite;
   z-index: 1;
 }
-.contact-svg { width: 100%; height: auto; display: block; }
 
-/* Animate the SVG person and elements */
-.contact-svg .svg-arm { animation: svgTyping 1.8s ease-in-out infinite; transform-origin: 403px 148px; }
-.contact-svg .svg-dot-1 { animation: svgPulse 2.1s ease-in-out infinite; }
-.contact-svg .svg-dot-2 { animation: svgPulse 2.7s ease-in-out infinite 0.4s; }
-.contact-svg .svg-dot-3 { animation: svgPulse 2.4s ease-in-out infinite 0.8s; }
-.contact-svg .svg-dot-4 { animation: svgPulse 2.2s ease-in-out infinite 1.2s; }
-.contact-svg .svg-dot-5 { animation: svgPulse 2.9s ease-in-out infinite 0.2s; }
-.contact-svg .svg-bit-1 { animation: svgDrift 3.2s ease-in-out infinite; }
-.contact-svg .svg-bit-2 { animation: svgDrift 2.8s ease-in-out infinite 1s; }
+/* On mobile the photo is pushed to the bottom so it doesn't
+   fight with the form — we switch to a top-to-bottom overlay */
+@media (max-width: 767px) {
+  .contact-bg-photo {
+    background-position: 70% center;
+  }
+  .contact-bg-photo::after {
+    background:
+      radial-gradient(ellipse at 50% 80%, rgba(255,193,7,0.07) 0%, transparent 60%),
+      linear-gradient(
+        to bottom,
+        rgba(6,40,61,0.97)  0%,
+        rgba(6,40,61,0.90) 45%,
+        rgba(10,61,92,0.65) 70%,
+        rgba(10,61,92,0.30) 100%
+      );
+  }
+}
 
-/* Headings on dark bg */
+/* All content inside contact sits above the photo */
+.contact-section > .container-xxl {
+  position: relative;
+  z-index: 2;
+}
+
+/* Headings */
 .contact-heading { color:var(--gold) !important; }
 .contact-sub     { color:rgba(255,255,255,.85) !important; }
 
+/* Form fields */
 .contact-section .form-control { background:rgba(255,255,255,.09);border:1.5px solid rgba(255,255,255,.25);color:#fff;caret-color:var(--gold);border-radius:10px;transition:border-color .2s,background .2s; }
 .contact-section .form-control:focus { background:rgba(255,255,255,.14);border-color:var(--gold);box-shadow:0 0 0 .2rem rgba(255,193,7,.22);color:#fff; }
 .contact-section .form-control::placeholder { color:rgba(255,255,255,.4); }
@@ -305,7 +468,55 @@ body {
 .contact-send-btn:hover { background:var(--blue);color:#fff;transform:translateY(-2px);box-shadow:0 8px 24px rgba(33,150,243,.3); }
 
 /* ==========================================================================
-   10. FOOTER
+   10. TOAST NOTIFICATION
+   ========================================================================== */
+#contactToast {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 9999;
+  min-width: 300px;
+  max-width: 420px;
+  padding: 1rem 1.4rem;
+  border-radius: 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: .9rem;
+  box-shadow: 0 8px 32px rgba(0,0,0,.35);
+  display: none;
+  text-align: center;
+  animation: toastIn .35s cubic-bezier(.175,.885,.32,1.275) forwards;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+#contactToast.toast-success {
+  background: rgba(6,40,61,0.96);
+  color: var(--gold);
+  border: 2px solid var(--gold);
+}
+#contactToast.toast-error {
+  background: rgba(80,10,10,0.95);
+  color: #fca5a5;
+  border: 2px solid #f87171;
+}
+#contactToast.toast-hide {
+  animation: toastOut .35s ease forwards;
+}
+
+/* On mobile, pin toast to bottom instead of top-right */
+@media (max-width: 575px) {
+  #contactToast {
+    top: auto;
+    bottom: 24px;
+    right: 12px;
+    left: 12px;
+    max-width: 100%;
+    min-width: unset;
+  }
+}
+
+/* ==========================================================================
+   11. FOOTER
    ========================================================================== */
 footer { background-color:var(--navy) !important;border-top:2px solid var(--gold); }
 .footer-copy { color:rgba(255,255,255,.75) !important;font-weight:500;margin-bottom:0; }
@@ -313,7 +524,7 @@ footer { background-color:var(--navy) !important;border-top:2px solid var(--gold
 .footer-social-link:hover { background:var(--gold);color:var(--navy);transform:translateY(-2px); }
 
 /* ==========================================================================
-   11. DARK MODE
+   12. DARK MODE
    ========================================================================== */
 body.dark-mode { background-color:#051a2a;color:var(--text-light); }
 body.dark-mode .navbar { background-color:#020f1a !important; }
