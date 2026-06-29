@@ -454,7 +454,7 @@
     </section>
 
     <!-- ======================================================================
-         CONTACT
+         CONTACT — posts to /contact (JSON), shows toast on success/error
          ====================================================================== -->
     <section class="contact-section py-5" id="contact">
       <div class="container-xxl py-5">
@@ -468,8 +468,25 @@
         </div>
         <div class="row pt-4">
           <div class="col-12">
-            <!-- Status message (hidden by default) -->
-            <div id="contact-status" class="text-center mb-3" style="display:none;font-weight:600;font-size:1rem;"></div>
+
+            <!-- Toast notification — shown top-right on submit result -->
+            <div id="contactToast" style="
+              display:none;
+              position:fixed;
+              top:24px;
+              right:24px;
+              z-index:9999;
+              padding:1rem 1.5rem;
+              border-radius:12px;
+              font-family:'Montserrat',sans-serif;
+              font-weight:600;
+              font-size:.9rem;
+              box-shadow:0 8px 32px rgba(0,0,0,.25);
+              min-width:280px;
+              text-align:center;
+              transition:opacity .3s ease;
+            "></div>
+
             <form id="contact-form" novalidate>
               <div class="row d-flex justify-content-center">
                 <div class="col-lg-6">
@@ -497,6 +514,7 @@
                 </div>
               </div>
             </form>
+
           </div>
         </div>
       </div>
@@ -611,56 +629,66 @@
       })();
     </script>
 
-    <!-- Contact form — AJAX submission -->
+    <!-- Contact form — AJAX POST to /contact, palette-matched toast feedback -->
     <script>
-      (function() {
-        const form   = document.getElementById('contact-form');
-        const status = document.getElementById('contact-status');
-        const btn    = document.getElementById('send-btn');
+      (function () {
+        const form  = document.getElementById('contact-form');
+        const toast = document.getElementById('contactToast');
+        const btn   = document.getElementById('send-btn');
 
-        form.addEventListener('submit', async function(e) {
+        function showToast(msg, ok) {
+          toast.textContent      = msg;
+          toast.style.background = ok ? '#06283D' : '#7f1d1d';
+          toast.style.color      = ok ? '#FFC107' : '#fca5a5';
+          toast.style.border     = ok ? '2px solid #FFC107' : '2px solid #f87171';
+          toast.style.display    = 'block';
+          toast.style.opacity    = '1';
+          // Auto-dismiss after 5 seconds
+          setTimeout(() => {
+            toast.style.opacity = '0';
+            setTimeout(() => { toast.style.display = 'none'; }, 350);
+          }, 5000);
+        }
+
+        form.addEventListener('submit', async function (e) {
           e.preventDefault();
 
-          const name    = form.name.value.trim();
-          const email   = form.email.value.trim();
-          const phone   = form.phone.value.trim();
-          const message = form.message.value.trim();
+          const payload = {
+            name:    form.name.value.trim(),
+            email:   form.email.value.trim(),
+            phone:   form.phone.value.trim(),
+            message: form.message.value.trim()
+          };
 
-          if (!name || !email || !message) {
-            showStatus('Please fill in all required fields.', false);
+          if (!payload.name || !payload.email || !payload.message) {
+            showToast('⚠️ Please fill in Name, Email and Message.', false);
             return;
           }
 
-          btn.disabled = true;
+          btn.disabled    = true;
           btn.textContent = 'Sending…';
-          status.style.display = 'none';
 
           try {
-            const res = await fetch('/', {
-              method: 'POST',
+            const res  = await fetch('/contact', {
+              method:  'POST',
               headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ name, email, phone, message })
+              body:    JSON.stringify(payload)
             });
-            if (res.ok) {
-              showStatus('✅ Message sent! I\'ll be in touch within 24–48 hours.', true);
+            const data = await res.json().catch(() => ({}));
+
+            if (res.ok && data.ok) {
+              showToast('✅ Message sent! I\'ll be in touch within 24–48 hours.', true);
               form.reset();
             } else {
-              const data = await res.json().catch(() => ({}));
-              showStatus('⚠️ ' + (data.error || 'Something went wrong. Please try again.'), false);
+              showToast('⚠️ ' + (data.error || 'Something went wrong. Please try again.'), false);
             }
           } catch (err) {
-            showStatus('⚠️ Network error. Please email lawrenceit38@gmail.com directly.', false);
+            showToast('⚠️ Network error. Email lawrenceit38@gmail.com directly.', false);
           } finally {
-            btn.disabled = false;
+            btn.disabled    = false;
             btn.textContent = 'SEND MESSAGE';
           }
         });
-
-        function showStatus(msg, ok) {
-          status.textContent = msg;
-          status.style.display = 'block';
-          status.style.color = ok ? '#4CAF50' : '#FFC107';
-        }
       })();
     </script>
 
