@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 # ── Email configuration ──────────────────────────────────────────────────────
 MAIL_USER = os.environ.get("MAIL_USER", "lawrenceit38@gmail.com")
-MAIL_PASS = os.environ.get("MAIL_PASS", "gudinyadebzxmvl")
+MAIL_PASS = os.environ.get("MAIL_PASS", "gudinyaidebzxmvl")
 MAIL_TO   = "lawrenceit38@gmail.com"
 
 # Updated projects list
