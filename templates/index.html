@@ -407,7 +407,7 @@
     <!-- CONTACT -->
     <section class="contact-section py-5" id="contact">
 
-      <!-- Animated photo background — z-index:0, overlays handled in CSS -->
+      <!-- Animated photo background -->
       <div class="contact-bg-photo" aria-hidden="true"></div>
 
       <!-- Toast notification -->
@@ -561,7 +561,7 @@
       })();
     </script>
 
-    <!-- Contact form AJAX + toast -->
+    <!-- Contact form AJAX + toast — FIXED: posts to /contact -->
     <script>
       (function () {
         const form  = document.getElementById('contact-form');
@@ -570,7 +570,6 @@
         let hideTimer, removeTimer;
 
         function showToast(msg, ok) {
-          // Clear any running timers so a rapid double-submit doesn't flicker
           clearTimeout(hideTimer);
           clearTimeout(removeTimer);
 
@@ -578,7 +577,6 @@
           toast.className   = ok ? 'toast-success' : 'toast-error';
           toast.style.display = 'block';
 
-          // Auto-dismiss after 5 s
           hideTimer = setTimeout(() => {
             toast.classList.add('toast-hide');
             removeTimer = setTimeout(() => {
@@ -603,13 +601,13 @@
           btn.disabled = true;
           btn.textContent = 'Sending…';
           try {
-            const res  = await fetch('/', {
+            const res  = await fetch('/contact', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(payload)
             });
             const data = await res.json().catch(() => ({}));
-            if (res.ok) {
+            if (res.ok && data.ok) {
               showToast("✅ Message sent! I'll be in touch within 24–48 hours.", true);
               form.reset();
             } else {
