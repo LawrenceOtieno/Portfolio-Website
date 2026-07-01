@@ -46,21 +46,21 @@ body {
   100% { background-position: 50% 80%; }
 }
 
-/* Mobile-only: wider, more noticeable pan since the viewport is narrow
-   and small position shifts barely register visually */
+/* Mobile-only: wider, more noticeable pan */
 @keyframes riverFlowMobile {
   0%   { background-position: 30% 78%; }
   50%  { background-position: 70% 68%; }
   100% { background-position: 30% 78%; }
 }
 
-/* Contact photo parallax drift */
+/* Contact photo drift — pure translate only, no scale()
+   scale() forces full layer repaints every frame causing scroll jank */
 @keyframes photoDrift {
-  0%   { transform: scale(1.08) translateX(0px)   translateY(0px); }
-  25%  { transform: scale(1.10) translateX(-6px)  translateY(-4px); }
-  50%  { transform: scale(1.08) translateX(-10px) translateY(-8px); }
-  75%  { transform: scale(1.10) translateX(-4px)  translateY(-3px); }
-  100% { transform: scale(1.08) translateX(0px)   translateY(0px); }
+  0%   { transform: translateX(0px)   translateY(0px); }
+  25%  { transform: translateX(-8px)  translateY(-5px); }
+  50%  { transform: translateX(-14px) translateY(-10px); }
+  75%  { transform: translateX(-6px)  translateY(-4px); }
+  100% { transform: translateX(0px)   translateY(0px); }
 }
 
 /* Gold shimmer sweep across contact overlay */
@@ -94,7 +94,7 @@ body {
 .dark-toggle-btn:hover { background:var(--gold); color:var(--navy); }
 
 /* ==========================================================================
-   3. HERO — River background visible & animated on ALL devices
+   3. HERO
    ========================================================================== */
 .hero {
   position: relative;
@@ -107,9 +107,6 @@ body {
   background-color: var(--navy);
 }
 
-/* River photo layer — full-bleed cover on every screen size so it
-   never clips into a "boxed" look. The motion comes purely from the
-   riverFlow background-position animation, not from resizing. */
 .hero::after {
   content: '';
   position: absolute;
@@ -140,10 +137,6 @@ body {
   will-change: background-position;
 }
 
-/* FIXED: mobile uses a wider background-size so there's enough image
-   bleeding past the viewport edges for the pan to be clearly visible,
-   plus a dedicated wider-range keyframe (riverFlowMobile) instead of the
-   subtle desktop one. */
 @media (max-width: 767px) {
   .hero::after {
     background-size: 160% auto;
@@ -369,7 +362,7 @@ body {
 .skill-bar-fill { height:100%;border-radius:999px;background:linear-gradient(90deg,var(--navy),var(--blue));width:0;transition:width 1s cubic-bezier(.4,0,.2,1); }
 
 /* ==========================================================================
-   9. CONTACT — Professional photo background, dynamic & responsive
+   9. CONTACT — smooth background, no scale() jank
    ========================================================================== */
 .contact-section {
   position: relative;
@@ -378,9 +371,11 @@ body {
   background-color: var(--navy);
 }
 
+/* inset:-20px oversizes the element so the translate drift
+   never exposes a gap at any edge */
 .contact-bg-photo {
   position: absolute;
-  inset: 0;
+  inset: -20px;
   background-image: url('/static/images/Background_Image.jpeg');
   background-repeat: no-repeat;
   background-size: cover;
