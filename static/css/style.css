@@ -39,18 +39,22 @@ body {
 @keyframes particleShift{ 0% { background-position:0 0,30px 30px; } 100% { background-position:60px 60px,90px 90px; } }
 @keyframes fadeSlideIn  { from { opacity:0; transform:translateY(12px); } to { opacity:1; transform:translateY(0); } }
 
-/* River flow — desktop, subtle pan */
+/* River flow — desktop, subtle pan.
+   FIXED: was animating background-position (forces a full repaint every
+   frame — the classic cause of scroll jank). Now animates transform only,
+   which the GPU compositor handles for free. The element is oversized via
+   a negative inset so the translate never exposes an edge. */
 @keyframes riverFlow {
-  0%   { background-position: 50% 85%; }
-  50%  { background-position: 52% 65%; }
-  100% { background-position: 50% 80%; }
+  0%   { transform: translate3d(0, 0, 0); }
+  50%  { transform: translate3d(0.6%, -1.2%, 0); }
+  100% { transform: translate3d(0, 0.3%, 0); }
 }
 
-/* Mobile-only: wider, more noticeable pan */
+/* Mobile-only: wider, more noticeable pan — transform-based */
 @keyframes riverFlowMobile {
-  0%   { background-position: 30% 78%; }
-  50%  { background-position: 70% 68%; }
-  100% { background-position: 30% 78%; }
+  0%   { transform: translate3d(0, 0, 0); }
+  50%  { transform: translate3d(2.2%, -0.8%, 0); }
+  100% { transform: translate3d(0, 0, 0); }
 }
 
 /* Contact photo drift — pure translate only, no scale()
@@ -63,10 +67,13 @@ body {
   100% { transform: translateX(0px)   translateY(0px); }
 }
 
-/* Gold shimmer sweep across contact overlay */
+/* Gold shimmer sweep across contact overlay.
+   FIXED: was animating background-position on a section-sized layer —
+   very expensive to repaint continuously. Now a wider strip slides via
+   transform instead, which is compositor-only. */
 @keyframes shimmer {
-  0%   { background-position: -200% center; }
-  100% { background-position:  200% center; }
+  0%   { transform: translate3d(-30%, 0, 0); }
+  100% { transform: translate3d(30%, 0, 0); }
 }
 
 /* Toast slide-in */
@@ -110,7 +117,8 @@ body {
 .hero::after {
   content: '';
   position: absolute;
-  inset: 0;
+  /* oversized so the transform-based pan below never exposes an edge */
+  inset: -4%;
   background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1600&q=80');
   background-repeat: no-repeat;
   background-size: cover;
@@ -134,11 +142,13 @@ body {
   animation: riverFlow 12s ease-in-out infinite alternate;
   z-index: 0;
   pointer-events: none;
-  will-change: background-position;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
 }
 
 @media (max-width: 767px) {
   .hero::after {
+    inset: -6%;
     background-size: 160% auto;
     background-position: 30% 78%;
     -webkit-mask-image: linear-gradient(
@@ -164,7 +174,7 @@ body {
 .hero-orb-1,.hero-orb-2 {
   position: absolute; border-radius: 50%; filter: blur(80px);
   opacity: 0.30; animation: heroOrb 8s ease-in-out infinite alternate;
-  pointer-events: none; z-index: 1;
+  pointer-events: none; z-index: 1; will-change: transform;
 }
 .hero-orb-1 { width:520px; height:520px; background:radial-gradient(circle,var(--blue) 0%,transparent 70%); top:-120px; left:-100px; }
 .hero-orb-2 { width:400px; height:400px; background:radial-gradient(circle,var(--gold) 0%,transparent 70%); bottom:-80px; right:-80px; animation-delay:3s; }
@@ -201,7 +211,7 @@ body {
 /* ==========================================================================
    5. SKILLS
    ========================================================================== */
-.skills-section { background:linear-gradient(135deg,var(--navy) 0%,#0a2e45 100%); position:relative; overflow:hidden; }
+.skills-section { background:linear-gradient(135deg,var(--navy) 0%,#0a2e45 100%); position:relative; overflow:hidden; content-visibility:auto; contain-intrinsic-size: 1px 900px; }
 .skills-section::before { content:''; position:absolute; inset:0; pointer-events:none; background-image:radial-gradient(circle,rgba(255,193,7,0.05) 1px,transparent 1px); background-size:40px 40px; }
 .skills-heading { color:#ffffff !important; text-shadow:0 2px 16px rgba(0,0,0,0.5); }
 .skills-sub     { color:var(--blue-light) !important; opacity:1 !important; }
@@ -210,7 +220,7 @@ body {
 @media(min-width:992px){ .skills-grid{ grid-template-columns:repeat(4,1fr); gap:1.5rem; } }
 @media(max-width:480px){ .skills-grid{ grid-template-columns:1fr; } }
 
-.sk-card { position:relative; border-radius:20px; overflow:hidden; padding:2rem 1.5rem; cursor:pointer; animation:skFloat 5s ease-in-out infinite; transition:transform 0.35s cubic-bezier(0.175,0.885,0.32,1.275),box-shadow 0.35s; outline:none; }
+.sk-card { position:relative; border-radius:20px; overflow:hidden; padding:2rem 1.5rem; cursor:pointer; animation:skFloat 5s ease-in-out infinite; transition:transform 0.35s cubic-bezier(0.175,0.885,0.32,1.275),box-shadow 0.35s; outline:none; will-change: transform; }
 .sk-card:nth-child(1){animation-delay:0s} .sk-card:nth-child(2){animation-delay:0.8s} .sk-card:nth-child(3){animation-delay:1.6s} .sk-card:nth-child(4){animation-delay:2.4s}
 .sk-card:hover,.sk-card:focus { animation-play-state:paused; transform:translateY(-16px) scale(1.03); }
 
@@ -239,7 +249,7 @@ body {
 /* ==========================================================================
    6. PORTFOLIO
    ========================================================================== */
-.portfolio-section { background:var(--off-white); }
+.portfolio-section { background:var(--off-white); content-visibility:auto; contain-intrinsic-size: 1px 700px; }
 .portfolio-heading { color:var(--navy) !important; }
 .portfolio-sub     { color:var(--text-mid) !important; }
 
@@ -271,7 +281,7 @@ body {
 /* ==========================================================================
    7. ABOUT
    ========================================================================== */
-.about-section { background:var(--navy) !important; }
+.about-section { background:var(--navy) !important; content-visibility:auto; contain-intrinsic-size: 1px 1400px; }
 .about-heading { color:#ffffff !important; text-shadow:0 2px 14px rgba(0,0,0,0.5); }
 .about-sub     { color:var(--blue-light) !important; opacity:1 !important; }
 
@@ -308,7 +318,7 @@ body {
 /* ==========================================================================
    8. CV
    ========================================================================== */
-.cv-section { background:var(--off-white) !important; }
+.cv-section { background:var(--off-white) !important; content-visibility:auto; contain-intrinsic-size: 1px 1200px; }
 .cv-heading { color:var(--navy) !important; }
 .cv-sub     { color:var(--text-mid) !important; }
 
@@ -362,7 +372,7 @@ body {
 .skill-bar-fill { height:100%;border-radius:999px;background:linear-gradient(90deg,var(--navy),var(--blue));width:0;transition:width 1s cubic-bezier(.4,0,.2,1); }
 
 /* ==========================================================================
-   9. CONTACT — smooth background, no scale() jank
+   9. CONTACT — smooth background, no scale()/background-position jank
    ========================================================================== */
 .contact-section {
   position: relative;
@@ -401,19 +411,27 @@ body {
     );
 }
 
+/* FIXED: was animating background-position on a full-section gradient
+   (expensive repaint every frame — the main cause of the contact-section
+   drag). Now an oversized strip is translated with transform instead,
+   which the compositor handles without ever repainting pixels. */
 .contact-bg-photo::before {
   content: '';
   position: absolute;
-  inset: 0;
+  top: 0;
+  bottom: 0;
+  left: -50%;
+  width: 200%;
   background: linear-gradient(
     105deg,
     transparent 40%,
     rgba(255,193,7,0.06) 50%,
     transparent 60%
   );
-  background-size: 200% 100%;
   animation: shimmer 8s linear infinite;
+  will-change: transform;
   z-index: 1;
+  pointer-events: none;
 }
 
 @media (max-width: 767px) {
@@ -562,3 +580,16 @@ body.dark-mode .contact-section .form-floating>label { color:rgba(255,255,255,.6
 body.dark-mode .contact-section .form-floating>.form-control:focus~label,
 body.dark-mode .contact-section .form-floating>.form-control:not(:placeholder-shown)~label { color:var(--gold) !important; }
 body.dark-mode .contact-section .form-control:-webkit-autofill { -webkit-box-shadow:0 0 0 1000px rgba(6,40,61,.96) inset !important;-webkit-text-fill-color:#fff !important; }
+
+/* ==========================================================================
+   13. MOTION & PERFORMANCE
+   ========================================================================== */
+/* Respect reduced-motion preference — also a free performance win */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
