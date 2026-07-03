@@ -94,7 +94,7 @@ body {
 .dark-toggle-btn:hover { background:var(--gold); color:var(--navy); }
 
 /* ==========================================================================
-   3. HERO — Animated galaxy / floating data background
+   3. HERO — Animated data-network background
    ========================================================================== */
 .hero {
   position: relative;
@@ -148,13 +148,65 @@ body {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(ellipse 60% 45% at 15%  40%, rgba(33,150,243,0.18)  0%, transparent 70%),
-    radial-gradient(ellipse 40% 55% at 85%  25%, rgba(255,193,7,0.10)   0%, transparent 65%),
-    radial-gradient(ellipse 50% 40% at 55%  75%, rgba(21,101,192,0.16)  0%, transparent 65%),
-    radial-gradient(ellipse 30% 30% at 75%  60%, rgba(100,181,246,0.12) 0%, transparent 60%),
-    radial-gradient(ellipse 45% 35% at 30%  80%, rgba(255,193,7,0.08)   0%, transparent 60%);
+    radial-gradient(ellipse 60% 45% at 15%  40%, rgba(33,150,243,0.16)  0%, transparent 70%),
+    radial-gradient(ellipse 40% 55% at 85%  25%, rgba(255,193,7,0.08)   0%, transparent 65%),
+    radial-gradient(ellipse 50% 40% at 55%  75%, rgba(21,101,192,0.14)  0%, transparent 65%),
+    radial-gradient(ellipse 30% 30% at 75%  60%, rgba(100,181,246,0.10) 0%, transparent 60%),
+    radial-gradient(ellipse 45% 35% at 30%  80%, rgba(255,193,7,0.06)   0%, transparent 60%);
   animation: nebulaShift 18s ease-in-out infinite alternate;
   will-change: transform, opacity;
+}
+
+/* Flowing data-network lines — evokes converging data streams,
+   built as one small tiling SVG so it stays GPU-cheap on any device */
+.hero-network {
+  position: absolute;
+  inset: -10% -20%;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.5;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='480' height='260' viewBox='0 0 480 260'%3E%3Cg fill='none' stroke-linecap='round'%3E%3Cpath d='M-20,40 C60,15 110,70 190,45 C260,25 300,65 360,50 C410,38 440,55 500,42' stroke='%232196F3' stroke-width='1.1' opacity='0.55'/%3E%3Cpath d='M-20,95 C50,130 120,75 200,110 C270,140 320,95 380,120 C420,138 450,110 500,125' stroke='%2364B5F6' stroke-width='1' opacity='0.4'/%3E%3Cpath d='M-20,150 C70,120 130,175 210,145 C280,120 330,165 390,140 C430,122 460,150 500,135' stroke='%23FFC107' stroke-width='1' opacity='0.35'/%3E%3Cpath d='M-20,205 C60,235 130,190 200,220 C265,248 320,205 385,225 C425,238 455,215 500,228' stroke='%2364B5F6' stroke-width='1' opacity='0.3'/%3E%3Cpath d='M-20,15 C40,45 90,-10 160,20 C220,45 260,5 320,25' stroke='%232196F3' stroke-width='0.8' opacity='0.3'/%3E%3C/g%3E%3Cg fill='%232196F3'%3E%3Ccircle cx='190' cy='45' r='2.2' opacity='0.7'/%3E%3Ccircle cx='360' cy='50' r='1.8' opacity='0.55'/%3E%3C/g%3E%3Cg fill='%23FFC107'%3E%3Ccircle cx='210' cy='145' r='2' opacity='0.6'/%3E%3Ccircle cx='390' cy='140' r='1.6' opacity='0.5'/%3E%3C/g%3E%3Cg fill='%2364B5F6'%3E%3Ccircle cx='200' cy='110' r='1.8' opacity='0.55'/%3E%3Ccircle cx='380' cy='120' r='1.6' opacity='0.45'/%3E%3Ccircle cx='200' cy='220' r='1.8' opacity='0.5'/%3E%3C/g%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 480px 260px;
+  animation: networkFlow 30s linear infinite;
+  will-change: background-position;
+}
+
+@keyframes networkFlow {
+  from { background-position: 0 0; }
+  to   { background-position: -480px 0; }
+}
+
+/* Soft diagonal light sweep — cheap transform-only motion, no repaint cost */
+.hero-sweep {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+.hero-sweep::before {
+  content: '';
+  position: absolute;
+  top: -20%;
+  bottom: -20%;
+  left: -60%;
+  width: 45%;
+  background: linear-gradient(
+    100deg,
+    transparent 0%,
+    rgba(33,150,243,0.05) 45%,
+    rgba(255,193,7,0.05) 55%,
+    transparent 100%
+  );
+  transform: translate3d(0,0,0);
+  animation: sweepMove 12s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes sweepMove {
+  0%, 100% { transform: translate3d(0,0,0); }
+  50%      { transform: translate3d(260%,0,0); }
 }
 
 /* Floating data grid overlay */
@@ -164,12 +216,12 @@ body {
   pointer-events: none;
   z-index: 1;
   background-image:
-    linear-gradient(rgba(33,150,243,0.06) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(33,150,243,0.06) 1px, transparent 1px),
-    radial-gradient(circle, rgba(255,193,7,0.55)   2px, transparent 2px),
-    radial-gradient(circle, rgba(100,181,246,0.50) 2px, transparent 2px),
-    radial-gradient(circle, rgba(255,193,7,0.40)   1.5px, transparent 1.5px),
-    radial-gradient(circle, rgba(100,181,246,0.45) 1.5px, transparent 1.5px);
+    linear-gradient(rgba(33,150,243,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(33,150,243,0.05) 1px, transparent 1px),
+    radial-gradient(circle, rgba(255,193,7,0.5)   2px, transparent 2px),
+    radial-gradient(circle, rgba(100,181,246,0.45) 2px, transparent 2px),
+    radial-gradient(circle, rgba(255,193,7,0.35)   1.5px, transparent 1.5px),
+    radial-gradient(circle, rgba(100,181,246,0.4) 1.5px, transparent 1.5px);
   background-size:
     60px 60px,
     60px 60px,
@@ -193,7 +245,7 @@ body {
   position: absolute;
   border-radius: 50%;
   filter: blur(90px);
-  opacity: 0.22;
+  opacity: 0.2;
   animation: heroOrb 10s ease-in-out infinite alternate;
   pointer-events: none;
   z-index: 1;
