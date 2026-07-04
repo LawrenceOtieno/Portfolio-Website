@@ -85,12 +85,11 @@
           <rect class="flow-bit" x="900"  y="260" width="4" height="4" style="animation-delay:1.5s"/>
         </g>
 
-        <!-- FADED PERFORMANCE CHART — trimmed to 2 clean lines so it reads
-             sharp instead of busy, and kept entirely in the blue family so
-             it never competes with the gold hero text. The ribbon above
-             ends right at its first point (1000,150), so the flowing line
-             reads as becoming the graph. Purely static after the initial
-             fade (costs nothing on scroll/animation). -->
+        <!-- FADED PERFORMANCE CHART — 2 lines, sharp mitered peaks (matches
+             the mobile look at any screen width) with glowing dots marking
+             every peak/trough. The ribbon above ends right at its first
+             point (1000,150), so the flowing line reads as becoming the
+             graph. Purely static after the initial fade. -->
         <g class="hero-chart-group">
           <!-- faint grid -->
           <path class="hero-chart-grid" d="M985,120 L1610,120"/>
@@ -99,18 +98,29 @@
           <path class="hero-chart-grid" d="M985,520 L1610,520"/>
           <path class="hero-chart-grid" d="M990,60 L990,560"/>
 
-          <!-- chart series: 2 lines only, both blue-toned -->
+          <!-- chart series: 2 lines only, sharp mitered joins -->
           <path class="hero-chart-line hc-blue"
                 d="M1000,150 L1040,120 L1080,180 L1120,140 L1160,200 L1200,160 L1240,110 L1280,170 L1320,130 L1360,190 L1400,150 L1440,100 L1480,160 L1520,120 L1560,180 L1600,140 L1615,160"/>
           <path class="hero-chart-line hc-blue-lt"
                 d="M985,330 L1020,290 L1060,345 L1100,305 L1140,360 L1180,315 L1220,275 L1260,335 L1300,295 L1340,350 L1380,305 L1420,265 L1460,325 L1500,285 L1540,345 L1580,300 L1610,320"/>
 
-          <!-- a couple of highlighted data points -->
-          <g fill="#2196F3">
-            <circle class="hero-chart-dot" cx="1240" cy="110" r="3.5" style="animation-delay:.2s"/>
+          <!-- glowing data points at every peak & trough -->
+          <g class="hero-chart-vertices">
+            <circle class="hero-chart-dot" cx="1040" cy="120" r="3.5" style="animation-delay:0s"/>
+            <circle class="hero-chart-dot" cx="1080" cy="180" r="3"   style="animation-delay:.3s"/>
+            <circle class="hero-chart-dot" cx="1160" cy="200" r="3"   style="animation-delay:.6s"/>
+            <circle class="hero-chart-dot" cx="1240" cy="110" r="3.5" style="animation-delay:.9s"/>
+            <circle class="hero-chart-dot" cx="1360" cy="190" r="3"   style="animation-delay:1.2s"/>
+            <circle class="hero-chart-dot" cx="1440" cy="100" r="4"   style="animation-delay:1.5s"/>
+            <circle class="hero-chart-dot" cx="1560" cy="180" r="3"   style="animation-delay:1.8s"/>
+            <circle class="hero-chart-dot" cx="1600" cy="140" r="3.5" style="animation-delay:2.1s"/>
           </g>
-          <g fill="#64B5F6">
-            <circle class="hero-chart-dot" cx="1420" cy="265" r="3" style="animation-delay:.8s"/>
+          <g class="hero-chart-vertices hc-vertices-dim">
+            <circle class="hero-chart-dot hc-dot-dim" cx="1020" cy="290" r="3" style="animation-delay:.2s"/>
+            <circle class="hero-chart-dot hc-dot-dim" cx="1140" cy="360" r="3" style="animation-delay:.7s"/>
+            <circle class="hero-chart-dot hc-dot-dim" cx="1220" cy="275" r="3" style="animation-delay:1.1s"/>
+            <circle class="hero-chart-dot hc-dot-dim" cx="1420" cy="265" r="3" style="animation-delay:1.6s"/>
+            <circle class="hero-chart-dot hc-dot-dim" cx="1540" cy="345" r="3" style="animation-delay:2s"/>
           </g>
         </g>
       </svg>
