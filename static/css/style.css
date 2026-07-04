@@ -163,10 +163,13 @@ body {
 .flow-track { fill: none; stroke: rgba(100,181,246,0.10); stroke-width: 1.2; }
 .flow-track--gold { stroke: rgba(255,193,7,0.09); }
 
+/* No SVG filter here on purpose — feGaussianBlur is the single most
+   expensive thing you can animate on a full-bleed surface and was the
+   main cause of scroll drag. The glow now comes purely from the
+   gradient stops on the stroke itself, which costs nothing extra. */
 .flow-pulse {
   fill: none;
   stroke-linecap: round;
-  filter: url(#heroFlowGlow);
 }
 .flow-pulse--a {
   stroke: url(#heroFlowBlue);
@@ -200,17 +203,37 @@ body {
   50%      { opacity: 0.75; }
 }
 
-/* Single soft glow accent behind the rising gold strand — translate-only,
-   modest blur radius, no scale in the keyframe so the blurred bitmap is
-   cached once and just moved (cheap on the compositor). */
+/* ---- FADED PERFORMANCE-CHART ACCENT ----
+   The gold ribbon (flow-pulse--c) now ends exactly where this chart
+   begins, so the flowing line visually "becomes" the graph. Everything
+   in here is static geometry except one short, one-time fade-in — no
+   ongoing animation cost at all once it has appeared. */
+.hero-chart-group {
+  opacity: 0;
+  animation: chartFadeIn 2.4s ease forwards;
+  animation-delay: .4s;
+}
+@keyframes chartFadeIn { to { opacity: 1; } }
+
+.hero-chart-grid { fill: none; stroke: rgba(255,255,255,0.05); stroke-width: 1; stroke-dasharray: 4 7; }
+.hero-chart-line { fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.hc-gold      { stroke: var(--gold);       opacity: .55; }
+.hc-blue      { stroke: var(--blue);       opacity: .40; }
+.hc-blue-lt   { stroke: var(--blue-light); opacity: .32; }
+.hc-gold-dark { stroke: var(--gold-dark);  opacity: .28; }
+.hc-white     { stroke: #ffffff;           opacity: .16; }
+
+.hero-chart-dot { animation: bitTwinkle 4.2s ease-in-out infinite; }
+
+/* Soft glow accent behind the chart — a layered radial-gradient does the
+   softening on its own, so no blur() filter (and its per-frame repaint
+   cost) is needed at all. */
 .hero-orb {
   position: absolute;
-  width: 360px; height: 360px;
-  top: 4%; right: -6%;
+  width: 420px; height: 420px;
+  top: 2%; right: -8%;
   border-radius: 50%;
-  background: radial-gradient(circle, var(--gold) 0%, transparent 70%);
-  filter: blur(50px);
-  opacity: 0.18;
+  background: radial-gradient(circle, rgba(255,193,7,0.30) 0%, rgba(255,193,7,0.10) 45%, transparent 72%);
   animation: heroOrbDrift 12s ease-in-out infinite alternate;
   pointer-events: none;
   z-index: 1;
@@ -222,10 +245,12 @@ body {
   to   { transform: translate3d(-30px, 20px, 0); }
 }
 
-/* Trim further on phones: fewer costly effects = smoother scrolling */
+/* Trim further on phones: fewer elements = smoother scrolling */
 @media (max-width: 767px) {
   .hero-orb { display: none; }
-  .flow-pulse { filter: none; }
+  .hero-chart-line.hc-blue-lt,
+  .hero-chart-line.hc-gold-dark,
+  .hero-chart-line.hc-white { display: none; }
 }
 
 .hero > div[style*="z-index"] { position:relative; z-index:2; }
