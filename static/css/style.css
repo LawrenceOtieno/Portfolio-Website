@@ -235,7 +235,7 @@ body {
   width: 420px; height: 420px;
   top: 2%; right: -8%;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,193,7,0.30) 0%, rgba(255,193,7,0.10) 45%, transparent 72%);
+  background: radial-gradient(circle, rgba(33,150,243,0.28) 0%, rgba(33,150,243,0.09) 45%, transparent 72%);
   animation: heroOrbDrift 12s ease-in-out infinite alternate;
   pointer-events: none;
   z-index: 1;
