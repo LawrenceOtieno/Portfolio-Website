@@ -139,97 +139,90 @@ body {
   will-change: transform;
 }
 
-/* ---- FLOWING DATA RIBBONS ---- */
+/* ---- DATA STREAM: local storage -> cloud ---- */
+.hero-datastream {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  overflow: hidden;
+}
+
 .hero-flow {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  z-index: 1;
-  pointer-events: none;
   transform: translateZ(0);
   will-change: transform;
   backface-visibility: hidden;
 }
 
-.flow-track { fill: none; stroke: rgba(100,181,246,0.10); stroke-width: 1.2; }
+.flow-track       { fill:none; stroke: rgba(255,255,255,0.07); stroke-width: 1; }
+.flow-track--main { stroke: rgba(125,211,252,0.10); stroke-width: 1.4; }
 
-.flow-pulse {
+.flow-pulse { fill:none; stroke-linecap: round; }
+.flow-pulse--ice   { stroke:url(#flowGradIce);   stroke-width:1.6; stroke-dasharray:120 1400; animation: streamMove 15s linear infinite; }
+.flow-pulse--teal  { stroke:url(#flowGradIce);   stroke-width:1.4; stroke-dasharray:100 1400; animation: streamMove 18s linear infinite; animation-delay:-6s; }
+.flow-pulse--slate { stroke:url(#flowGradSlate); stroke-width:1.2; stroke-dasharray:90  1400; animation: streamMove 20s linear infinite; animation-delay:-10s; }
+.flow-pulse--main  { stroke-width:2; animation-duration:12s; }
+
+@keyframes streamMove { to { stroke-dashoffset:-1400; } }
+
+.flow-particle {
+  fill: rgba(125,211,252,0.55);
+  filter: drop-shadow(0 0 3px rgba(56,189,248,0.55));
+}
+.flow-particle--soft { fill: rgba(255,255,255,0.30); filter: drop-shadow(0 0 2px rgba(255,255,255,0.30)); }
+.flow-particle--main { fill: rgba(94,234,212,0.55);  filter: drop-shadow(0 0 4px rgba(94,234,212,0.50)); }
+
+.flow-ping {
   fill: none;
-  stroke-linecap: round;
-}
-.flow-pulse--a {
-  stroke: url(#heroFlowBlue);
-  stroke-width: 2.2;
-  stroke-dasharray: 130 950;
-  animation: flowMove 7s linear infinite;
-}
-.flow-pulse--b {
-  stroke: url(#heroFlowBlue);
-  stroke-width: 1.8;
-  stroke-dasharray: 100 950;
-  animation: flowMove 9s linear infinite;
-  animation-delay: -3s;
-}
-.flow-pulse--c {
-  stroke: url(#heroFlowBlueDeep);
-  stroke-width: 2.8;
-  stroke-dasharray: 170 1150;
-  animation: flowMove 8s linear infinite;
-  animation-delay: -5s;
-}
-
-@keyframes flowMove {
-  to { stroke-dashoffset: -1150; }
-}
-
-.flow-bit { animation: bitTwinkle 3.6s ease-in-out infinite; }
-
-@keyframes bitTwinkle {
-  0%, 100% { opacity: 0.15; }
-  50%      { opacity: 0.75; }
-}
-
-/* ---- FADED PERFORMANCE-CHART ACCENT ----
-   2 lines, sharp mitered peaks/troughs (matches mobile at any screen
-   width — stroke-linejoin: miter is what keeps the points crisp instead
-   of round), plus glowing dots on every peak and trough. Everything here
-   is static geometry except one short, one-time fade-in — no ongoing
-   animation cost once it has appeared. */
-.hero-chart-group {
+  stroke: rgba(94,234,212,0.35);
+  stroke-width: 1.2;
+  transform-origin: center;
+  transform-box: fill-box;
+  animation: pingOut 3.2s ease-out infinite;
   opacity: 0;
-  animation: chartFadeIn 2.4s ease forwards;
-  animation-delay: .4s;
 }
-@keyframes chartFadeIn { to { opacity: 1; } }
-
-.hero-chart-grid { fill: none; stroke: rgba(255,255,255,0.05); stroke-width: 1; stroke-dasharray: 4 7; }
-
-.hero-chart-line {
-  fill: none;
-  stroke-width: 1.6;
-  stroke-linecap: round;
-  stroke-linejoin: miter;   /* sharp pointed peaks/troughs, not rounded */
-  stroke-miterlimit: 6;
-}
-.hc-blue    { stroke: var(--blue-light); opacity: .65; }
-.hc-blue-lt { stroke: var(--blue-dark);  opacity: .38; }
-
-/* Glowing peak/trough markers — layered drop-shadow gives the glow
-   without an expensive feGaussianBlur filter on a large surface; these
-   circles are tiny and static aside from the opacity twinkle, so the
-   cost is negligible. */
-.hero-chart-dot {
-  fill: var(--blue-light);
-  filter: drop-shadow(0 0 4px rgba(100,181,246,0.9)) drop-shadow(0 0 8px rgba(33,150,243,0.5));
-  animation: bitTwinkle 4.2s ease-in-out infinite;
-}
-.hc-dot-dim {
-  fill: var(--blue-dark);
-  filter: drop-shadow(0 0 3px rgba(21,101,192,0.85)) drop-shadow(0 0 6px rgba(21,101,192,0.4));
+@keyframes pingOut {
+  0%   { transform: scale(0.4); opacity: 0.5; }
+  70%  { opacity: 0.12; }
+  100% { transform: scale(2.6); opacity: 0; }
 }
 
-/* Soft glow accent behind the chart */
+/* endpoint markers */
+.hero-node {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  color: rgba(148,210,238,0.4);
+}
+.hero-node--source { left: 3%; }
+.hero-node--dest   { right: 3%; color: rgba(153,230,209,0.4); }
+.hero-node__icon   { width: 34px; height: 34px; filter: drop-shadow(0 0 6px rgba(56,189,248,0.18)); }
+.hero-node__label  { font-size: .62rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 600; opacity: .8; }
+
+@media (min-width: 768px) {
+  .hero-node { display: flex; }
+}
+@media (min-width: 1200px) {
+  .hero-node--source { left: 5%; }
+  .hero-node--dest   { right: 5%; }
+}
+
+/* quiet vignette so the streams stay subdued directly behind the headline */
+.hero-textshield {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 55% at 50% 48%, rgba(6,40,61,0.55) 0%, rgba(6,40,61,0.15) 55%, transparent 78%);
+}
+
+/* Soft glow accent */
 .hero-orb {
   position: absolute;
   width: 420px; height: 420px;
