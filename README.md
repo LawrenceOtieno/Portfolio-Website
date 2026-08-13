@@ -33,25 +33,25 @@ A modern, fully responsive, and interactive personal portfolio web application b
 A sleek introduction card highlighting core professional tracks, contact information, direct links to social profiles, and a call-to-action button to download the latest CV.
 *   **Key Details Included:** Name, target roles, direct email (`lawrenceit38@gmail.com`), phone number, and social buttons (Twitter, Facebook, LinkedIn, GitHub).
 
-![Professional Summary & Header](https://githubusercontent.com)
+![Image 1](https://githubusercontent.com)
 
 ### 2. Core Skills Directory
 A grid layout composed of modular cards that breakdown domain specific technical proficiency and service offerings.
 *   **Modules:** Business Analyst, Data Engineer, Automation & Integration, and Technical/Business Documentation.
 
-![Skills Directory Grid](https://githubusercontent.com)
+![Image 2](https://githubusercontent.com)
 
 ### 3. Interactive Project Portfolio
 A slider component displaying real-world data applications, physics simulation pipelines, optimization workflows, and custom analytics tools.
 *   **Visual Highlights:** Integrated data visualization modules showing ratings over time, data telemetry logs, launch velocities, and responsive carousel navigation.
 
-![Project Portfolio Slider](https://githubusercontent.com)
+![Image 3](https://githubusercontent.com)
 
 ### 4. Asynchronous Contact Gateway
 A clean user interface containing input fields coupled with validation constraints, engineered to let potential recruiters or clients submit inquiries effortlessly.
 *   **Fields:** Full Name, Email Address, Phone Number, and Custom Message Textarea.
 
-![Contact Form Grid](https://githubusercontent.com)
+![Image 4](https://githubusercontent.com)
 
 ---
 
