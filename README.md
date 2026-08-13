@@ -1,11 +1,11 @@
 # Lawrence Otieno | Portfolio & Professional Showcase
 
-A modern, fully responsive, and interactive personal portfolio web application built to highlight expertise in **Business Analysis**, **IT Operations**, and **Data Engineering**. Designed with a mobile-first approach, it features smooth cross-platform sliding, responsive layouts, and an interactive tabbed resume interface.
+A modern, fully responsive, and interactive personal portfolio web application built to highlight expertise in **Business Analysis**, **Basic IT Operations**, and **Data Engineering**. Designed with a mobile-first approach, it features smooth cross-platform sliding, responsive layouts, and an interactive tabbed resume interface.
 
 ## 🚀 Key Highlights
 
 * **Business Analysis:** Showcasing end-to-end requirements gathering, stakeholder alignment, business process optimization, and detailed workflow mapping.
-* **IT Operations:** Highlighting infrastructure support, system monitoring, troubleshooting, and robust administrative workflows across enterprise environments.
+* **Basic IT Operations:** Highlighting infrastructure support, system monitoring, troubleshooting, and robust administrative workflows across enterprise environments.
 * **Data Engineering & Analytics:** Demonstrating the design and deployment of scalable data pipelines, data modeling, automated ETL processes, and interactive analytical dashboards.
 
 ---
