@@ -35,7 +35,7 @@ def send_email(name: str, email: str, phone: str, message: str) -> None:
 
     html_body = f"""
     <html><body style="font-family:Arial,sans-serif;color:#06283D;">
-      <h2 style="color:#FFC107;">New message from your portfolio</h2>
+      <h2 style="color:#F5820D;">New message from your portfolio</h2>
       <table cellpadding="8" style="border-collapse:collapse;width:100%;max-width:600px;">
         <tr><td style="font-weight:bold;width:100px;">Name</td><td>{name}</td></tr>
         <tr style="background:#f4f8fb;"><td style="font-weight:bold;">Email</td><td><a href="mailto:{email}">{email}</a></td></tr>
