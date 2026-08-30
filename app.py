@@ -25,6 +25,75 @@ projects = [
     {"name": "Human Resource Management (HRM)- Executive Dashboard", "image": "images/HRM.png", "tags": ["Tableau"], "link": "#"},
 ]
 
+# Testimonials — named entries use a dark-skin-tone person emoji matched to
+# gender for the avatar; anonymized entries render an "incognito" icon instead.
+testimonials = [
+    {
+        "name": "Lynn Ajema",
+        "role": "Data Analyst",
+        "company": "Aesops ke",
+        "quote": "An exceptional analytical thinker who bridges the gap perfectly between technical system requirements and business processes. From managing complex workflows to optimizing SAP modules, their documentation and reporting are top-tier.",
+        "rating": 5,
+        "emoji": "\U0001F469\U0001F3FF",
+        "anonymous": False,
+    },
+    {
+        "name": "John Kamau",
+        "role": "Data Team Lead",
+        "company": "L-IFT",
+        "quote": "Was incredibly reliable in handling critical system support and optimizing our daily data flows. Their dedication to maintaining flawless ICT infrastructure ensured our operations always ran smoothly.",
+        "rating": 5,
+        "emoji": "\U0001F468\U0001F3FF",
+        "anonymous": False,
+    },
+    {
+        "name": "Purity Cherono",
+        "role": "Communications Specialist",
+        "company": "Lilt AI",
+        "quote": "Demonstrated outstanding technical precision while documenting complex guidelines for our indigenous language AI models. A highly collaborative engineer who excelled at translating nuanced local variations into structured technical logic.",
+        "rating": 5,
+        "emoji": "\U0001F469\U0001F3FF",
+        "anonymous": False,
+    },
+    {
+        "name": "Kelly Otieno",
+        "role": "Peer / Technical Collaborator",
+        "company": "",
+        "quote": "A master at structuring backend workflows and building highly organized engineering documentation in Jira and Confluence. Their systematic approach to mapping end-to-end operational processes brought absolute clarity to cross-functional teams.",
+        "rating": 4.5,
+        "emoji": "\U0001F468\U0001F3FF",
+        "anonymous": False,
+    },
+    {
+        "name": "Anonymous",
+        "role": "Senior Business Analyst",
+        "company": "Private",
+        "quote": "A brilliant strategist with a sharp eye for workflow bottlenecks. They excelled at gathering stakeholders' chaotic requirements and transforming them into beautifully structured, actionable technical solutions.",
+        "rating": 5,
+        "emoji": "",
+        "anonymous": True,
+    },
+    {
+        "name": "Anonymous",
+        "role": "DevOps & Automation Engineer",
+        "company": "Private",
+        "quote": "Transformed our slow, manual data entries into automated, highly efficient pipelines. They possessed a deep understanding of software integrations, significantly cutting down our daily operational friction.",
+        "rating": 4.5,
+        "emoji": "",
+        "anonymous": True,
+    },
+    {
+        "name": "Anonymous",
+        "role": "Product Manager",
+        "company": "Private",
+        "quote": "The perfect cross-functional collaborator for systems optimization. Their unique blend of analytical data parsing and automated process mapping completely revitalized our operational efficiency models.",
+        "rating": 3.5,
+        "emoji": "",
+        "anonymous": True,
+    },
+]
+
+
 def send_email(name: str, email: str, phone: str, message: str) -> None:
     """Send a contact-form notification to MAIL_TO via Gmail SMTP."""
     msg = MIMEMultipart("alternative")
@@ -65,7 +134,7 @@ def send_email(name: str, email: str, phone: str, message: str) -> None:
 
 @app.route("/", methods=["GET"])
 def index():
-    return render_template("index.html", projects=projects)
+    return render_template("index.html", projects=projects, testimonials=testimonials)
 
 
 @app.route("/contact", methods=["POST"])
