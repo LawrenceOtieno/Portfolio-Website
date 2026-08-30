@@ -385,6 +385,10 @@ body {
 .scroll-dot { width:8px;height:8px;border-radius:50%;background:#c0d6e4;border:none;padding:0;cursor:pointer;transition:background .3s,transform .3s; }
 .scroll-dot.active { background:var(--blue);transform:scale(1.35); }
 
+/* light-on-dark variant, used on the Testimonials section's navy background */
+.scroll-dot--light { background:rgba(255,255,255,.28); }
+.scroll-dot--light.active { background:var(--gold); }
+
 .portfolio-arrow-prev,.portfolio-arrow-next { position:absolute;top:50%;transform:translateY(-50%);z-index:10;background:rgba(255,255,255,.95);border:1.5px solid #c0d6e4;border-radius:50%;width:44px;height:44px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .2s,color .2s,border-color .2s;box-shadow:0 2px 8px rgba(6,40,61,.12);color:var(--navy); }
 .portfolio-arrow-prev:hover,.portfolio-arrow-next:hover { background:var(--blue);color:#fff;border-color:var(--blue); }
 .portfolio-arrow-prev{left:-10px} .portfolio-arrow-next{right:-10px}
@@ -482,6 +486,96 @@ body {
 .skill-bar-label span:last-child { color:var(--blue) !important; }
 .skill-bar-track { height:8px;background:#d0e8f2;border-radius:999px;overflow:hidden; }
 .skill-bar-fill { height:100%;border-radius:999px;background:linear-gradient(90deg,var(--navy),var(--blue));width:0;transition:width 1s cubic-bezier(.4,0,.2,1); }
+
+/* ==========================================================================
+   8.5 TESTIMONIALS
+   ========================================================================== */
+.testimonials-section {
+  background:linear-gradient(135deg,var(--navy) 0%,#0a2e45 100%);
+  position:relative;
+  overflow:hidden;
+  content-visibility:auto;
+  contain-intrinsic-size: 1px 900px;
+}
+.testimonials-section::before {
+  content:'';
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background-image:radial-gradient(circle,rgba(94,234,212,0.05) 1px,transparent 1px);
+  background-size:40px 40px;
+}
+.testimonials-heading { color:#ffffff !important; text-shadow:0 2px 16px rgba(0,0,0,0.5); position:relative; z-index:1; }
+.testimonials-sub     { color:var(--blue-light) !important; opacity:1 !important; position:relative; z-index:1; }
+
+.testimonial-scroll-track {
+  display:flex;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;
+  scroll-behavior:smooth;
+  gap:1.25rem;
+  padding:.5rem 1rem 1.5rem;
+  scrollbar-width:none;
+  -ms-overflow-style:none;
+  position:relative;
+  z-index:1;
+}
+.testimonial-scroll-track::-webkit-scrollbar { display:none; }
+.testimonial-scroll-track .testimonial-slide { flex:0 0 min(320px,85vw); scroll-snap-align:center; scroll-snap-stop:always; display:flex; }
+@media(min-width:768px){ .testimonial-scroll-track .testimonial-slide{ flex:0 0 380px; } }
+@media(min-width:1200px){ .testimonial-scroll-track .testimonial-slide{ flex:0 0 400px; } }
+
+.testimonial-card {
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(245,130,13,.18);
+  border-left:3px solid var(--teal);
+  border-radius:16px;
+  padding:1.75rem 1.5rem 1.5rem;
+  backdrop-filter:blur(4px);
+  display:flex;
+  flex-direction:column;
+  width:100%;
+  transition:transform .3s,box-shadow .3s,border-color .3s;
+}
+.testimonial-card:hover { transform:translateY(-4px); box-shadow:0 12px 32px rgba(13,148,136,.25); border-color:var(--teal); }
+
+.testimonial-quote-icon { color:var(--gold); font-size:1.9rem; line-height:1; opacity:.85; margin-bottom:.25rem; }
+
+.testimonial-text { color:rgba(255,255,255,.88) !important; font-size:.9rem; line-height:1.7; flex-grow:1; margin-bottom:1rem; }
+
+.testimonial-stars { display:flex; align-items:center; gap:.2rem; color:var(--gold); font-size:.85rem; margin-bottom:1.1rem; }
+.testimonial-stars .bi-star { color:rgba(255,255,255,.3); }
+.testimonial-rating-num { color:rgba(255,255,255,.6); font-size:.75rem; font-weight:600; margin-left:.4rem; }
+
+.testimonial-person { display:flex; align-items:center; gap:.85rem; }
+.testimonial-avatar {
+  width:48px; height:48px; border-radius:50%;
+  background:linear-gradient(135deg,var(--teal) 0%,var(--blue) 100%);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.4rem; flex-shrink:0;
+  border:2px solid rgba(255,255,255,.25);
+  box-shadow:0 4px 14px rgba(13,148,136,.3);
+}
+.testimonial-avatar--anon {
+  background:linear-gradient(135deg,var(--navy-light) 0%,var(--navy-mid) 100%);
+  color:var(--gold);
+  font-size:1.15rem;
+}
+.testimonial-name { color:#ffffff !important; font-size:.92rem; font-weight:700; margin:0; }
+.testimonial-role { color:var(--blue-light) !important; font-size:.76rem; margin:0; }
+
+.testimonial-arrow-prev,.testimonial-arrow-next {
+  position:absolute; top:50%; transform:translateY(-50%); z-index:10;
+  background:rgba(255,255,255,.1); border:1.5px solid rgba(255,255,255,.25);
+  border-radius:50%; width:44px; height:44px;
+  display:flex; align-items:center; justify-content:center;
+  cursor:pointer; transition:background .2s,color .2s,border-color .2s;
+  color:#fff; backdrop-filter:blur(4px);
+}
+.testimonial-arrow-prev:hover,.testimonial-arrow-next:hover { background:var(--gold); color:var(--navy); border-color:var(--gold); }
+.testimonial-arrow-prev{left:-10px} .testimonial-arrow-next{right:-10px}
+@media(max-width:767px){ .testimonial-arrow-prev,.testimonial-arrow-next{display:none} }
 
 /* ==========================================================================
    9. CONTACT — Professional photo background
@@ -659,6 +753,7 @@ body.dark-mode .scroll-dot          { background:var(--navy-light); }
 body.dark-mode .scroll-dot.active   { background:var(--gold); }
 body.dark-mode .portfolio-arrow-prev,
 body.dark-mode .portfolio-arrow-next { background:var(--navy-mid); border-color:var(--navy-light); color:var(--text-light); }
+body.dark-mode .testimonial-card { background:rgba(255,255,255,.09); border-color:rgba(245,130,13,.28); }
 body.dark-mode .contact-section .form-control { background:rgba(255,255,255,.07) !important; border-color:rgba(255,255,255,.2) !important; color:#fff !important; }
 body.dark-mode .contact-section .form-control:focus { background:rgba(255,255,255,.12) !important; border-color:var(--gold) !important; }
 body.dark-mode .contact-section .form-floating>label { color:rgba(255,255,255,.6) !important; }
