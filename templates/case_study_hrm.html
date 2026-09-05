@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case Study — HRM Executive Dashboard</title>
+<script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+<style>
+:root {
+  --navy:#06283D; --navy-mid:#0A3D5C; --navy-light:#1A5276;
+  --orange:#F5820D; --orange-dark:#B8610A; --teal:#0D9488;
+  --blue:#2196F3; --blue-dark:#1565C0;
+  --white:#FFFFFF; --off-white:#F4F8FB; --text-mid:#3D6680; --grid:#DCE7EF;
+  --font: 'Segoe UI', Inter, Arial, sans-serif;
+}
+* { box-sizing: border-box; }
+body { margin:0; background:var(--off-white); color:var(--text-mid); font-family:var(--font); line-height:1.65; }
+.wrap { max-width: 920px; margin: 0 auto; padding: 0 24px 80px 24px; }
+.hero { background: var(--navy); color: var(--off-white); padding: 56px 24px 44px 24px; }
+.hero .inner { max-width: 920px; margin:0 auto; }
+.kicker { font-size:12px; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--orange); margin-bottom:10px; }
+.hero h1 { font-size: 32px; color:#fff; margin: 0 0 14px 0; line-height:1.3; }
+.hero .meta { font-size: 14px; color:#c9d9e5; margin-bottom: 22px; }
+.hero .meta b { color:#fff; }
+.impact-box { background: rgba(255,255,255,0.06); border-left:4px solid var(--orange); border-radius:8px; padding:16px 20px; font-size:15.5px; color:#e8f1f7; }
+.nav { position: sticky; top:0; background:var(--white); border-bottom:1px solid var(--grid); z-index:10; }
+.nav .inner { max-width:920px; margin:0 auto; padding:12px 24px; display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap; }
+.nav-sections { display:flex; gap:26px; flex-wrap:wrap; }
+.nav a { color:var(--navy); text-decoration:none; font-weight:600; font-size:14px; }
+.nav a:hover { color:var(--orange-dark); }
+.nav-back { color:var(--text-mid) !important; font-weight:600; }
+.nav-actions { display:flex; align-items:center; gap:14px; }
+.nav-download-btn { background:var(--orange); color:#fff !important; border-radius:999px; padding:8px 18px; font-size:13px; font-weight:700; }
+.nav-download-btn:hover { background:var(--orange-dark); color:#fff !important; }
+@media (max-width: 560px) {
+  .nav .inner { padding:10px 16px; }
+  .nav-sections { gap:16px; font-size:13px; order:2; width:100%; }
+  .nav-actions { order:1; width:100%; justify-content:space-between; }
+}
+section { margin-top: 46px; }
+.section-label { display:flex; align-items:center; gap:10px; margin-bottom: 14px; }
+.section-label .badge { width:34px; height:34px; border-radius:8px; display:flex; align-items:center; justify-content:center; font-size:17px; color:#fff; }
+.badge.situation { background: var(--orange-dark); }
+.badge.task { background: var(--navy-light); }
+.badge.action { background: var(--blue-dark); }
+.badge.result { background: var(--teal); }
+.section-label h2 { margin:0; color:var(--navy); font-size: 23px; }
+.card { background:#fff; border-radius:10px; padding:22px 26px; box-shadow:0 1px 3px rgba(6,40,61,0.08); margin-bottom:16px; }
+.card.accent-orange { border-left:5px solid var(--orange); }
+.card.accent-navy { border-left:5px solid var(--navy-light); }
+.card.accent-blue { border-left:5px solid var(--blue-dark); }
+.card.accent-teal { border-left:5px solid var(--teal); }
+.action-item { margin-bottom: 20px; }
+.action-item h3 { color:var(--navy); font-size:16px; margin:0 0 6px 0; }
+.action-item p { margin:0; font-size:15px; }
+.result-grid { display:grid; grid-template-columns: 1fr 1fr; gap:14px; }
+.result-item { background:#EAF7F5; border-left:4px solid var(--teal); border-radius:8px; padding:14px 16px; font-size:14.5px; color:var(--navy); }
+.chart-intro { font-size:14.5px; margin: 18px 0 4px 0; }
+.chart-row { display:flex; gap:36px; margin: 18px 0 30px 0; }
+.chart-box { flex: 1 1 0; min-width:0; min-height:440px; background:#fff; border-radius:10px; border:1px solid var(--grid); box-shadow:0 1px 3px rgba(6,40,61,0.08); padding:14px; }
+.chart-box img { width:100%; height:auto; display:block; }
+.chart-caption { font-size:12.5px; color:var(--text-mid); text-align:center; margin-top:8px; }
+.closing-note { margin-top:50px; font-size:13.5px; font-style:italic; color:var(--text-mid); border-top:1px solid var(--grid); padding-top:16px; }
+.footer-links { margin-top:22px; font-size:14px; }
+.footer-links a { color:var(--blue-dark); font-weight:600; text-decoration:none; }
+@media print {
+  .nav { display:none; }
+  .hero { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .card { box-shadow:none; border:1px solid var(--grid); }
+  .chart-row { page-break-inside: avoid; break-inside: avoid; }
+}
+@media (max-width: 640px) {
+  .result-grid { grid-template-columns: 1fr; }
+  .chart-row { flex-direction: column; }
+  .chart-box { min-height: 360px; }
+}
+</style>
+</head><body>
+
+<div class="hero"><div class="inner">
+  <div class="kicker">Case Study</div>
+  <h1>Turning Messy HR Data Into a Simple, Useful Dashboard</h1>
+  <div class="meta"><b>Role:</b> Data / Business Analyst &middot; <b>Tools:</b> Python, Streamlit, Plotly, Pandas &middot; <b>Scope:</b> 500+ employee records across 4 cities</div>
+  <div class="impact-box">
+    I was given raw HR data with no easy way to use it. I checked the data for mistakes, fixed
+    the ones I found, and built a simple dashboard from scratch that helps leaders see, in plain
+    terms, where staff are leaving and why &mdash; and why it's happening.
+  </div>
+</div></div>
+
+
+<div class="nav"><div class="inner">
+  <div class="nav-actions">
+    <a href="/#case-studies" class="nav-back">&larr; Back to Portfolio</a>
+  </div>
+  <div class="nav-sections">
+    <a href="#situation">Situation</a>
+    <a href="#task">Task</a>
+    <a href="#action">Action</a>
+    <a href="#result">Result</a>
+  </div>
+  <div class="nav-actions">
+    <a href="{{ url_for('static', filename='files/hrm_case_study.pdf') }}" class="nav-download-btn" download>Download PDF</a>
+  </div>
+</div></div>
+
+
+<div class="wrap">
+
+<section id="situation">
+  <div class="section-label"><div class="badge situation">&#128269;</div><h2>Situation</h2></div>
+  <div class="card accent-orange">
+    <p>A company with offices in four cities in Kenya &mdash; Nairobi, Mombasa, Kisumu, and Nakuru
+    &mdash; had information about all of its staff: who worked there, what they were paid, how
+    long they'd stayed, and who had left. But nobody could actually use this information to answer
+    simple questions, like: <i>Which department is losing the most people? Are staff choosing to
+    leave, or are they being let go? Is pay fair between men and women, and between the four
+    cities?</i> The information existed, but it was just sitting there. Nobody had turned it into
+    anything useful.</p>
+    <p style="margin-top:14px;">It got worse when I looked closer. Some of the numbers in the data
+    didn't add up. Two columns that were supposed to show the same thing &mdash; whether someone
+    still worked there or not &mdash; sometimes disagreed with each other. And it wasn't clear if
+    the pay numbers were monthly or yearly. If these mistakes weren't fixed first, any report
+    built on top of this data could give the wrong answer, and nobody would notice.</p>
+  </div>
+</section>
+
+<section id="task">
+  <div class="section-label"><div class="badge task">&#127919;</div><h2>Task</h2></div>
+  <div class="card accent-navy">
+    <p>My job was to take this raw data, find and fix what was wrong with it, and turn it into an
+    easy-to-use dashboard that could answer the company's real questions &mdash; something that
+    could also be shared with anyone, not just people who could log into the live app.</p>
+  </div>
+</section>
+
+<section id="action">
+  <div class="section-label"><div class="badge action">&#9881;&#65039;</div><h2>Action</h2></div>
+  <div class="card accent-blue">
+
+    <div class="action-item">
+      <h3>Checked the data for mistakes before trusting it</h3>
+      <p>Found that two columns meant to say the same thing didn't always agree, figured out why
+      (they were being filled in separately instead of one coming from the other), and fixed it so
+      they can't disagree anymore. Also checked whether pay numbers were monthly or yearly, and
+      corrected them so they're clear and consistent.</p>
+    </div>
+
+    <div class="action-item">
+      <h3>Built the dashboard around real questions, not just around the columns in the data</h3>
+      <p>Made five simple pages: one page that shows everything at a glance, and four pages that
+      each answer one clear question &mdash; like "Who's leaving, and why?" or "Is pay fair across
+      our four cities?" Every chart comes with a short, plain note explaining what it shows and why
+      it matters, instead of just a caption.</p>
+    </div>
+
+    <div class="action-item">
+      <h3>Let people click on a chart to see the real details behind it</h3>
+      <p>Added a feature where clicking on a bar in a chart shows the actual staff records behind
+      that number. When it first didn't work, I found the exact reason &mdash; the code was reading
+      the wrong part of the chart &mdash; and tested the fix to make sure it actually worked before
+      calling it done.</p>
+    </div>
+
+    <div class="action-item">
+      <h3>Kept private information private</h3>
+      <p>Staff names are hidden by default everywhere they appear. Only someone with a password can
+      reveal them, and once they enter it, it stays unlocked for the rest of their visit instead of
+      asking again on every page.</p>
+    </div>
+
+    <div class="action-item">
+      <h3>Made it easy to share</h3>
+      <p>Added buttons to download the whole dashboard as a webpage or as an image, so someone can
+      share the findings by email or in a slide without needing to open the live app. Along the
+      way, I also fixed a technical problem that was stopping the image download from working.</p>
+    </div>
+
+  </div>
+
+  <p class="chart-intro">Two examples of what the finished dashboard shows:</p>
+  <div class="chart-row">
+    <div class="chart-box"><div style="height:380px; width:100%;">                            <div id="99193e5a-5176-496c-abbc-733d938ca577" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("99193e5a-5176-496c-abbc-733d938ca577")) {                    Plotly.newPlot(                        "99193e5a-5176-496c-abbc-733d938ca577",                        [{"cliponaxis":false,"marker":{"color":["#0D9488","#0D9488","#0D9488","#B8610A","#B8610A","#B8610A"]},"orientation":"h","text":{"dtype":"f8","bdata":"zczMzMzMGkBmZmZmZmYiQM3MzMzMzCNAzczMzMzMJkDNzMzMzMwoQGZmZmZmZipA"},"textposition":"outside","texttemplate":"%{text}%","x":{"dtype":"f8","bdata":"zczMzMzMGkBmZmZmZmYiQM3MzMzMzCNAzczMzMzMJkDNzMzMzMwoQGZmZmZmZipA"},"y":["Engineering","Operations","Finance","Sales","Marketing","Human Resources"],"type":"bar"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05}}},"font":{"family":"'Segoe UI', Inter, Arial, sans-serif","color":"#06283D","size":12},"margin":{"l":10,"r":30,"t":50,"b":40},"title":{"font":{"size":14,"color":"#06283D"},"text":"Share of staff who left, by department","x":0.02,"xanchor":"left"},"height":380,"plot_bgcolor":"#FFFFFF","paper_bgcolor":"rgba(0,0,0,0)","showlegend":false,"legend":{},"xaxis":{"showgrid":true,"gridcolor":"#DCE7EF","zeroline":false,"automargin":true,"title":{"text":"% who left"},"range":[0,17.82]},"yaxis":{"showgrid":false,"zeroline":false,"automargin":true}},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div><div class="chart-caption">One department loses almost twice as many staff as the best-performing one.</div></div>
+    <div class="chart-box"><div style="height:380px; width:100%;">                            <div id="90bcff3b-0b89-4a1e-b869-0619d4a35b60" class="plotly-graph-div" style="height:100%; width:100%;"></div>            <script>                window.PLOTLYENV=window.PLOTLYENV || {};                                if (document.getElementById("90bcff3b-0b89-4a1e-b869-0619d4a35b60")) {                    Plotly.newPlot(                        "90bcff3b-0b89-4a1e-b869-0619d4a35b60",                        [{"hole":0.55,"labels":["Let go by the company","Left on their own"],"marker":{"colors":["#B8610A","#0D9488"]},"textfont":{"color":"#FFFFFF","size":13},"textinfo":"percent","values":{"dtype":"i1","bdata":"JxM="},"type":"pie"}],                        {"template":{"data":{"histogram2dcontour":[{"type":"histogram2dcontour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"choropleth":[{"type":"choropleth","colorbar":{"outlinewidth":0,"ticks":""}}],"histogram2d":[{"type":"histogram2d","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"heatmap":[{"type":"heatmap","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"contourcarpet":[{"type":"contourcarpet","colorbar":{"outlinewidth":0,"ticks":""}}],"contour":[{"type":"contour","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"surface":[{"type":"surface","colorbar":{"outlinewidth":0,"ticks":""},"colorscale":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]]}],"mesh3d":[{"type":"mesh3d","colorbar":{"outlinewidth":0,"ticks":""}}],"scatter":[{"fillpattern":{"fillmode":"overlay","size":10,"solidity":0.2},"type":"scatter"}],"parcoords":[{"type":"parcoords","line":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolargl":[{"type":"scatterpolargl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"bar":[{"error_x":{"color":"#2a3f5f"},"error_y":{"color":"#2a3f5f"},"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"bar"}],"scattergeo":[{"type":"scattergeo","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterpolar":[{"type":"scatterpolar","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"histogram":[{"marker":{"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"histogram"}],"scattergl":[{"type":"scattergl","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatter3d":[{"type":"scatter3d","line":{"colorbar":{"outlinewidth":0,"ticks":""}},"marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattermap":[{"type":"scattermap","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scatterternary":[{"type":"scatterternary","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"scattercarpet":[{"type":"scattercarpet","marker":{"colorbar":{"outlinewidth":0,"ticks":""}}}],"carpet":[{"aaxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"baxis":{"endlinecolor":"#2a3f5f","gridcolor":"white","linecolor":"white","minorgridcolor":"white","startlinecolor":"#2a3f5f"},"type":"carpet"}],"table":[{"cells":{"fill":{"color":"#EBF0F8"},"line":{"color":"white"}},"header":{"fill":{"color":"#C8D4E3"},"line":{"color":"white"}},"type":"table"}],"barpolar":[{"marker":{"line":{"color":"#E5ECF6","width":0.5},"pattern":{"fillmode":"overlay","size":10,"solidity":0.2}},"type":"barpolar"}],"pie":[{"automargin":true,"type":"pie"}]},"layout":{"autotypenumbers":"strict","colorway":["#636efa","#EF553B","#00cc96","#ab63fa","#FFA15A","#19d3f3","#FF6692","#B6E880","#FF97FF","#FECB52"],"font":{"color":"#2a3f5f"},"hovermode":"closest","hoverlabel":{"align":"left"},"paper_bgcolor":"white","plot_bgcolor":"#E5ECF6","polar":{"bgcolor":"#E5ECF6","angularaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"radialaxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"ternary":{"bgcolor":"#E5ECF6","aaxis":{"gridcolor":"white","linecolor":"white","ticks":""},"baxis":{"gridcolor":"white","linecolor":"white","ticks":""},"caxis":{"gridcolor":"white","linecolor":"white","ticks":""}},"coloraxis":{"colorbar":{"outlinewidth":0,"ticks":""}},"colorscale":{"sequential":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"sequentialminus":[[0.0,"#0d0887"],[0.1111111111111111,"#46039f"],[0.2222222222222222,"#7201a8"],[0.3333333333333333,"#9c179e"],[0.4444444444444444,"#bd3786"],[0.5555555555555556,"#d8576b"],[0.6666666666666666,"#ed7953"],[0.7777777777777778,"#fb9f3a"],[0.8888888888888888,"#fdca26"],[1.0,"#f0f921"]],"diverging":[[0,"#8e0152"],[0.1,"#c51b7d"],[0.2,"#de77ae"],[0.3,"#f1b6da"],[0.4,"#fde0ef"],[0.5,"#f7f7f7"],[0.6,"#e6f5d0"],[0.7,"#b8e186"],[0.8,"#7fbc41"],[0.9,"#4d9221"],[1,"#276419"]]},"xaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"yaxis":{"gridcolor":"white","linecolor":"white","ticks":"","title":{"standoff":15},"zerolinecolor":"white","automargin":true,"zerolinewidth":2},"scene":{"xaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"yaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2},"zaxis":{"backgroundcolor":"#E5ECF6","gridcolor":"white","linecolor":"white","showbackground":true,"ticks":"","zerolinecolor":"white","gridwidth":2}},"shapedefaults":{"line":{"color":"#2a3f5f"}},"annotationdefaults":{"arrowcolor":"#2a3f5f","arrowhead":0,"arrowwidth":1},"geo":{"bgcolor":"white","landcolor":"#E5ECF6","subunitcolor":"white","showland":true,"showlakes":true,"lakecolor":"white"},"title":{"x":0.05}}},"font":{"family":"'Segoe UI', Inter, Arial, sans-serif","color":"#06283D","size":12},"margin":{"l":10,"r":30,"t":50,"b":55},"title":{"font":{"size":14,"color":"#06283D"},"text":"Why people left the company","x":0.02,"xanchor":"left"},"legend":{"orientation":"h","y":-0.15,"x":0.5,"xanchor":"center"},"height":380,"plot_bgcolor":"#FFFFFF","paper_bgcolor":"rgba(0,0,0,0)","showlegend":true,"xaxis":{"showgrid":true,"gridcolor":"#DCE7EF","zeroline":false,"automargin":true},"yaxis":{"showgrid":false,"zeroline":false,"automargin":true}},                        {"displayModeBar": false, "responsive": true}                    )                };            </script>        </div><div class="chart-caption">Most people who left didn't choose to &mdash; they were let go.</div></div>
+  </div>
+</section>
+
+<section id="result">
+  <div class="section-label"><div class="badge result">&#9989;</div><h2>Result</h2></div>
+  <div class="result-grid">
+    <div class="result-item"><b>Found the real story.</b> Most people who left didn't quit &mdash;
+    they were let go. That means this is mostly a hiring and performance problem, not a "people
+    don't want to stay" problem.</div>
+    <div class="result-item"><b>Found exactly where to look first.</b> One department loses almost
+    twice as many staff as the best one, giving leaders a clear place to start instead of guessing.</div>
+    <div class="result-item"><b>Fixed a hidden data problem for good.</b> The two columns that used
+    to disagree can no longer do so, so every number on the dashboard can be trusted.</div>
+    <div class="result-item"><b>Made answers fast to find.</b> Anyone can see the big picture on
+    one screen, then click once to dig deeper into the details they care about.</div>
+    <div class="result-item"><b>Made it shareable.</b> The whole dashboard can be downloaded as a
+    file and shared with anyone, even if they can't open the live app.</div>
+    <div class="result-item"><b>Tested fixes properly.</b> Instead of assuming a fix worked, I
+    checked it directly &mdash; for example, by simulating the exact click that was failing before
+    &mdash; before calling anything finished.</div>
+  </div>
+
+  <div class="footer-links">
+    Live dashboard: <a href="https://lawrenceotieno-hrm-executive-dashboard-app-wggi3y.streamlit.app/">View it here</a>
+  </div>
+
+  <div class="closing-note">
+    This project was built on made-up (sample) data, as a way to show how I work through a data
+    problem from start to finish &mdash; not as a claim about results from a real company.
+  </div>
+</section>
+
+</div>
+
+</body></html>
