@@ -28,13 +28,23 @@
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarMain">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
               <li class="nav-item mx-2"><a class="nav-link" href="#skills">Skills</a></li>
               <li class="nav-item mx-2"><a class="nav-link" href="#portfolio">Portfolio</a></li>
               <li class="nav-item mx-2"><a class="nav-link" href="#about">About</a></li>
-              <li class="nav-item mx-2"><a class="nav-link" href="#cv">CV</a></li>
-              <li class="nav-item mx-2"><a class="nav-link" href="#testimonials">Testimonials</a></li>
-              <li class="nav-item mx-2"><a class="nav-link" href="#contact">Contact</a></li>
+              <li class="nav-item mx-2 dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="moreNavDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  More
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end more-dropdown-menu" aria-labelledby="moreNavDropdown">
+                  <li><a class="dropdown-item" href="#cv"><i class="bi bi-mortarboard-fill me-2"></i>CV</a></li>
+                  <li><a class="dropdown-item" href="#case-studies"><i class="bi bi-clipboard-data-fill me-2"></i>Case Studies</a></li>
+                  <li><a class="dropdown-item" href="#testimonials"><i class="bi bi-chat-quote-fill me-2"></i>Testimonials</a></li>
+                  <li><a class="dropdown-item" href="#faq"><i class="bi bi-question-circle-fill me-2"></i>FAQ</a></li>
+                  <li><hr class="dropdown-divider"></li>
+                  <li><a class="dropdown-item" href="#contact"><i class="bi bi-envelope-fill me-2"></i>Contact</a></li>
+                </ul>
+              </li>
             </ul>
           </div>
           <button onclick="toggleDarkMode()" class="dark-toggle-btn ms-3" aria-label="Toggle Dark Mode">
@@ -270,6 +280,46 @@
         <div class="scroll-dots mt-3" id="portfolioDots">
           {% for project in projects %}
           <button class="scroll-dot {% if loop.first %}active{% endif %}" data-index="{{ loop.index0 }}" aria-label="Slide {{ loop.index }}"></button>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- CASE STUDIES -->
+    <section class="case-studies-section py-5" id="case-studies">
+      <div class="container">
+        <div class="row mt-4 py-3">
+          <div class="col-12 text-center">
+            <div class="section-title-wrap mx-auto">
+              <h2 class="display-2 fw-bold case-studies-heading">CASE STUDIES</h2>
+            </div>
+            <p class="case-studies-sub fw-normal py-2 mt-3 mx-auto" style="max-width:640px;">A closer look at how I work through a real analytical problem, from messy data to a decision-ready dashboard.</p>
+          </div>
+        </div>
+        <div class="row g-4 mt-2 justify-content-center">
+          {% for cs in case_studies %}
+          <div class="col-md-8 col-lg-6">
+            <div class="cs-card h-100">
+              <div class="cs-card-img-wrapper">
+                <img src="{{ url_for('static', filename=cs.image) }}" alt="{{ cs.title }}" loading="lazy"/>
+              </div>
+              <div class="cs-card-body">
+                <div class="d-flex flex-wrap gap-1 mb-2">
+                  {% for tag in cs.tags %}<span class="cs-tag">{{ tag }}</span>{% endfor %}
+                </div>
+                <h4 class="cs-card-title">{{ cs.title }}</h4>
+                <p class="cs-card-text">{{ cs.summary }}</p>
+                <div class="cs-card-actions">
+                  <a href="{{ cs.view_url }}" target="_blank" rel="noopener noreferrer" class="cs-btn cs-btn-view">
+                    View Case Study <i class="fas fa-arrow-up-right-from-square ms-1"></i>
+                  </a>
+                  <a href="{{ url_for('static', filename=cs.pdf_file) }}" download class="cs-btn cs-btn-download">
+                    <i class="fas fa-download me-1"></i> Download PDF
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
           {% endfor %}
         </div>
       </div>
@@ -577,6 +627,35 @@
         <div class="scroll-dots mt-3" id="testimonialDots">
           {% for t in testimonials %}
           <button class="scroll-dot scroll-dot--light {% if loop.first %}active{% endif %}" data-index="{{ loop.index0 }}" aria-label="Slide {{ loop.index }}"></button>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq-section py-5" id="faq">
+      <div class="container">
+        <div class="row mt-4 py-3">
+          <div class="col-12 text-center">
+            <div class="section-title-wrap mx-auto">
+              <h2 class="display-2 fw-bold faq-heading">FAQ</h2>
+            </div>
+            <p class="faq-sub fw-normal py-2 mt-3 mx-auto" style="max-width:650px;">A few things hiring managers often want to know before reaching out.</p>
+          </div>
+        </div>
+        <div class="faq-accordion mx-auto mt-4">
+          {% for faq in faqs %}
+          <div class="faq-item">
+            <button class="faq-question{% if not loop.first %} collapsed{% endif %}" type="button"
+              data-bs-toggle="collapse" data-bs-target="#faqAnswer{{ loop.index }}"
+              aria-expanded="{{ 'true' if loop.first else 'false' }}" aria-controls="faqAnswer{{ loop.index }}">
+              <span>{{ faq.question }}</span>
+              <i class="bi bi-plus-lg faq-icon"></i>
+            </button>
+            <div class="collapse{% if loop.first %} show{% endif %}" id="faqAnswer{{ loop.index }}">
+              <div class="faq-answer">{{ faq.answer }}</div>
+            </div>
+          </div>
           {% endfor %}
         </div>
       </div>
