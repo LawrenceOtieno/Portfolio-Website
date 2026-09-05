@@ -87,6 +87,50 @@ body {
 .dark-toggle-btn { background:rgba(255,255,255,0.08); border:1.5px solid rgba(245,130,13,0.45); color:var(--gold); width:44px; height:44px; border-radius:50%; display:flex; align-items:center; justify-content:center; cursor:pointer; transition:background 0.2s,color 0.2s; flex-shrink:0; }
 .dark-toggle-btn:hover { background:var(--gold); color:var(--navy); }
 
+/* ---- "More" dropdown (Skills / Portfolio / About stay visible; everything
+   else lives here so the bar never gets crowded on any screen size) ---- */
+.navbar-nav .dropdown-toggle::after { vertical-align:1px; margin-left:4px; }
+.navbar-nav .dropdown-toggle:hover,
+.navbar-nav .dropdown-toggle.show    { color:var(--gold) !important; }
+
+.more-dropdown-menu {
+  background: var(--navy-mid);
+  border: 1.5px solid rgba(245,130,13,0.35);
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.35);
+  min-width: 200px;
+}
+.more-dropdown-menu .dropdown-item {
+  color: rgba(255,255,255,0.88);
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 8px;
+  padding: 0.55rem 0.85rem;
+  transition: background 0.2s, color 0.2s;
+}
+.more-dropdown-menu .dropdown-item i { color: var(--gold); width:16px; }
+.more-dropdown-menu .dropdown-item:hover,
+.more-dropdown-menu .dropdown-item:focus {
+  background: rgba(245,130,13,0.16);
+  color: #fff;
+}
+.more-dropdown-menu .dropdown-divider { border-color: rgba(255,255,255,0.12); margin: 6px 4px; }
+
+/* On mobile the dropdown opens inline inside the collapsed menu — give it a
+   touch-friendly, full-width feel instead of the desktop floating card. */
+@media (max-width: 991.98px) {
+  .more-dropdown-menu {
+    position: static !important;
+    width: 100%;
+    margin-top: 4px;
+    box-shadow: none;
+    border-color: rgba(245,130,13,0.2);
+    background: rgba(255,255,255,0.05);
+  }
+  .navbar-nav .dropdown-menu { float:none; }
+}
+
 /* ==========================================================================
    3. HERO — Animated data-network background
    ========================================================================== */
@@ -395,6 +439,45 @@ body {
 @media(max-width:767px){ .portfolio-arrow-prev,.portfolio-arrow-next{display:none} }
 
 /* ==========================================================================
+   6.5 CASE STUDIES
+   ========================================================================== */
+.case-studies-section { background:var(--off-white); position:relative; content-visibility:auto; contain-intrinsic-size: 1px 700px; border-top:1px solid rgba(6,40,61,0.06); }
+.case-studies-heading { color:var(--navy) !important; }
+.case-studies-sub     { color:var(--text-mid) !important; }
+
+.cs-card {
+  background:#fff;
+  border-radius:18px;
+  overflow:hidden;
+  box-shadow:0 4px 20px rgba(6,40,61,.1);
+  transition:transform .3s, box-shadow .3s;
+  border-top:4px solid var(--gold);
+  display:flex;
+  flex-direction:column;
+}
+.cs-card:hover { transform:translateY(-4px); box-shadow:0 14px 34px rgba(33,150,243,.2); }
+
+.cs-card-img-wrapper { aspect-ratio:16/9; overflow:hidden; background:var(--navy); }
+.cs-card-img-wrapper img { width:100%; height:100%; object-fit:cover; transition:transform .4s; }
+.cs-card:hover .cs-card-img-wrapper img { transform:scale(1.05); }
+
+.cs-card-body { padding:1.5rem 1.6rem 1.75rem; display:flex; flex-direction:column; flex-grow:1; }
+.cs-tag { background:var(--navy); color:var(--gold); border-radius:999px; padding:.2rem .7rem; font-size:.72rem; font-weight:600; }
+.cs-card-title { color:var(--navy) !important; font-weight:700; font-size:1.15rem; margin-bottom:.6rem; }
+.cs-card-text  { color:var(--text-mid) !important; font-size:.92rem; line-height:1.65; margin-bottom:1.25rem; flex-grow:1; }
+
+.cs-card-actions { display:flex; flex-wrap:wrap; gap:.75rem; }
+.cs-btn {
+  display:inline-flex; align-items:center; justify-content:center;
+  border-radius:999px; padding:.65rem 1.4rem; font-size:.85rem; font-weight:700;
+  text-decoration:none; transition:background .25s, color .25s, transform .25s, box-shadow .25s;
+}
+.cs-btn-view { background:var(--blue); color:#fff; }
+.cs-btn-view:hover { background:var(--gold); color:var(--navy); transform:translateY(-2px); box-shadow:0 8px 20px rgba(245,130,13,.3); }
+.cs-btn-download { background:transparent; color:var(--navy); border:1.5px solid #c0d6e4; }
+.cs-btn-download:hover { border-color:var(--blue); color:var(--blue); background:rgba(33,150,243,.06); }
+
+/* ==========================================================================
    7. ABOUT
    ========================================================================== */
 .about-section { background:var(--navy) !important; content-visibility:auto; contain-intrinsic-size: 1px 1400px; }
@@ -578,6 +661,48 @@ body {
 @media(max-width:767px){ .testimonial-arrow-prev,.testimonial-arrow-next{display:none} }
 
 /* ==========================================================================
+   8.7 FAQ
+   ========================================================================== */
+.faq-section { background:var(--off-white); content-visibility:auto; contain-intrinsic-size: 1px 600px; }
+.faq-heading { color:var(--navy) !important; }
+.faq-sub     { color:var(--text-mid) !important; }
+
+.faq-accordion { max-width:760px; }
+
+.faq-item {
+  background:#fff;
+  border-radius:14px;
+  box-shadow:0 2px 10px rgba(6,40,61,.07);
+  margin-bottom:1rem;
+  overflow:hidden;
+  border-left:3px solid var(--blue);
+  transition:border-color .25s, box-shadow .25s;
+}
+.faq-item:has(.faq-question:not(.collapsed)) { border-left-color:var(--gold); box-shadow:0 6px 22px rgba(245,130,13,.14); }
+
+.faq-question {
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:1rem;
+  background:none;
+  border:none;
+  text-align:left;
+  padding:1.15rem 1.4rem;
+  font-family:'Montserrat',sans-serif;
+  font-size:.98rem;
+  font-weight:700;
+  color:var(--navy);
+  cursor:pointer;
+}
+.faq-icon { color:var(--gold); font-size:.85rem; flex-shrink:0; transition:transform .25s; }
+.faq-question.collapsed .faq-icon { transform:rotate(0deg); }
+.faq-question:not(.collapsed) .faq-icon { transform:rotate(135deg); }
+
+.faq-answer { padding:0 1.4rem 1.35rem; font-size:.92rem; line-height:1.7; color:var(--text-mid); }
+
+/* ==========================================================================
    9. CONTACT — Professional photo background
    ========================================================================== */
 .contact-section {
@@ -719,6 +844,15 @@ body.dark-mode .portfolio-sub     { color:var(--blue-light) !important; }
 body.dark-mode .portfolio-card    { background:var(--navy-mid) !important; }
 body.dark-mode .portfolio-card-title { color:#ffffff !important; }
 
+body.dark-mode .case-studies-section { background:#051a2a !important; border-top-color:rgba(255,255,255,.08); }
+body.dark-mode .case-studies-heading { color:#ffffff !important; }
+body.dark-mode .case-studies-sub     { color:var(--blue-light) !important; }
+body.dark-mode .cs-card { background:var(--navy-mid) !important; }
+body.dark-mode .cs-card-title { color:#ffffff !important; }
+body.dark-mode .cs-card-text  { color:rgba(255,255,255,.7) !important; }
+body.dark-mode .cs-btn-download { border-color:var(--navy-light); color:var(--text-light); }
+body.dark-mode .cs-btn-download:hover { border-color:var(--blue); color:var(--blue-light); background:rgba(33,150,243,.12); }
+
 body.dark-mode .cv-section { background:#051a2a !important; }
 body.dark-mode .cv-heading { color:#ffffff !important; text-shadow:0 2px 12px rgba(0,0,0,.5); }
 body.dark-mode .cv-sub     { color:var(--blue-light) !important; }
@@ -754,6 +888,13 @@ body.dark-mode .scroll-dot.active   { background:var(--gold); }
 body.dark-mode .portfolio-arrow-prev,
 body.dark-mode .portfolio-arrow-next { background:var(--navy-mid); border-color:var(--navy-light); color:var(--text-light); }
 body.dark-mode .testimonial-card { background:rgba(255,255,255,.09); border-color:rgba(245,130,13,.28); }
+body.dark-mode .faq-section { background:#051a2a !important; }
+body.dark-mode .faq-heading { color:#ffffff !important; }
+body.dark-mode .faq-sub     { color:var(--blue-light) !important; }
+body.dark-mode .faq-item    { background:var(--navy-mid) !important; }
+body.dark-mode .faq-question{ color:#ffffff !important; }
+body.dark-mode .faq-answer  { color:rgba(255,255,255,.72) !important; }
+body.dark-mode .more-dropdown-menu { background:#020f1a; border-color:rgba(245,130,13,.3); }
 body.dark-mode .contact-section .form-control { background:rgba(255,255,255,.07) !important; border-color:rgba(255,255,255,.2) !important; color:#fff !important; }
 body.dark-mode .contact-section .form-control:focus { background:rgba(255,255,255,.12) !important; border-color:var(--gold) !important; }
 body.dark-mode .contact-section .form-floating>label { color:rgba(255,255,255,.6) !important; }
