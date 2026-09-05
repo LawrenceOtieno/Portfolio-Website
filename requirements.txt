@@ -19,3 +19,4 @@ threadpoolctl==3.5.0
 tzdata==2024.2
 Werkzeug==3.0.4
 flask_mail
+python-dotenv
