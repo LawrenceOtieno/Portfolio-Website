@@ -3,13 +3,16 @@ import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 
+from dotenv import load_dotenv
+load_dotenv()
+
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
 
 # ── Email configuration ──────────────────────────────────────────────────────
-MAIL_USER = os.environ.get("MAIL_USER", "lawrenceit38@gmail.com")
-MAIL_PASS = os.environ.get("MAIL_PASS", "gudinyaidebzxmvl")
+MAIL_USER = os.environ.get("MAIL_USER")
+MAIL_PASS = os.environ.get("MAIL_PASS")
 MAIL_TO   = "lawrenceit38@gmail.com"
 
 # Updated projects list
@@ -23,6 +26,31 @@ projects = [
     {"name": "Blog on using PACE as an analytical framework", "image": "images/pace.png", "tags": ["WordPress"], "link": "#"},
     {"name": "COVID-19 fatalities and risk of conflicts - Youth Bulge", "image": "images/COVID-19_youth.jpg", "tags": ["Excel", "R", "Research"], "link": "#"},
     {"name": "Human Resource Management (HRM)- Executive Dashboard", "image": "images/HRM.png", "tags": ["Tableau"], "link": "#"},
+]
+
+# Case studies — each has an interactive HTML "view" page (view_url, rendered by
+# Flask so it can use url_for for its own asset links) and a static PDF download.
+case_studies = [
+    {
+        "title": "Turning Messy HR Data Into a Simple, Useful Dashboard",
+        "summary": "Cleaned conflicting HR records for 500+ employees across 4 cities, then built an executive dashboard from scratch that shows leaders where staff are leaving and why.",
+        "tags": ["Python", "Streamlit", "Plotly", "Pandas", "Data Cleaning"],
+        "image": "images/dashboard.png",
+        "view_url": "/case-study/hrm-dashboard",
+        "pdf_file": "files/hrm_case_study.pdf",
+    },
+]
+
+# FAQ — shown in the "Frequently Asked Questions" section on the homepage.
+faqs = [
+    {
+        "question": "What is your primary technical stack?",
+        "answer": "I specialise in Python (its libraries and frameworks), Excel, Power BI, SQL, and automation & integration tools.",
+    },
+    {
+        "question": "Are you open to contract or full-time remote opportunities?",
+        "answer": "Yes, I am fully equipped for full-time, remote, hybrid, and on-site roles, as well as project-based consultancies.",
+    },
 ]
 
 # Testimonials — named entries use a dark-skin-tone person emoji matched to
@@ -134,7 +162,22 @@ def send_email(name: str, email: str, phone: str, message: str) -> None:
 
 @app.route("/", methods=["GET"])
 def index():
-    return render_template("index.html", projects=projects, testimonials=testimonials)
+    return render_template(
+        "index.html",
+        projects=projects,
+        testimonials=testimonials,
+        case_studies=case_studies,
+        faqs=faqs,
+    )
+
+
+@app.route("/case-study/hrm-dashboard", methods=["GET"])
+def case_study_hrm():
+    """Interactive, self-contained version of the HRM dashboard case study.
+    Opened from the Case Studies section's 'View Case Study' button. The
+    downloadable PDF version lives at /static/files/hrm_case_study.pdf and is
+    linked directly from both this page and the homepage card."""
+    return render_template("case_study_hrm.html")
 
 
 @app.route("/contact", methods=["POST"])
