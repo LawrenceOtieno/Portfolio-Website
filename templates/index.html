@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..800&family=Inter:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet"/>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
   </head>
 
@@ -132,7 +132,7 @@
         </svg>
 
         <!-- faint background growth chart, tucked low behind the headline -->
-        <svg class="hero-chart" viewBox="0 0 600 260" preserveAspectRatio="xMidYMax meet" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <svg class="hero-chart" viewBox="0 0 600 260" preserveAspectRatio="xMaxYMax meet" xmlns="http://www.w3.org/2000/svg" focusable="false">
           <defs>
             <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
               <stop offset="0%"   stop-color="#5EEAD4" stop-opacity="0.20"/>
@@ -176,11 +176,11 @@
         <div class="hero-textshield"></div>
       </div>
 
-      <div class="text-center px-4" style="position:relative;z-index:2;">
-        <p class="hero-tagline text-uppercase fw-bold mb-2 fs-5">Welcome to my Portfolio</p>
-        <h1 class="display-2 text-white fw-bold mb-3">Lawrence Otieno</h1>
-        <h3 class="h2 fw-normal mb-5 mx-auto" style="max-width:850px;min-height:48px;line-height:1.5;color:rgba(255,255,255,0.9);">
-          <span id="typewriter-text" class="fw-bold" style="color:#F5820D;"></span><span class="cursor">|</span>
+      <div class="hero-content text-center px-4" style="position:relative;z-index:2;">
+        <span class="hero-eyebrow"><i class="bi bi-stars"></i> Welcome to my portfolio</span>
+        <h1 class="hero-name mb-3">Lawrence Otieno</h1>
+        <h3 class="hero-role mx-auto mb-5">
+          <span id="typewriter-text" class="hero-role-word"></span><span class="cursor">|</span>
         </h3>
         <a href="#skills" class="hero-cta-btn">
           Explore My Expertise <i class="fas fa-arrow-down ms-2 bounce-icon"></i>
