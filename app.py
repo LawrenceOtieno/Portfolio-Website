@@ -30,12 +30,15 @@ projects = [
 
 # Case studies — each has an interactive HTML "view" page (view_url, rendered by
 # Flask so it can use url_for for its own asset links) and a static PDF download.
+# NOTE: "image" here is a DIFFERENT file from the Portfolio card's image above —
+# add your own cover at static/images/case-studies/hrm-case-study-cover.png
+# (any image works, just keep the filename or update the path below to match).
 case_studies = [
     {
         "title": "Turning Messy HR Data Into a Simple, Useful Dashboard",
         "summary": "Cleaned conflicting HR records for 500+ employees across 4 cities, then built an executive dashboard from scratch that shows leaders where staff are leaving and why.",
         "tags": ["Python", "Streamlit", "Plotly", "Pandas", "Data Cleaning"],
-        "image": "images/dashboard.png",
+        "image": "images/case-studies/hrm-case-study-cover.png",
         "view_url": "/case-study/hrm-dashboard",
         "pdf_file": "files/hrm_case_study.pdf",
     },
