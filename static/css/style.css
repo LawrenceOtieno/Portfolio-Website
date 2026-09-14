@@ -399,10 +399,10 @@ h1, h2, h3, h4, h5, h6,
 
 .hero-name {
   font-family: 'Outfit', sans-serif;
-  font-weight: 700;
-  font-size: clamp(2.75rem, 6.5vw, 5.5rem);
-  line-height: 1.05;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  font-size: clamp(2.1rem, 5.6vw, 4.6rem);
+  line-height: 1.15;
+  letter-spacing: -0.01em;
   color: #ffffff;
   margin-bottom: 1.25rem;
 }
